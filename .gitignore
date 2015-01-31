@@ -1,6 +1,6 @@
 # Android Studio files
-/.idea/workspace.xml
-/.idea/libraries
+*.iml
+.idea/*
 .DS_Store
 
 # Built application files
