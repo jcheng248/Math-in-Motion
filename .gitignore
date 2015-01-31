@@ -1,6 +1,6 @@
 # Android Studio files
 *.iml
-.idea/*
+.idea/
 .DS_Store
 
 # Built application files
