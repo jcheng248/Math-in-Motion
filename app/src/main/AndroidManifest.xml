@@ -16,6 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".eighttiles"
+            android:label="@string/title_activity_eighttiles"
+            android:parentActivityName=".Home" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eecs481.mathinmotion.Home" />
+        </activity>
+        <activity
+            android:name=".AlgebrainAction"
+            android:label="@string/title_activity_algebrain_action"
+            android:parentActivityName=".Home" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eecs481.mathinmotion.Home" />
+        </activity>
     </application>
 
 </manifest>

@@ -3,25 +3,22 @@ package com.eecs481.mathinmotion;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.content.Intent;
-import android.widget.EditText;
 
-public class Home extends ActionBarActivity {
+
+public class eighttiles extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_eighttiles);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_eighttiles, menu);
         return true;
     }
 
@@ -38,14 +35,5 @@ public class Home extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public void eight(View view){
-        Intent intent = new Intent(this, eighttiles.class);
-        startActivity(intent);
-    }
-    public void algebra(View view){
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        startActivity(intent);
-
     }
 }

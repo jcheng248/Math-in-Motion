@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Math in Motion</string>
-    <string name="title_activity_home">Math in Motion</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">M4TH 1N M0T10N</string>
+    <string name="title_activity_home">M4TH 1N M0T10N</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_eighttiles">eighttiles</string>
+    <string name="eight_tiles">eight_tiles</string>
+    <string name="title_activity_algebrain_action">AlgebrainAction</string>
+    <string name="algebra">Algebra_in_Action</string>
 
 </resources>
