@@ -12,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
+import android.util.Log;
 
 public class Home extends ActionBarActivity implements SensorEventListener {
 
@@ -53,13 +54,16 @@ public class Home extends ActionBarActivity implements SensorEventListener {
             long curTime = System.currentTimeMillis();
 
             if ((curTime - lastUpdate) > 100) {
+                Log.d("xTag", Float.toString(x));
+                Log.d("yTag", Float.toString(y));
+                Log.d("zTag", Float.toString(z));
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
 
                 float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
-                    search();
+                    //search();
                 }
 
                 last_x = x;
