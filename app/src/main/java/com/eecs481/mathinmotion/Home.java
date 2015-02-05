@@ -44,27 +44,41 @@ public class Home extends ActionBarActivity implements SensorEventListener {
 
     }
 
-    public void onSensorChanged(SensorEvent event) {
+    public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly
+        //this will only work, if the Home activity is called from start (opened) after each move
+        //if we are just returning from search, then the math will need to be changed to deltas
         Sensor mySensor = event.sensor;
 
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
             long curTime = System.currentTimeMillis();
 
-            if ((curTime - lastUpdate) > 100) {
+            if ((curTime - lastUpdate) > 1000) {
+
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+
                 Log.d("xTag", Float.toString(x));
                 Log.d("yTag", Float.toString(y));
                 Log.d("zTag", Float.toString(z));
+
                 long diffTime = (curTime - lastUpdate);
                 lastUpdate = curTime;
 
                 float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
 
-                if (speed > SHAKE_THRESHOLD) {
-                    //search();
+                if (speed > SHAKE_THRESHOLD) { //shaking
+                    shake();
                 }
+
+                Log.d("lastx", Float.toString(last_x));
+                Log.d("lasty", Float.toString(last_y));
+                Log.d("lastz", Float.toString(last_z));
+
+                if (x <= -5 && Math.abs(y)<= 3 && last_x != 0) right(); //tile goes right //y  should be roughly 0
+                if (x >= 5 && Math.abs(y)<= 3 && last_x != 0) left();//tile goes left//y  should be roughly 0
+                if (y >= 5 && Math.abs(x)<= 3 && last_y != 0) down(); //tile goes down //x  should be roughly 0
+                if (y <= -5 && Math.abs(x)<= 3 &&last_y != 0) up(); //tile goes up //x  should be roughly 0
 
                 last_x = x;
                 last_y = y;
@@ -106,6 +120,25 @@ public class Home extends ActionBarActivity implements SensorEventListener {
     public void search() {
         Intent intent = new Intent(this, AlgebrainAction.class);
         startActivity(intent);
-
+    }
+    public void left() {
+        Intent intent = new Intent(this, AlgebrainAction.class);
+        startActivity(intent);
+    }
+    public void right() {
+        Intent intent = new Intent(this, AlgebrainAction.class);
+        startActivity(intent);
+    }
+    public void down() {
+        Intent intent = new Intent(this, AlgebrainAction.class);
+        startActivity(intent);
+    }
+    public void up() {
+        Intent intent = new Intent(this, AlgebrainAction.class);
+        startActivity(intent);
+    }
+    public void shake() {
+        Intent intent = new Intent(this, AlgebrainAction.class);
+        startActivity(intent);
     }
 }
