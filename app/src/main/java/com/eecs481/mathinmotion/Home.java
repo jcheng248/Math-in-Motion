@@ -20,7 +20,7 @@ public class Home extends ActionBarActivity implements SensorEventListener {
     private Sensor mAccelerometer;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 600;
+    private static final int SHAKE_THRESHOLD = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +75,10 @@ public class Home extends ActionBarActivity implements SensorEventListener {
                 Log.d("lasty", Float.toString(last_y));
                 Log.d("lastz", Float.toString(last_z));
 
-                if (x <= -5 && Math.abs(y)<= 3 && last_x != 0) right(); //tile goes right //y  should be roughly 0
-                if (x >= 5 && Math.abs(y)<= 3 && last_x != 0) left();//tile goes left//y  should be roughly 0
-                if (y >= 5 && Math.abs(x)<= 3 && last_y != 0) down(); //tile goes down //x  should be roughly 0
-                if (y <= -5 && Math.abs(x)<= 3 &&last_y != 0) up(); //tile goes up //x  should be roughly 0
+                if (x <= -5 && Math.abs(y)<= 1 && last_x != 0) right(); //tile goes right //y  should be roughly 0
+                if (x >= 5 && Math.abs(y)<= 1 && last_x != 0) left();//tile goes left//y  should be roughly 0
+                if (y >= 5 && Math.abs(x)<= 1 && last_y != 0) down(); //tile goes down //x  should be roughly 0
+                if (y <= -5 && Math.abs(x)<= 1 &&last_y != 0) up(); //tile goes up //x  should be roughly 0
 
                 last_x = x;
                 last_y = y;
@@ -138,6 +138,7 @@ public class Home extends ActionBarActivity implements SensorEventListener {
         startActivity(intent);
     }
     public void shake() {
+        Log.d("shake", "shake");
         Intent intent = new Intent(this, AlgebrainAction.class);
         startActivity(intent);
     }
