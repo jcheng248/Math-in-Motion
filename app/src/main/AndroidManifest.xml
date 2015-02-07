@@ -9,7 +9,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Home"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +28,14 @@
         <activity
             android:name=".AlgebrainAction"
             android:label="@string/title_activity_algebrain_action"
+            android:parentActivityName=".Home" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eecs481.mathinmotion.Home" />
+        </activity>
+        <activity
+            android:name=".Instructions"
+            android:label="@string/title_activity_instructions"
             android:parentActivityName=".Home" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -3,12 +3,14 @@
 
     <string name="app_name">M4TH 1N M0T10N</string>
     <string name="title_activity_home">M4TH 1N M0T10N</string>
+    <string name="eight_tiles">8-Puzzle</string>
+    <string name="algebra">Algebra in Action</string>
+    <string name="instructions">Instructions</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_eighttiles">eighttiles</string>
-    <string name="eight_tiles">eight_tiles</string>
     <string name="title_activity_algebrain_action">AlgebrainAction</string>
-    <string name="algebra">Algebra_in_Action</string>
     <string name="title_activity_test">test</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_instructions">Instructions</string>
 
 </resources>
