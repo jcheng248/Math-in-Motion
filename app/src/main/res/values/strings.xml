@@ -8,5 +8,7 @@
     <string name="eight_tiles">eight_tiles</string>
     <string name="title_activity_algebrain_action">AlgebrainAction</string>
     <string name="algebra">Algebra_in_Action</string>
+    <string name="title_activity_test">test</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
