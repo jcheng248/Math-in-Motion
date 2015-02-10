@@ -49,195 +49,223 @@ public class eighttiles extends ActionBarActivity  {
         int b1 = spacerow;
         int b2 = spacecolumn;
         if(checkComplete())
-            return;
-//        if((board[0][0] == "1") && (board[0][1] == "2") && (board[0][2] == "3") && (board[1][0] == "4") && (board[2][0] == "7") )
-//        {
-//            if(b1 == 1 && b2 == 1)
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(b1 == 2 && b2 == 1)
-//            {
-//                swipeDown(null);
-//            }
-//            else if(b1 == 1 && b2 == 2)
-//            {
-//                swipeUp(null);
-//            }
-//            else
-//            {
-//                swipeRight(null);
-//            }
-//        }
-//        else if((board[0][0] == "1") && (board[0][1] == "2") && (board[0][2] == "3") && !((board[1][0] == "4") && (board[2][0] == "7") ))
-//        {
-//            if(board[1][1] == "" && board[1][2] =="4" && board[2][2] == "7")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[1][1] == "4" && board[1][2] =="" && board[2][2] == "7")
-//            {
-//                swipeUp(null);
-//            }
-//            else if(board[1][1] == "4" && board[1][2] =="7" && board[2][2] == "")
-//            {
-//                swipeRight(null);
-//            }
-//            else if(board[1][1] == "4" && board[1][2] =="7" && board[2][1] == "")
-//            {
-//                swipeDown(null);
-//            }
-//            else if(board[1][1] == "" && board[1][2] =="7" && board[2][1] == "4")
-//            {
-//                swipeRight(null);
-//            }
-//            else if(board[1][0] == "" && board[1][2] =="7" && board[2][1] == "4")
-//            {
-//                swipeUp(null);
-//            }
-//            else if(board[2][0] == "" && board[1][2] =="7" && board[2][1] == "4")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[2][0] == "4" && board[1][2] =="7" && board[2][1] == "")
-//            {
-//                swipeDown(null);
-//            }
-//            else if(board[2][0] == "4" && board[1][2] =="7" && board[1][1] == "")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[2][0] == "4" && board[1][2] =="" && board[1][1] == "7")
-//            {
-//                swipeUp(null);
-//            }
-//            else if(board[2][0] == "4" && board[2][2] =="" && board[1][1] == "7")
-//            {
-//                swipeRight(null);
-//            }
-//            else if(board[2][0] == "4" && board[2][1] =="" && board[1][1] == "7")
-//            {
-//                swipeDown(null);
-//            }
-//            else if(board[2][0] == "4" && board[2][1] =="7" && board[1][1] == "")
-//            {
-//                swipeRight(null);
-//            }
-//            else if(board[2][0] == "4" && board[2][1] =="7" && board[1][0] == "")
-//            {
-//                swipeUp(null);
-//            }
-//            else if(board[2][0] == "" && board[2][1] =="7" && board[1][0] == "4")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[1][0] == "" && board[1][1] == "7" && board[1][2] == "4")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[1][0] == "7" && board[1][1] == "" && board[1][2] == "4")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[1][0] == "7" && board[1][1] == "4" && board[1][2] == "")
-//            {
-//                swipeUp(null);
-//            }
-//            else if(board[1][0] == "7" && board[1][1] == "4" && board[2][0] == "")
-//            {
-//                swipeDown(null);
-//            }
-//            else if(board[1][0] == "7" && board[1][1] == "4")
-//            {
-//                swipeRight(null);
-//            }
-//            else if(board[1][0] == "" && board[1][1] == "4" && board[2][0] == "7")
-//            {
-//                swipeLeft(null);
-//            }
-//            else if(board[1][2] != "4")
-//            {
-//                if((b1 == 2) && (b2 == 2))
-//                {
-//                    swipeDown(null);
-//                }
-//                else if(b1 == 2)
-//                {
-//                    swipeLeft(null);
-//                }
-//                else if((b1 == 1) && (b2 == 0))
-//                {
-//                    swipeUp(null);
-//                }
-//                else
-//                {
-//                    swipeRight(null);
-//                }
-//            }
-//            else if((board[1][1]) == "7")
-//            {
-//                if((b1 == 2) && (b2 == 0))
-//                {
-//                    swipeDown(null);
-//                }
-//                else
-//                {
-//                    swipeRight(null);
-//                }
-//            }
-//            else if((b1 == 2) && (b2 == 2))
-//            {
-//                swipeRight(null);
-//            }
-//            else if(board[2][2] == "7" && !(b1 == 1 && b2 == 1))
-//            {
-//                if(b1 == 2)
-//                {
-//                    swipeDown(null);
-//                }
-//                else
-//                {
-//                    swipeRight(null);
-//                }
-//            }
-//        }
-//        else if((board[0][0] =="1") &&(board[0][1] == "2") && (board[1][2] == "3") && (board[1][0] == ""))
-//        {
-//            swipeDown(null);
-//        }
-//        else if((board[0][0] =="") &&(board[0][1] == "2") && (board[1][2] == "3") && (board[1][0] == "1"))
-//        {
-//            swipeLeft(null);
-//        }
-//        else if((board[0][0] =="2") &&(board[0][1] == "") && (board[1][2] == "3") && (board[1][0] == "1"))
-//        {
-//            swipeLeft(null);
-//        }
-//        else if((board[0][0] =="2") &&(board[0][2] == "") && (board[1][2] == "3") && (board[1][0] == "1"))
-//        {
-//            swipeUp(null);
-//        }
-//        else if((board[0][0] =="2") &&(board[0][2] == "3") && (board[1][2] == "") && (board[1][0] == "1"))
-//        {
-//            swipeRight(null);
-//        }
-//        else if((board[0][0] =="2") &&(board[0][2] == "3") && (board[1][1] == "") && (board[1][0] == "1"))
-//        {
-//            swipeDown(null);
-//        }
-//        else if((board[0][0] =="2") &&(board[0][2] == "3") && (board[0][1] == "") && (board[1][0] == "1"))
-//        {
-//            swipeRight(null);
-//        }
-//        else if((board[0][0] =="") &&(board[0][2] == "3") && (board[0][1] == "2") && (board[1][0] == "1"))
-//        {
-//            swipeDown(null);
-//        }
-//        else
-        if(board[0][0] != "1")
         {
-            
-            board[0][1] = board[2][2];
+            renderBoard();
+            return;
+        }
+
+        if((board[0][0].equals("1")) && (board[0][1].equals("2")) && (board[0][2].equals("3")) && (board[1][0].equals("4")) && (board[2][0].equals("7")) )
+        {
+            if(b1 == 1 && b2 == 1)
+            {
+                swipeLeft(null);
+            }
+            else if(b1 == 2 && b2 == 1)
+            {
+                swipeDown(null);
+            }
+            else if(b1 == 1 && b2 == 2)
+            {
+                swipeUp(null);
+            }
+            else
+            {
+                swipeRight(null);
+            }
+        }
+
+        else if((board[0][0].equals("1")) && (board[0][1].equals("2")) && (board[0][2].equals("3")) && !((board[1][0].equals("4")) && (board[2][0].equals("7")) ))
+        {
+            if(board[1][1].equals("") && board[1][2].equals("4") && board[2][2].equals("7"))
+            {
+                swipeLeft(null);
+            }
+            else if(board[1][1].equals("4") && board[1][2].equals("") && board[2][2].equals("7"))
+            {
+                swipeUp(null);
+            }
+            else if(board[1][1].equals("4") && board[1][2].equals("7") && board[2][2].equals(""))
+            {
+                swipeRight(null);
+            }
+            else if(board[1][1].equals("4") && board[1][2].equals("7") && board[2][1].equals(""))
+            {
+                swipeDown(null);
+            }
+            else if(board[1][1].equals("") && board[1][2].equals("7") && board[2][1].equals("4"))
+            {
+                swipeRight(null);
+            }
+            else if(board[1][0].equals("") && board[1][2].equals("7") && board[2][1].equals("4"))
+            {
+                swipeUp(null);
+            }
+            else if(board[2][0].equals("") && board[1][2].equals("7") && board[2][1].equals("4"))
+            {
+                swipeLeft(null);
+            }
+            else if(board[2][0].equals("4") && board[1][2].equals("7") && board[2][1].equals(""))
+            {
+                swipeDown(null);
+            }
+            else if(board[2][0].equals("4") && board[1][2].equals("7") && board[1][1].equals(""))
+            {
+                swipeLeft(null);
+            }
+            else if(board[2][0].equals("4") && board[1][2].equals("") && board[1][1].equals("7"))
+            {
+                swipeUp(null);
+            }
+            else if(board[2][0].equals("4") && board[2][2].equals("") && board[1][1].equals("7"))
+            {
+                swipeRight(null);
+            }
+            else if(board[2][0].equals("4") && board[2][1].equals("") && board[1][1].equals("7"))
+            {
+                swipeDown(null);
+            }
+            else if(board[2][0].equals("4") && board[2][1].equals("7") && board[1][1].equals(""))
+            {
+                swipeRight(null);
+            }
+            else if(board[2][0].equals("4") && board[2][1].equals("7") && board[1][0].equals(""))
+            {
+                swipeUp(null);
+            }
+            else if(board[2][0].equals("") && board[2][1].equals("7") && board[1][0].equals("4"))
+            {
+                swipeLeft(null);
+            }
+            else if(board[1][0].equals("") && board[1][1].equals("7") && board[1][2].equals("4"))
+            {
+                swipeLeft(null);
+            }
+            else if(board[1][0].equals("7") && board[1][1].equals("") && board[1][2].equals("4"))
+            {
+                swipeLeft(null);
+            }
+            else if(board[1][0].equals("7") && board[1][1].equals("4") && board[1][2].equals(""))
+            {
+                swipeUp(null);
+            }
+            else if(board[1][0].equals("7") && board[1][1].equals("4") && board[2][2].equals(""))
+            {
+                swipeRight(null);
+            }
+            else if(board[1][0].equals("7") && board[1][1].equals("4") && board[2][1].equals(""))
+            {
+                swipeRight(null);
+            }
+            else if(board[1][0].equals("7") && board[1][1].equals("4") && board[2][0].equals(""))
+            {
+                swipeDown(null);
+            }
+            else if(board[1][0].equals("") && board[1][1].equals("4") && board[2][0].equals("7"))
+            {
+                swipeLeft(null);
+            }
+            else if(!board[1][2].equals("4"))
+            {
+                if((b1 == 2) && (b2 == 2))
+                {
+                    swipeDown(null);
+                }
+                else if(b1 == 2)
+                {
+                    swipeLeft(null);
+                }
+                else if((b1 == 1) && (b2 == 0))
+                {
+                    swipeUp(null);
+                }
+                else
+                {
+                    swipeRight(null);
+                }
+            }
+            else if((board[1][1]).equals("7"))
+            {
+                if((b1 == 2) && (b2 == 0))
+                {
+                    swipeDown(null);
+                }
+                else
+                {
+                    swipeRight(null);
+                }
+            }
+            else if((b1 == 2) && (b2 == 2))
+            {
+                swipeRight(null);
+            }
+            else if(board[2][2].equals("7") && !(b1 == 1 && b2 == 1))
+            {
+                if(b1 == 2)
+                {
+                    swipeDown(null);
+                }
+                else
+                {
+                    swipeRight(null);
+                }
+            }
+            else
+            {
+                if(b1 == 1 && b2 == 1)
+                {
+                    swipeUp(null);
+                }
+                else if(b1 == 1)
+                {
+                    swipeLeft(null);
+                }
+                else if(b2 == 1)
+                {
+                    swipeRight(null);
+                }
+                else
+                {
+                    swipeDown(null);
+                }
+            }
+        }
+        if((board[0][0].equals("1") &&(board[0][1].equals("2") && (board[1][2].equals("3")) && (board[1][0].equals("")))))
+        {
+            swipeDown(null);
+        }
+        else if((board[0][0].equals("") &&(board[0][1].equals("2") && (board[1][2].equals("3") && (board[1][0].equals("1"))))))
+        {
+            swipeLeft(null);
+        }
+        else if((board[0][0].equals("2") &&(board[0][1].equals("") && (board[1][2].equals("3") && (board[1][0].equals("1"))))))
+        {
+            swipeLeft(null);
+        }
+        else if((board[0][0].equals("2") &&(board[0][2].equals("") && (board[1][2].equals("3") && (board[1][0].equals("1"))))))
+        {
+            swipeUp(null);
+        }
+        else if((board[0][0].equals("2") &&(board[0][2].equals("3") && (board[1][2].equals("") && (board[1][0].equals("1"))))))
+        {
+            swipeRight(null);
+        }
+        else if((board[0][0].equals("2") &&(board[0][2].equals("3") && (board[1][1].equals("") && (board[1][0].equals("1"))))))
+        {
+            swipeDown(null);
+        }
+        else if((board[0][0].equals("2") &&(board[0][2].equals("3") && (board[0][1].equals("") && (board[1][0].equals("1"))))))
+        {
+            swipeRight(null);
+        }
+        else if((board[0][0].equals("") &&(board[0][2].equals("3") && (board[0][1].equals("2") && (board[1][0].equals("1"))))))
+        {
+            swipeUp(null);
+        }
+
+        else if(!board[0][0].equals("1"))
+        {
+
+            //board[0][1] = board[2][2];
             int i = 0;
             int j = 1;
             boolean found = false;
@@ -247,7 +275,7 @@ public class eighttiles extends ActionBarActivity  {
             {
                 for( y = 0; y <3;y++)
                 {
-                    if(board[x][y] == "1")
+                    if(board[x][y].equals("1"))
                     {
 
                         i = x;
@@ -258,18 +286,7 @@ public class eighttiles extends ActionBarActivity  {
 
             }
 
-            if(true)
-            {
-                if (board[0][2] == "1")
-                    swipeDown(null);
-                else if ( j == 2)
-                    swipeLeft(null);
-                else if ( j ==0)
-                    swipeRight(null);
-                else
-                    swipeUp(null);
-            }
-            else if((j == 0) && (b2 != 0) )
+            if((j == 0) && (b2 != 0) )
             {
 
                 if( b1 != 0)
@@ -294,17 +311,21 @@ public class eighttiles extends ActionBarActivity  {
                 }
 
             }
-            else if ((j == 1) && (b2 == 2))
+            else if ((j == 1) && (b2 == 2) && b1 != 0)
             {
                 swipeRight(findViewById(android.R.id.content));
             }
+            else if (((j == 1) && (b2 == 2)))
+            {
+                swipeUp(null);
+            }
             else if((j == 1))
             {
-                if(b1 == 1 && b2 != 2)
+                if(b2 == 1 && b1 != 2)
                 {
                     swipeUp(findViewById(android.R.id.content));
                 }
-                else if(b1 ==1)
+                else if(b2 ==1)
                 {
                     swipeRight(findViewById(android.R.id.content));
                 }
@@ -337,159 +358,150 @@ public class eighttiles extends ActionBarActivity  {
                 }
             }
         }
-//        else if(board[0][1] != "2")
-//        {
-//            current.setText("2");
-//            int i = 0;
-//            int j = 0;
-//            found:
-//                for(i = 0;i<3;i++)
-//                {
-//                    for(j = 0; j <3;j++)
-//                    {
-//                        if(board[i][j] == "2")
-//                        {
-//                            break found;
-//                        }
-//                    }
-//                }
-//            if(j == 0)
-//            {
-//                if(b2 == 0)
-//                {
-//                    if (b1 > i)
-//                    {
-//                        swipeLeft(null);
-//                    }
-//                    else
-//                    {
-//                        swipeUp(null);
-//                    }
-//                }
-//                else
-//                {
-//                    if (b1 >1)
-//                    {
-//                        swipeDown(null);
-//                    }
-//                    else if( b1 < 1)
-//                    {
-//                        swipeUp(null);
-//                    }
-//                    else
-//                    {
-//                        swipeRight(null);
-//                    }
-//                }
-//            }
-//            else if(j == 1)
-//            {
-//                if((b1 < j) && (b2 == 1))
-//                {
-//                    swipeUp(null);
-//                }
-//                if(b2 == 2)
-//                {
-//                    if(b1 == 0)
-//                    {
-//                        swipeRight(null);
-//                    }
-//                    else
-//                    {
-//                        swipeDown(null);
-//                    }
-//                }
-//                else if(i == 2)
-//                {
-//                    if((b1 == 2) && (b2 == 0))
-//                    {
-//                        swipeDown(null);
-//                    }
-//                    else  if((b1 == 1) && (b2 == 0))
-//                    {
-//                        swipeLeft(null);
-//                    }
-//                }
-//                else if(i == 1)
-//                {
-//                    if ((b1 ==1) && (b2 == 0))
-//                    {
-//                        swipeUp(null);
-//                    }
-//                    else
-//                    {
-//                        swipeLeft(null);
-//                    }
-//                }
-//            }
-//            //j = 2
-//            else
-//            {
-//                if((b2 == 2) && (b1 < i))
-//                {
-//                    swipeUp(null);
-//                }
-//                else if((b2 == 2) )
-//                {
-//                    swipeRight(null);
-//                }
-//                else if(b2 == 0)
-//                {
-//                    swipeLeft(null);
-//                }
-//                else if (b1 == 0)
-//                {
-//                    swipeLeft(null);
-//                }
-//                else
-//                {
-//                    swipeDown(null);
-//                }
-//            }
-//        }
-//        else if((board[0][2] != "3") && (board[1][2] != "3"))
-//        {
-//            if((b1 == 0)&&(b2 == 2))
-//            {
-//                swipeUp(null);
-//            }
-//            if((b1 == 2) && (b2 == 2))
-//            {
-//                swipeDown(null);
-//            }
-//            else if(b1 == 2)
-//            {
-//                swipeLeft(null);
-//            }
-//            else if((b1 == 1) && (b2 == 0))
-//            {
-//                swipeUp(null);
-//            }
-//            else
-//            {
-//                swipeRight(null);
-//            }
-//        }
-//        else if(board[1][2] == "3" && !((b1 == 1) && (b2 == 0)))
-//        {
-//            if((b1 == 0)&&(b2 == 2))
-//            {
-//                swipeUp(null);
-//            }
-//            else if((b1 == 1) && (b2 ==1))
-//            {
-//                swipeRight(null);
-//            }
-//            else if ((b1 == 2) && (b2 == 0))
-//            {
-//                swipeDown(null);
-//            }
-//            else
-//            {
-//                swipeRight(null);
-//            }
-//        }
+        else if(!board[0][1].equals("2"))
+        {
+            int i = 0;
+            int j = 0;
+            found:
+                for(i = 0;i<3;i++)
+                {
+                    for(j = 0; j <3;j++)
+                    {
+                        if(board[i][j].equals("2"))
+                        {
+                            break found;
+                        }
+                    }
+                }
+            if(j == 0)
+            {
+                if(b2 == 0)
+                {
+                    if (b1 > i)
+                    {
+                        swipeLeft(null);
+                    }
+                    else
+                    {
+                        swipeUp(null);
+                    }
+                }
+                else
+                {
+                    if (b1 == 1)
+                    {
+                        swipeRight(null);
+                    }
+                    else if( b1 < 1)
+                    {
+                        swipeUp(null);
+                    }
+                    else
+                    {
+                        swipeDown(null);
+                    }
+                }
+            }
+            else if( j == 1)
+            {
+                if((b2 == 1) && (b1 < i))
+                {
+                    swipeUp(null);
+                }
+                else if(b2 == 1)
+                {
+                    swipeLeft(null);
+                }
+                else if(b2 == 0)
+                {
+                    if(b1!= i)
+                    {
+                        swipeLeft(null);
+                    }
+                    else if(b1 == 1)
+                    {
+                        swipeUp(null);
+                    }
+                    else if(b1 == 2)
+                    {
+                        swipeDown(null);
+                    }
+                }
+                else
+                {
+                    if(b1 == 0)
+                    {
+                        swipeRight(null);
+                    }
+                    else
+                    {
+                        swipeDown(null);
+                    }
+                }
 
+            }
+            else if(j == 2)
+            {
+                if(b2 == 0)
+                {
+                    swipeLeft(null);
+                }
+                else if( b2 == 1 && b1 == 0)
+                {
+                    swipeLeft(null);
+                }
+                else if(b2 == 1)
+                {
+                    swipeDown(null);
+                }
+                else if (b2 == 2 && b1 <i)
+                {
+                    swipeUp(null);
+                }
+                else
+                {
+                    swipeRight(null);
+                }
+            }
+        }
+        else if((!board[0][2].equals("3")) && (!board[1][2].equals("3")))
+        {
+            if((b1 == 0)&&(b2 == 2))
+            {
+                swipeUp(null);
+            }
+            if((b1 == 2) && (b2 == 0))
+            {
+                swipeDown(null);
+            }
+            else if(b1 == 2)
+            {
+                swipeRight(null);
+            }
+            else if((b1 == 1) && (b2 == 2))
+            {
+                swipeUp(null);
+            }
+            else
+            {
+                swipeLeft(null);
+            }
+        }
+        else if(!((b1 == 1)&&(b2 == 0)) && (board[1][2].equals("3")))
+        {
+            if((b1 == 0)&&(b2 == 2))
+            {
+                swipeUp(null);
+            }
+            else if(b2 != 0)
+            {
+                swipeRight(null);
+            }
+            else
+            {
+                swipeDown(null);
+            }
+        }
 
     }
     public boolean checkComplete()
@@ -501,10 +513,10 @@ public class eighttiles extends ActionBarActivity  {
             {
                 TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
                 current.setText(board[i][j]);
-                if(board[i][j] != Integer.toString(i*3+j+1) && (board[i][j] != ""))
+                if(!(board[i][j].equals( Integer.toString(i*3+j+1)) || (board[i][j].equals(""))))
 //                current.setText(Integer.toString(i));
                     finish = false;
-                if (board[i][j] == "")
+                if (board[i][j].equals(""))
                     current.setBackgroundColor( -16776961);
                 else
                     current.setBackgroundColor( -65536 );
