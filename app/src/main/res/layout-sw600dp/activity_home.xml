@@ -1,25 +1,99 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@color/orange"
     tools:context="com.eecs481.mathinmotion.Home">
 
-    <Button android:layout_width="wrap_content"
+    <ImageView
+        android:adjustViewBounds="true"
+        android:layout_width="475dp"
         android:layout_height="wrap_content"
-        android:text = "8-tiles"
-        android:onClick="eight"
-        android:id="@+id/button" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/home_title" />
 
-    <Button android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
-        android:text = "Algebra in Action"
-        android:layout_below="@+id/button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="algebra"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp" >
 
-</RelativeLayout>
+        <ImageView android:id="@+id/eight_puzzle_launch"
+            android:adjustViewBounds="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/eight_tiles"
+            android:src="@drawable/home_button"
+            android:onClick="eight_puzzle_launch" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:text="@string/eight_tiles"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <ImageView android:id="@+id/algebra_launch"
+            android:adjustViewBounds="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/algebra"
+            android:src="@drawable/home_button"
+            android:onClick="algebra_launch" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:text="@string/algebra"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp">
+
+        <ImageView android:id="@+id/instructions_launch"
+            android:adjustViewBounds="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/instructions"
+            android:src="@drawable/home_button"
+            android:onClick="instructions_launch" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:text="@string/instructions"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
