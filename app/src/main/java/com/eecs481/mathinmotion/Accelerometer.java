@@ -1,42 +1,53 @@
 package com.eecs481.mathinmotion;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.content.Intent;
+import android.content.Context;
 import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.Log;
 
-public class Accelerometer extends ActionBarActivity implements SensorEventListener {
+import java.util.ArrayList;
 
+public class Accelerometer implements SensorEventListener
+{
+    private static Accelerometer instance = null;
     private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
+    private ArrayList<AccelerometerListener> listeners;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 100;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-    protected void onResume() {
-        super.onResume();
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    private Accelerometer(Context context)
+    {
+        listeners = new ArrayList<AccelerometerListener>();
     }
 
-    protected void onPause() {
-        super.onPause();
-        mSensorManager.unregisterListener(this);
+    public static Accelerometer getInstance(Context context)
+    {
+        if (instance == null)
+            instance = new Accelerometer(context);
+        return instance;
     }
+
+    public void addListener(Context context, AccelerometerListener listener)
+    {
+        if (listeners.size() == 0)
+        {
+            mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+            Sensor mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        listeners.add(listener);
+    }
+
+    public void removeListener(AccelerometerListener listener)
+    {
+        listeners.remove(listener);
+        if (listeners.size() == 0)
+            mSensorManager.unregisterListener(this);
+    }
+
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
@@ -102,59 +113,26 @@ public class Accelerometer extends ActionBarActivity implements SensorEventListe
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-    public void eight(View view){
-        Intent intent = new Intent(this, eighttiles.class);
-        startActivity(intent);
-    }
-    public void algebra(View view){
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        startActivity(intent);
-    }
-    public void search() {
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        startActivity(intent);
-    }
     public void left() {
         Log.d("direction", "left");
-        Intent intent = new Intent(this, AlgebrainAction.class);
+        //Intent intent = new Intent(this, AlgebrainAction.class);
         //startActivity(intent);
     }
     public void right() {Log.d("direction", "right");
-        Intent intent = new Intent(this, AlgebrainAction.class);
+        //Intent intent = new Intent(this, AlgebrainAction.class);
         // startActivity(intent);
     }
     public void down() {Log.d("direction", "down");
-        Intent intent = new Intent(this, AlgebrainAction.class);
+        //Intent intent = new Intent(this, AlgebrainAction.class);
         //startActivity(intent);
     }
     public void up() {Log.d("direction", "up");
-        Intent intent = new Intent(this, AlgebrainAction.class);
+        //Intent intent = new Intent(this, AlgebrainAction.class);
         // startActivity(intent);
     }
     public void shake() {
         Log.d("shake", "shake");
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, AlgebrainAction.class);
+        //startActivity(intent);
     }
 }
