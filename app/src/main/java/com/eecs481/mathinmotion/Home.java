@@ -6,12 +6,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
-import android.widget.EditText;
 import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorEvent;
 import android.util.Log;
 
 public class Home extends ActionBarActivity implements SensorEventListener {
@@ -126,14 +124,25 @@ public class Home extends ActionBarActivity implements SensorEventListener {
 
         return super.onOptionsItemSelected(item);
     }
-    public void eight(View view){
+
+    public void eight_puzzle_launch(View view)
+    {
         Intent intent = new Intent(this, eighttiles.class);
         startActivity(intent);
     }
-    public void algebra(View view){
+
+    public void algebra_launch(View view)
+    {
         Intent intent = new Intent(this, AlgebrainAction.class);
         startActivity(intent);
     }
+
+    public void instructions_launch(View view)
+    {
+        Intent intent = new Intent(this, Instructions.class);
+        startActivity(intent);
+    }
+
     public void search() {
         Intent intent = new Intent(this, AlgebrainAction.class);
         startActivity(intent);

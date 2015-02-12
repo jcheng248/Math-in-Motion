@@ -8,18 +8,18 @@
 
     <ImageView
         android:adjustViewBounds="true"
-        android:layout_width="275dp"
+        android:layout_width="475dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/home_title" />
 
     <RelativeLayout
-        android:layout_width="250dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" >
+        android:layout_marginTop="40dp" >
 
         <ImageView android:id="@+id/eight_puzzle_launch"
             android:adjustViewBounds="true"
@@ -37,16 +37,16 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:text="@string/eight_tiles"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="250dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="30dp">
 
         <ImageView android:id="@+id/algebra_launch"
             android:adjustViewBounds="true"
@@ -64,16 +64,16 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:text="@string/algebra"/>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="250dp"
+        android:layout_width="450dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="30dp">
 
         <ImageView android:id="@+id/instructions_launch"
             android:adjustViewBounds="true"
@@ -91,7 +91,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:text="@string/instructions"/>
 
     </RelativeLayout>
