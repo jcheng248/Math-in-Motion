@@ -14,7 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorEvent;
 import android.util.Log;
 
-public class Home extends ActionBarActivity {
+public class Home extends ActionBarActivity implements AccelerometerListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,12 @@ public class Home extends ActionBarActivity {
     }
     protected void onResume() {
         super.onResume();
+        Accelerometer.getInstance(this).addListener(this, this);
     }
 
     protected void onPause() {
         super.onPause();
+        Accelerometer.getInstance(this).removeListener(this);
     }
 
     @Override

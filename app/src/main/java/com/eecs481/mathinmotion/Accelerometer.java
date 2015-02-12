@@ -16,6 +16,7 @@ public class Accelerometer implements SensorEventListener
     private ArrayList<AccelerometerListener> listeners;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
+    private String move = "none";
     private static final int SHAKE_THRESHOLD = 100;
 
     private Accelerometer(Context context)
@@ -59,56 +60,31 @@ public class Accelerometer implements SensorEventListener
         if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             long curTime = System.currentTimeMillis();
 
-            if ((curTime - lastUpdate) > 1000) {
+            if ((curTime - lastUpdate) > 3500) {
 
                 float x = event.values[0];
                 float y = event.values[1];
                 float z = event.values[2];
 
-                Log.d("xTag", Float.toString(x));
+                /*Log.d("xTag", Float.toString(x));
                 Log.d("yTag", Float.toString(y));
                 Log.d("zTag", Float.toString(z));
 
-                long diffTime = (curTime - lastUpdate);
-                lastUpdate = curTime;
-
-                float speed = Math.abs(x + y + z - last_x - last_y - last_z)/ diffTime * 10000;
-
-                if (speed > SHAKE_THRESHOLD) { //shaking on the horiz axis by moving bottom and top right and left repeatedly
-                    shake();//They need to shake quite forcefully....need to lower threshold WITHOUT
-                    //calling function when user does not want this action to happen.
-                }
 
                 Log.d("lastx", Float.toString(last_x));
                 Log.d("lasty", Float.toString(last_y));
-                Log.d("lastz", Float.toString(last_z));
+                Log.d("lastz", Float.toString(last_z)); */
 
-                //detects change in a certain axis while making sure the other axises remain near 0 or +/- 9.8
-                if (Math.abs(last_x) <= 1 && x-last_x <= -3 && Math.abs(y)<= 2) right();
-                if (Math.abs(last_x) <= 1 && x-last_x >= 3 && Math.abs(y)<= 2) left();//tile goes left//y  should be roughly 0
-                if (Math.abs(last_y) <= 1 && y-last_y >= 3 && Math.abs(x)<= 2) down(); //tile goes down //x  should be roughly 0
-                if (Math.abs(last_y) <= 1 && y-last_y <= -3 && Math.abs(x)<= 2) up(); //tile goes up //x  should be roughly 0
-                //*NOTE: USER MUST RETURN PHONE BACK TO HORIZ HOLDING POSITION for this to work
-                //user waits for about 2.5 seconds at rest position
+                if(move == "none"){
+                    if(x - last_x >= 3) right();
+                    if(x - last_x <= 3) left();
+                }
 
                 last_x = x;
                 last_y = y;
                 last_z = z;
 
-                /*
-                 //this will only work, if the Home activity is called from start (opened) after each move
-                 //if we are just returning from search, then the math will need to be changed to deltas
-                if (x <= -5 && Math.abs(y)<= 1 && last_x != 0) right(); //tile goes right //y  should be roughly 0
-                if (x >= 5 && Math.abs(y)<= 1 && last_x != 0) left();//tile goes left//y  should be roughly 0
-                if (y >= 5 && Math.abs(x)<= 1 && last_y != 0) down(); //tile goes down //x  should be roughly 0
-                if (y <= -5 && Math.abs(x)<= 1 &&last_y != 0) up(); //tile goes up //x  should be roughly 0
-
-                last_x = x;
-                last_y = y;
-                last_z = z;*/
-
-
-
+                lastUpdate = System.currentTimeMillis();
             }
         }
     }
