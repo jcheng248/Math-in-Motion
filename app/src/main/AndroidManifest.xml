@@ -10,6 +10,7 @@
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +21,7 @@
         <activity
             android:name=".eighttiles"
             android:label="@string/title_activity_eighttiles"
+            android:screenOrientation="portrait"
             android:parentActivityName=".Home" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
