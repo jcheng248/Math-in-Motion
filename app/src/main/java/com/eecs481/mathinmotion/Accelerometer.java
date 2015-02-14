@@ -121,7 +121,7 @@ public class Accelerometer implements SensorEventListener
 //                     last_z = 0;
 //                 }
 //             }
-             lastUpdate = curTime;
+            lastUpdate = curTime;
             last_x = x;
             last_y = y;
             last_z = z;
