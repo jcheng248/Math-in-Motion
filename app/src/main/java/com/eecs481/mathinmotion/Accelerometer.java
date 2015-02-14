@@ -16,9 +16,14 @@ public class Accelerometer implements SensorEventListener
     private ArrayList<AccelerometerListener> listeners;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private String move = "none";
     private static final int SHAKE_THRESHOLD = 100;
-
+    private float velocity_x = 0;
+    private float avg_vel_x = 0;
+    private float velocity_y= 0;
+    private float avg_vel_y = 0;
+    private float velocity_z = 0;
+    private float avg_vel_z = 0;
+    private float timer = 0;
     private Accelerometer(Context context)
     {
         listeners = new ArrayList<AccelerometerListener>();
@@ -36,7 +41,7 @@ public class Accelerometer implements SensorEventListener
         if (listeners.size() == 0)
         {
             mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
-            Sensor mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            Sensor mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
         listeners.add(listener);
@@ -52,41 +57,81 @@ public class Accelerometer implements SensorEventListener
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-
+    boolean waiting = false;
     public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly
-
-        Sensor mySensor = event.sensor;
-
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            long curTime = System.currentTimeMillis();
-
-            if ((curTime - lastUpdate) > 3500) {
-
-                float x = event.values[0];
-                float y = event.values[1];
-                float z = event.values[2];
-
-                /*Log.d("xTag", Float.toString(x));
-                Log.d("yTag", Float.toString(y));
-                Log.d("zTag", Float.toString(z));
-
-
-                Log.d("lastx", Float.toString(last_x));
-                Log.d("lasty", Float.toString(last_y));
-                Log.d("lastz", Float.toString(last_z)); */
-
-                if(move == "none"){
-                    if(x - last_x >= 3) right();
-                    if(x - last_x <= 3) left();
+         long curTime = System.currentTimeMillis();
+         float x = event.values[0];
+         float y = event.values[1];
+         float z = event.values[2];
+         if(curTime - lastUpdate > 200)
+         {
+             waiting = true;
+         }
+        if(curTime - lastUpdate > 2000)
+        {
+            last_x = 0;
+            last_y = 0;
+            last_z = 0;
+        }
+         if(waiting && (Math.abs(x) >= 2.5 || Math.abs(y) >= 2.5 || Math.abs(z) >= 2.5)) {
+            waiting = false;
+            if(last_x != 0 && Math.abs(x) > Math.abs(y))
+            {
+                if((last_x*x )< 0 && last_x >0 )
+                {
+                    right();
+                    last_x = 0;
+                    last_y = 0;
+                    last_z = 0;
+                }
+                else if((last_x*x )< 0 && last_x <0 )
+                {
+                    left();
+                    last_x = 0;
+                    last_y = 0;
+                    last_z = 0;
                 }
 
-                last_x = x;
-                last_y = y;
-                last_z = z;
-
-                lastUpdate = System.currentTimeMillis();
             }
-        }
+             if(last_y != 0 && Math.abs(y) > Math.abs(x)) {
+                if((last_y * y) <0 && last_y >0) {
+                    up();
+                    last_y = 0;
+                    last_x = 0;
+                    last_z = 0;
+                }
+                else if((last_y*y) < 0 && last_y <0) {
+                    down();
+                    last_y = 0;
+                    last_x = 0;
+                    last_z = 0;
+                }
+            }
+//             if(last_y != 0 && Math.abs(y) > Math.abs(x)) {
+//                 if((last_y * y) <0 && last_y >0) {
+//                     up();
+//                     last_y = 0;
+//                     last_x = 0;
+//                     last_z = 0;
+//                 }
+//                 else if((last_y*y) < 0 && last_y <0) {
+//                     down();
+//                     last_y = 0;
+//                     last_x = 0;
+//                     last_z = 0;
+//                 }
+//             }
+             lastUpdate = curTime;
+            last_x = x;
+            last_y = y;
+            last_z = z;
+         }
+
+
+    }
+    public float max3(float a, float b, float c)
+    {
+        return Math.max(Math.max(a,b),c);
     }
 
     public void left() {
