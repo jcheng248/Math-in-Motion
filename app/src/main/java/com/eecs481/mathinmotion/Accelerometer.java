@@ -75,7 +75,7 @@ public class Accelerometer implements SensorEventListener
         }
          if(waiting && (Math.abs(x) >= 2.5 || Math.abs(y) >= 2.5 || Math.abs(z) >= 2.5)) {
             waiting = false;
-            if(last_x != 0 && Math.abs(x) > Math.abs(y))
+            if(last_x != 0 && Math.abs(last_x) > Math.abs(last_y) &&Math.abs(last_x)>Math.abs(last_z))
             {
                 if((last_x*x )< 0 && last_x >0 )
                 {
@@ -93,7 +93,7 @@ public class Accelerometer implements SensorEventListener
                 }
 
             }
-             if(last_y != 0 && Math.abs(y) > Math.abs(x)) {
+             if(last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y)>Math.abs(last_z)) {
                 if((last_y * y) <0 && last_y >0) {
                     up();
                     last_y = 0;
@@ -107,20 +107,16 @@ public class Accelerometer implements SensorEventListener
                     last_z = 0;
                 }
             }
-//             if(last_y != 0 && Math.abs(y) > Math.abs(x)) {
-//                 if((last_y * y) <0 && last_y >0) {
-//                     up();
-//                     last_y = 0;
-//                     last_x = 0;
-//                     last_z = 0;
-//                 }
-//                 else if((last_y*y) < 0 && last_y <0) {
-//                     down();
-//                     last_y = 0;
-//                     last_x = 0;
-//                     last_z = 0;
-//                 }
-//             }
+             if(last_z != 0 && Math.abs(last_z) > Math.abs(last_y) && Math.abs(last_z)>Math.abs(last_x)) {
+                 if((last_z * z) <0) {
+
+                     shake();
+                     last_y = 0;
+                     last_x = 0;
+                     last_z = 0;
+                 }
+
+             }
             lastUpdate = curTime;
             last_x = x;
             last_y = y;
