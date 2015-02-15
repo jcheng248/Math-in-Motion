@@ -30,9 +30,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Play"
+                android:text="Eight Tiles"
                 android:id="@+id/win"
-                android:layout_column="2" />
+                android:layout_column="2"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="28dp" />
 
         </TableRow>
 
