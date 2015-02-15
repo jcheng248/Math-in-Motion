@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".eighttiles"
-            android:label="@string/title_activity_eighttiles"
+            android:label="@string/title_activity_eightpuzzle"
             android:screenOrientation="portrait"
             android:parentActivityName=".Home" >
             <meta-data
