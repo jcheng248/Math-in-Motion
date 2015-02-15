@@ -1,9 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/orange"
     tools:context="com.eecs481.mathinmotion.Home">
 
     <ImageView
@@ -35,7 +34,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="@string/eight_tiles"/>
@@ -62,7 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="@string/algebra"/>
@@ -89,7 +86,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="@string/instructions"/>
