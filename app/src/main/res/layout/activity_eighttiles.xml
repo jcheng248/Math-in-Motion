@@ -26,13 +26,16 @@
             android:layout_height="fill_parent"
             android:id="@+id/hello">
 
-                <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Play"
+                android:text="Eight Tiles"
                 android:id="@+id/win"
-                android:layout_column="2" />
+                android:layout_column="2"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="28dp" />
 
         </TableRow>
 
@@ -45,27 +48,36 @@
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block1"
                 android:tag="1"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:textAlignment="center"
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block2"
                 android:tag="2"
-                android:layout_column="2" />
+                android:layout_column="2"
+                android:textAlignment="center"
+                android:gravity="center" />
 
             <TextView
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block3"
                 android:tag="3"
-                android:layout_column="3" />
+                android:layout_column="3"
+                android:gravity="center" />
+
         </TableRow>
 
         <TableRow
@@ -76,25 +88,34 @@
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block4"
                 android:tag="4"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:gravity="center" />
+
             <TextView
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block5"
                 android:tag="5"
-                android:layout_column="2" />
+                android:layout_column="2"
+                android:gravity="center" />
+
             <TextView
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block6"
                 android:tag="6"
-                android:layout_column="3" />
+                android:layout_column="3"
+                android:gravity="center" />
+
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -104,25 +125,34 @@
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block7"
                 android:tag="7"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:gravity="center" />
+
             <TextView
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block8"
                 android:tag="8"
-                android:layout_column="2" />
+                android:layout_column="2"
+                android:gravity="center" />
+
             <TextView
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
+                android:background="@drawable/tile"
                 android:id="@+id/block9"
                 android:tag="9"
-                android:layout_column="3" />
+                android:layout_column="3"
+                android:gravity="center" />
+
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
