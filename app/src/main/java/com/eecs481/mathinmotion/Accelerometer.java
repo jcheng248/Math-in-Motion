@@ -126,10 +126,6 @@ public class Accelerometer implements SensorEventListener
 
 
     }
-    public float max3(float a, float b, float c)
-    {
-        return Math.max(Math.max(a,b),c);
-    }
 
     public void left()
     {
