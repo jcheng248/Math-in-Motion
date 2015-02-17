@@ -13,7 +13,7 @@ import java.io.Console;
 import java.util.Random;
 
 
-public class eighttiles extends ActionBarActivity  {
+public class eighttiles extends ActionBarActivity implements AccelerometerListener {
     static String[][] board = new String [3][3];
     boolean done = false;
     int spacerow = 2;
@@ -34,10 +34,23 @@ public class eighttiles extends ActionBarActivity  {
         board[2][2]= "";
 
         setContentView(R.layout.activity_eighttiles);
-        reset(null);
+        reset();
 
     }
-    public void nextStep(View view)
+
+    protected void onResume()
+    {
+        super.onResume();
+        Accelerometer.getInstance().addListener(this, this);
+    }
+
+    protected void onPause()
+    {
+        super.onPause();
+        Accelerometer.getInstance().removeListener(this);
+    }
+
+    public void nextStep()
     {
 //        TextView current = (TextView) findViewById(R.id.win);
 //        current.setText("you!!");
@@ -58,19 +71,19 @@ public class eighttiles extends ActionBarActivity  {
         {
             if(b1 == 1 && b2 == 1)
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(b1 == 2 && b2 == 1)
             {
-                swipeDown(null);
+                swipeDown();
             }
             else if(b1 == 1 && b2 == 2)
             {
-                swipeUp(null);
+                swipeUp();
             }
             else
             {
-                swipeRight(null);
+                swipeRight();
             }
         }
 
@@ -78,188 +91,188 @@ public class eighttiles extends ActionBarActivity  {
         {
             if(board[1][1].equals("") && board[1][2].equals("4") && board[2][2].equals("7"))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(board[1][1].equals("4") && board[1][2].equals("") && board[2][2].equals("7"))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if(board[1][1].equals("4") && board[1][2].equals("7") && board[2][2].equals(""))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[1][1].equals("4") && board[1][2].equals("7") && board[2][1].equals(""))
             {
-                swipeDown(null);
+                swipeDown();
             }
             else if(board[1][1].equals("") && board[1][2].equals("7") && board[2][1].equals("4"))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[1][0].equals("") && board[1][2].equals("7") && board[2][1].equals("4"))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if(board[2][0].equals("") && board[1][2].equals("7") && board[2][1].equals("4"))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(board[2][0].equals("4") && board[1][2].equals("7") && board[2][1].equals(""))
             {
-                swipeDown(null);
+                swipeDown();
             }
             else if(board[2][0].equals("4") && board[1][2].equals("7") && board[1][1].equals(""))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(board[2][0].equals("4") && board[1][2].equals("") && board[1][1].equals("7"))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if(board[2][0].equals("4") && board[2][2].equals("") && board[1][1].equals("7"))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[2][0].equals("4") && board[2][1].equals("") && board[1][1].equals("7"))
             {
-                swipeDown(null);
+                swipeDown();
             }
             else if(board[2][0].equals("4") && board[2][1].equals("7") && board[1][1].equals(""))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[2][0].equals("4") && board[2][1].equals("7") && board[1][0].equals(""))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if(board[2][0].equals("") && board[2][1].equals("7") && board[1][0].equals("4"))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(board[1][0].equals("") && board[1][1].equals("7") && board[1][2].equals("4"))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(board[1][0].equals("7") && board[1][1].equals("") && board[1][2].equals("4"))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(board[1][0].equals("7") && board[1][1].equals("4") && board[1][2].equals(""))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if(board[1][0].equals("7") && board[1][1].equals("4") && board[2][2].equals(""))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[1][0].equals("7") && board[1][1].equals("4") && board[2][1].equals(""))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[1][0].equals("7") && board[1][1].equals("4") && board[2][0].equals(""))
             {
-                swipeDown(null);
+                swipeDown();
             }
             else if(board[1][0].equals("") && board[1][1].equals("4") && board[2][0].equals("7"))
             {
-                swipeLeft(null);
+                swipeLeft();
             }
             else if(!board[1][2].equals("4"))
             {
                 if((b1 == 2) && (b2 == 2))
                 {
-                    swipeDown(null);
+                    swipeDown();
                 }
                 else if(b1 == 2)
                 {
-                    swipeLeft(null);
+                    swipeLeft();
                 }
                 else if((b1 == 1) && (b2 == 0))
                 {
-                    swipeUp(null);
+                    swipeUp();
                 }
                 else
                 {
-                    swipeRight(null);
+                    swipeRight();
                 }
             }
             else if((board[1][1]).equals("7"))
             {
                 if((b1 == 2) && (b2 == 0))
                 {
-                    swipeDown(null);
+                    swipeDown();
                 }
                 else
                 {
-                    swipeRight(null);
+                    swipeRight();
                 }
             }
             else if((b1 == 2) && (b2 == 2))
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if(board[2][2].equals("7") && !(b1 == 1 && b2 == 1))
             {
                 if(b1 == 2)
                 {
-                    swipeDown(null);
+                    swipeDown();
                 }
                 else
                 {
-                    swipeRight(null);
+                    swipeRight();
                 }
             }
             else
             {
                 if(b1 == 1 && b2 == 1)
                 {
-                    swipeUp(null);
+                    swipeUp();
                 }
                 else if(b1 == 1)
                 {
-                    swipeLeft(null);
+                    swipeLeft();
                 }
                 else if(b2 == 1)
                 {
-                    swipeRight(null);
+                    swipeRight();
                 }
                 else
                 {
-                    swipeDown(null);
+                    swipeDown();
                 }
             }
         }
         if((board[0][0].equals("1") &&(board[0][1].equals("2") && (board[1][2].equals("3")) && (board[1][0].equals("")))))
         {
-            swipeDown(null);
+            swipeDown();
         }
         else if((board[0][0].equals("") &&(board[0][1].equals("2") && (board[1][2].equals("3") && (board[1][0].equals("1"))))))
         {
-            swipeLeft(null);
+            swipeLeft();
         }
         else if((board[0][0].equals("2") &&(board[0][1].equals("") && (board[1][2].equals("3") && (board[1][0].equals("1"))))))
         {
-            swipeLeft(null);
+            swipeLeft();
         }
         else if((board[0][0].equals("2") &&(board[0][2].equals("") && (board[1][2].equals("3") && (board[1][0].equals("1"))))))
         {
-            swipeUp(null);
+            swipeUp();
         }
         else if((board[0][0].equals("2") &&(board[0][2].equals("3") && (board[1][2].equals("") && (board[1][0].equals("1"))))))
         {
-            swipeRight(null);
+            swipeRight();
         }
         else if((board[0][0].equals("2") &&(board[0][2].equals("3") && (board[1][1].equals("") && (board[1][0].equals("1"))))))
         {
-            swipeDown(null);
+            swipeDown();
         }
         else if((board[0][0].equals("2") &&(board[0][2].equals("3") && (board[0][1].equals("") && (board[1][0].equals("1"))))))
         {
-            swipeRight(null);
+            swipeRight();
         }
         else if((board[0][0].equals("") &&(board[0][2].equals("3") && (board[0][1].equals("2") && (board[1][0].equals("1"))))))
         {
-            swipeUp(null);
+            swipeUp();
         }
 
         else if(!board[0][0].equals("1"))
@@ -291,11 +304,11 @@ public class eighttiles extends ActionBarActivity  {
 
                 if( b1 != 0)
                 {
-                   swipeDown(findViewById(android.R.id.content));
+                   swipeDown();
                 }
                 else if(( b1 ==0))
                 {
-                    swipeRight(findViewById(android.R.id.content));
+                    swipeRight();
                 }
 
             }
@@ -303,58 +316,58 @@ public class eighttiles extends ActionBarActivity  {
             {
                 if(b1 > i)
                 {
-                    swipeLeft(findViewById(android.R.id.content));
+                    swipeLeft();
                 }
                 else
                 {
-                    swipeUp(findViewById(android.R.id.content));
+                    swipeUp();
                 }
 
             }
             else if ((j == 1) && (b2 == 2) && b1 != 0)
             {
-                swipeRight(findViewById(android.R.id.content));
+                swipeRight();
             }
             else if (((j == 1) && (b2 == 2)))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if((j == 1))
             {
                 if(b2 == 1 && b1 != 2)
                 {
-                    swipeUp(findViewById(android.R.id.content));
+                    swipeUp();
                 }
                 else if(b2 ==1)
                 {
-                    swipeRight(findViewById(android.R.id.content));
+                    swipeRight();
                 }
                 else if(b1 == 0 && b2 == 0)
                 {
-                    swipeLeft(findViewById(android.R.id.content));
+                    swipeLeft();
                 }
                 else
                 {
-                    swipeDown(findViewById(android.R.id.content));
+                    swipeDown();
                 }
             }
             else if( j == 2)
             {
                 if(b2 == 2 && b1 < i)
                 {
-                    swipeUp(findViewById(android.R.id.content));
+                    swipeUp();
                 }
                 else if( b2 == 2)
                 {
-                    swipeRight(findViewById(android.R.id.content));
+                    swipeRight();
                 }
                 else if(b1 == 0)
                 {
-                    swipeLeft(findViewById(android.R.id.content));
+                    swipeLeft();
                 }
                 else
                 {
-                    swipeDown(findViewById(android.R.id.content));
+                    swipeDown();
                 }
             }
         }
@@ -379,26 +392,26 @@ public class eighttiles extends ActionBarActivity  {
                 {
                     if (b1 > i)
                     {
-                        swipeLeft(null);
+                        swipeLeft();
                     }
                     else
                     {
-                        swipeUp(null);
+                        swipeUp();
                     }
                 }
                 else
                 {
                     if (b1 == 1)
                     {
-                        swipeRight(null);
+                        swipeRight();
                     }
                     else if( b1 < 1)
                     {
-                        swipeUp(null);
+                        swipeUp();
                     }
                     else
                     {
-                        swipeDown(null);
+                        swipeDown();
                     }
                 }
             }
@@ -406,36 +419,36 @@ public class eighttiles extends ActionBarActivity  {
             {
                 if((b2 == 1) && (b1 < i))
                 {
-                    swipeUp(null);
+                    swipeUp();
                 }
                 else if(b2 == 1)
                 {
-                    swipeLeft(null);
+                    swipeLeft();
                 }
                 else if(b2 == 0)
                 {
                     if(b1!= i)
                     {
-                        swipeLeft(null);
+                        swipeLeft();
                     }
                     else if(b1 == 1)
                     {
-                        swipeUp(null);
+                        swipeUp();
                     }
                     else if(b1 == 2)
                     {
-                        swipeDown(null);
+                        swipeDown();
                     }
                 }
                 else
                 {
                     if(b1 == 0)
                     {
-                        swipeRight(null);
+                        swipeRight();
                     }
                     else
                     {
-                        swipeDown(null);
+                        swipeDown();
                     }
                 }
 
@@ -444,23 +457,23 @@ public class eighttiles extends ActionBarActivity  {
             {
                 if(b2 == 0)
                 {
-                    swipeLeft(null);
+                    swipeLeft();
                 }
                 else if( b2 == 1 && b1 == 0)
                 {
-                    swipeLeft(null);
+                    swipeLeft();
                 }
                 else if(b2 == 1)
                 {
-                    swipeDown(null);
+                    swipeDown();
                 }
                 else if (b2 == 2 && b1 <i)
                 {
-                    swipeUp(null);
+                    swipeUp();
                 }
                 else
                 {
-                    swipeRight(null);
+                    swipeRight();
                 }
             }
         }
@@ -468,38 +481,38 @@ public class eighttiles extends ActionBarActivity  {
         {
             if((b1 == 0)&&(b2 == 2))
             {
-                swipeUp(null);
+                swipeUp();
             }
             if((b1 == 2) && (b2 == 0))
             {
-                swipeDown(null);
+                swipeDown();
             }
             else if(b1 == 2)
             {
-                swipeRight(null);
+                swipeRight();
             }
             else if((b1 == 1) && (b2 == 2))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else
             {
-                swipeLeft(null);
+                swipeLeft();
             }
         }
         else if(!((b1 == 1)&&(b2 == 0)) && (board[1][2].equals("3")))
         {
             if((b1 == 0)&&(b2 == 2))
             {
-                swipeUp(null);
+                swipeUp();
             }
             else if(b2 != 0)
             {
-                swipeRight(null);
+                swipeRight();
             }
             else
             {
-                swipeDown(null);
+                swipeDown();
             }
         }
 
@@ -552,7 +565,7 @@ public class eighttiles extends ActionBarActivity  {
         getMenuInflater().inflate(R.menu.menu_eighttiles, menu);
         return true;
     }
-    public void reset(View view)
+    public void reset()
     {
         Random randomGenerator = new Random();
         for(int i = 0; i < 400; i++)
@@ -580,25 +593,25 @@ public class eighttiles extends ActionBarActivity  {
         }
         renderBoard();
     }
-    public void swipeUp(View view)
+    public void swipeUp()
     {
         if (spacerow != 2)
             goUp();
         renderBoard();
     }
-    public void swipeDown(View view)
+    public void swipeDown()
     {
         if (spacerow != 0)
             goDown();
         renderBoard();
     }
-    public void swipeLeft(View view)
+    public void swipeLeft()
     {
         if (spacecolumn != 2)
             goLeft();
         renderBoard();
     }
-    public void swipeRight(View view)
+    public void swipeRight()
     {
         if (spacecolumn != 0)
             goRight();

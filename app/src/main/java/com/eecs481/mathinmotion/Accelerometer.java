@@ -24,15 +24,16 @@ public class Accelerometer implements SensorEventListener
     private float velocity_z = 0;
     private float avg_vel_z = 0;
     private float timer = 0;
-    private Accelerometer(Context context)
+
+    private Accelerometer()
     {
         listeners = new ArrayList<AccelerometerListener>();
     }
 
-    public static Accelerometer getInstance(Context context)
+    public static Accelerometer getInstance()
     {
         if (instance == null)
-            instance = new Accelerometer(context);
+            instance = new Accelerometer();
         return instance;
     }
 
@@ -130,26 +131,29 @@ public class Accelerometer implements SensorEventListener
         return Math.max(Math.max(a,b),c);
     }
 
-    public void left() {
-        Log.d("direction", "left");
-        //Intent intent = new Intent(this, AlgebrainAction.class);
-        //startActivity(intent);
+    public void left()
+    {
+        for (AccelerometerListener listener : listeners)
+            listener.swipeLeft();
     }
-    public void right() {Log.d("direction", "right");
-        //Intent intent = new Intent(this, AlgebrainAction.class);
-        // startActivity(intent);
+    public void right()
+    {
+        for (AccelerometerListener listener : listeners)
+            listener.swipeRight();
     }
-    public void down() {Log.d("direction", "down");
-        //Intent intent = new Intent(this, AlgebrainAction.class);
-        //startActivity(intent);
+    public void down()
+    {
+        for (AccelerometerListener listener : listeners)
+            listener.swipeDown();
     }
-    public void up() {Log.d("direction", "up");
-        //Intent intent = new Intent(this, AlgebrainAction.class);
-        // startActivity(intent);
+    public void up()
+    {
+        for (AccelerometerListener listener : listeners)
+            listener.swipeUp();
     }
-    public void shake() {
-        Log.d("shake", "shake");
-        //Intent intent = new Intent(this, AlgebrainAction.class);
-        //startActivity(intent);
+    public void shake()
+    {
+        for (AccelerometerListener listener : listeners)
+            listener.nextStep();
     }
 }

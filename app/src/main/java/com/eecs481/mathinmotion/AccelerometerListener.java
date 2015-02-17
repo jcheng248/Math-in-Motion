@@ -6,17 +6,17 @@ public interface AccelerometerListener
 {
     /* Functions that interface with Activities */
     //tilt up
-    /*public void swipeUp(View view);
+    public void swipeUp();
 
     //tilt down
-    public void swipeDown(View view);
+    public void swipeDown();
 
     //tilt left
-    public void swipeLeft(View view);
+    public void swipeLeft();
 
     //tilt right
-    public void swipeRight(View view);
+    public void swipeRight();
 
     //shake
-    public void nextStep(View view);*/
+    public void nextStep();
 }
