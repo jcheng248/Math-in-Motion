@@ -1,15 +1,17 @@
 package com.eecs481.mathinmotion;
 
-import android.hardware.SensorEventListener;
+import android.content.Intent;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import java.io.Console;
 import java.util.Random;
 
 
@@ -34,8 +36,8 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         board[2][2]= "";
 
         setContentView(R.layout.activity_eighttiles);
+        setupToolbars();
         reset();
-
     }
 
     protected void onResume()
@@ -48,6 +50,21 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
     {
         super.onPause();
         Accelerometer.getInstance().removeListener(this);
+    }
+
+    private void setupToolbars()
+    {
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayShowTitleEnabled(false);
+        actionbar.setDisplayShowHomeEnabled(false);
+        actionbar.setDisplayUseLogoEnabled(false);
+        actionbar.setDisplayHomeAsUpEnabled(false);
+        actionbar.setDisplayShowCustomEnabled(true);
+
+        View custom = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
+        TextView title = (TextView)custom.findViewById(R.id.actionbar_title);
+        title.setText(R.string.title_activity_eightpuzzle);
+        actionbar.setCustomView(custom);
     }
 
     public void nextStep()
@@ -559,12 +576,6 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_eighttiles, menu);
-        return true;
-    }
     public void reset()
     {
         Random randomGenerator = new Random();
@@ -647,18 +658,13 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         spacecolumn--;
         //renderBoard();
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    public void home_launch(View view)
+    {
+        NavUtils.navigateUpFromSameTask(this);
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void settings_launch(View view)
+    {
     }
 }

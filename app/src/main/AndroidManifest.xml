@@ -11,6 +11,7 @@
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +23,7 @@
             android:name=".eighttiles"
             android:label="@string/title_activity_eightpuzzle"
             android:screenOrientation="portrait"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:parentActivityName=".Home" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
