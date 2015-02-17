@@ -160,54 +160,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Up"
-                android:onClick="swipeDown"
-                android:id="@+id/button"
-                android:layout_column="2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Left"
-                android:onClick="swipeRight"
-                android:id="@+id/button2"
-                android:tag="1"
-                android:layout_column="1" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Right"
-                android:onClick="swipeLeft"
-                android:id="@+id/button3"
-                android:layout_column="3" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Down"
-                android:onClick="swipeUp"
-                android:id="@+id/button4"
-                android:layout_column="2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Shake"
                 android:onClick="nextStep"
                 android:id="@+id/button6"
@@ -222,6 +174,71 @@
                 android:layout_column="3" />
         </TableRow>
 
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:id="@+id/stats"
+        android:paddingLeft="32dp"
+        android:paddingBottom="115dp"
+        android:gravity="bottom">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="75dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/eight_tiles_time"
+                android:background="@drawable/home_button"
+                android:id="@+id/stat1"
+                android:layout_column="1"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"
+                android:textSize="30sp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:id="@+id/stats_two"
+        android:paddingBottom="115dp"
+        android:gravity="bottom"
+        android:paddingLeft="325dp">
+
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="75dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/eight_tiles_moves"
+                android:background="@drawable/home_button"
+                android:id="@+id/stat2"
+                android:layout_column="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:textSize="30sp" />
+
+        </TableRow>
 
     </TableLayout>
 

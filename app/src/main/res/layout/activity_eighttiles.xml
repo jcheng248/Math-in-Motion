@@ -13,7 +13,8 @@
         android:layout_alignParentStart="true"
         android:layout_gravity="center"
         android:id="@+id/board"
-        android:gravity="center_vertical|center_horizontal">
+        android:gravity="center_horizontal"
+        android:paddingTop="65dp">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -33,7 +34,6 @@
                 android:text="Eight Tiles"
                 android:id="@+id/win"
                 android:layout_column="2"
-                android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
@@ -158,9 +158,69 @@
 
         </TableRow>
 
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:id="@+id/stats"
+        android:paddingLeft="32dp"
+        android:paddingBottom="115dp"
+        android:gravity="bottom">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/eight_tiles_time"
+                android:background="@drawable/home_button"
+                android:id="@+id/stat1"
+                android:layout_column="1"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="5dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
+        android:id="@+id/stats_two"
+        android:paddingRight="0dp"
+        android:paddingBottom="115dp"
+        android:gravity="bottom"
+        android:paddingLeft="188dp">
 
 
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/eight_tiles_moves"
+                android:background="@drawable/home_button"
+                android:id="@+id/stat2"
+                android:layout_column="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp" />
+
+        </TableRow>
 
     </TableLayout>
 

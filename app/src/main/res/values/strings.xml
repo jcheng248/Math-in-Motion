@@ -12,5 +12,7 @@
     <string name="title_activity_test">test</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_instructions">Instructions</string>
+    <string name="eight_tiles_time">Time:</string>
+    <string name="eight_tiles_moves">Moves:</string>
 
 </resources>
