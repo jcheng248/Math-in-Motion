@@ -569,10 +569,7 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
                 current.setBackgroundColor(-256);
             }
         }
-        else
-        {
-            current.setText("Play 8-squares");
-        }
+
 
     }
 
