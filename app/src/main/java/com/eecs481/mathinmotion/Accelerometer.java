@@ -17,13 +17,6 @@ public class Accelerometer implements SensorEventListener
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 100;
-    private float velocity_x = 0;
-    private float avg_vel_x = 0;
-    private float velocity_y= 0;
-    private float avg_vel_y = 0;
-    private float velocity_z = 0;
-    private float avg_vel_z = 0;
-    private float timer = 0;
 
     boolean waiting = false;
 
@@ -85,6 +78,11 @@ public class Accelerometer implements SensorEventListener
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
+                    long time = System.currentTimeMillis();
+                    while(System.currentTimeMillis() - time <= 500){
+
+                    }
+
                 }
                 else if((last_x * x) < 0 && last_x < 0)
                 {
@@ -92,20 +90,32 @@ public class Accelerometer implements SensorEventListener
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
+                    long time = System.currentTimeMillis();
+                    while(System.currentTimeMillis() - time <= 500){
+
+                    }
                 }
             }
-             if(last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y)>Math.abs(last_z)) {
+            if(last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y)>Math.abs(last_z)) {
                 if((last_y * y) < 0 && last_y > 0) {
                     up();
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
+                    long time = System.currentTimeMillis();
+                    while(System.currentTimeMillis() - time <= 500){
+
+                    }
                 }
                 else if((last_y * y) < 0 && last_y < 0) {
                     down();
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
+                    long time = System.currentTimeMillis();
+                    while(System.currentTimeMillis() - time <= 500){
+
+                    }
                 }
             }
             if(last_z != 0 && Math.abs(last_z) > Math.abs(last_y) && Math.abs(last_z)>Math.abs(last_x)) {
@@ -114,6 +124,10 @@ public class Accelerometer implements SensorEventListener
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
+                    long time = System.currentTimeMillis();
+                    while(System.currentTimeMillis() - time <= 500){
+
+                    }
                 }
             }
             lastUpdate = curTime;
