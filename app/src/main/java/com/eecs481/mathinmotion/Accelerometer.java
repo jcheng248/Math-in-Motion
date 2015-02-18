@@ -25,6 +25,8 @@ public class Accelerometer implements SensorEventListener
     private float avg_vel_z = 0;
     private float timer = 0;
 
+    boolean waiting = false;
+
     private Accelerometer()
     {
         listeners = new ArrayList<AccelerometerListener>();
@@ -58,75 +60,68 @@ public class Accelerometer implements SensorEventListener
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-    boolean waiting = false;
     public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly
-         long curTime = System.currentTimeMillis();
-         float x = event.values[0];
-         float y = event.values[1];
-         float z = event.values[2];
-         if(curTime - lastUpdate > 200)
-         {
-             waiting = true;
-         }
-        if(curTime - lastUpdate > 2000)
+        long curTime = System.currentTimeMillis();
+        float x = event.values[0];
+        float y = event.values[1];
+        float z = event.values[2];
+        if(curTime - lastUpdate > 200) //wait 200 ms to get get opposite direction accel data
+        {
+            waiting = true;
+        }
+        if(curTime - lastUpdate > 2000) //wait two seconds to refresh
         {
             last_x = 0;
             last_y = 0;
             last_z = 0;
         }
-         if(waiting && (Math.abs(x) >= 2.5 || Math.abs(y) >= 2.5 || Math.abs(z) >= 2.5)) {
+        if(waiting && (Math.abs(x) >= 2.5 || Math.abs(y) >= 2.5 || Math.abs(z) >= 2.5)) {
             waiting = false;
-            if(last_x != 0 && Math.abs(last_x) > Math.abs(last_y) &&Math.abs(last_x)>Math.abs(last_z))
+            if(last_x != 0 && Math.abs(last_x) > Math.abs(last_y) && Math.abs(last_x) > Math.abs(last_z))
             {
-                if((last_x*x )< 0 && last_x >0 )
+                if((last_x * x) < 0 && last_x > 0 )
                 {
                     right();
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
                 }
-                else if((last_x*x )< 0 && last_x <0 )
+                else if((last_x * x) < 0 && last_x < 0)
                 {
                     left();
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
                 }
-
             }
              if(last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y)>Math.abs(last_z)) {
-                if((last_y * y) <0 && last_y >0) {
+                if((last_y * y) < 0 && last_y > 0) {
                     up();
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
                 }
-                else if((last_y*y) < 0 && last_y <0) {
+                else if((last_y * y) < 0 && last_y < 0) {
                     down();
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
                 }
             }
-             if(last_z != 0 && Math.abs(last_z) > Math.abs(last_y) && Math.abs(last_z)>Math.abs(last_x)) {
-                 if((last_z * z) <0) {
-
-                     shake();
-                     last_y = 0;
-                     last_x = 0;
-                     last_z = 0;
-                 }
-
-             }
+            if(last_z != 0 && Math.abs(last_z) > Math.abs(last_y) && Math.abs(last_z)>Math.abs(last_x)) {
+                if((last_z * z) < 0) {
+                    shake();
+                    last_y = 0;
+                    last_x = 0;
+                    last_z = 0;
+                }
+            }
             lastUpdate = curTime;
             last_x = x;
             last_y = y;
             last_z = z;
-         }
-
-
+        }
     }
-
     public void left()
     {
         for (AccelerometerListener listener : listeners)

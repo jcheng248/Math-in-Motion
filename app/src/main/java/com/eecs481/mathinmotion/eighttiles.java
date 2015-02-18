@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.io.Console;
 import java.util.Random;
+import java.util.Stack;
 
 
 public class eighttiles extends ActionBarActivity implements AccelerometerListener {
@@ -18,6 +19,7 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
     boolean done = false;
     int spacerow = 2;
     int spacecolumn = 2;
+    Stack<String> last_move = new Stack<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -595,26 +597,34 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
     }
     public void swipeUp()
     {
-        if (spacerow != 2)
-            goUp();
+        if (spacerow != 2){
+            String direction = "up";
+            last_move.push(direction);
+            goUp();}
         renderBoard();
     }
     public void swipeDown()
     {
-        if (spacerow != 0)
-            goDown();
+        if (spacerow != 0){
+            String direction = "down";
+            last_move.push(direction);
+            goDown();}
         renderBoard();
     }
     public void swipeLeft()
     {
-        if (spacecolumn != 2)
-            goLeft();
+        if (spacecolumn != 2){
+            String direction = "left";
+            last_move.push(direction);
+            goLeft();}
         renderBoard();
     }
     public void swipeRight()
     {
-        if (spacecolumn != 0)
-            goRight();
+        if (spacecolumn != 0){
+            String direction = "right";
+            last_move.push(direction);
+            goRight();}
         renderBoard();
     }
     public void goUp()
@@ -660,5 +670,16 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void undo(View view){
+        Log.d("stack size",Integer.toString(last_move.size()));
+        if(last_move.empty()) return;
+        String last = last_move.peek();
+        last_move.pop();
+        if(last == "left") swipeRight();
+        else if(last == "right") swipeLeft();
+        else if(last == "up") swipeDown();
+        else swipeUp();
+        last_move.pop();
     }
 }
