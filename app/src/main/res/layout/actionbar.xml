@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:clickable="true"
         android:onClick="home_launch"
-        android:src="@drawable/home_icon"
+        android:src="@drawable/home"
         android:contentDescription="@string/title_activity_home"
         android:scaleType="fitCenter" />
 
@@ -39,6 +39,6 @@
         android:clickable="true"
         android:onClick="settings_launch"
         android:contentDescription="@string/action_settings"
-        android:src="@drawable/settings_icon" />
+        android:src="@drawable/settings" />
 
 </RelativeLayout>
