@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".eighttiles"
+            android:name=".EightPuzzle"
             android:label="@string/title_activity_eightpuzzle"
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow"
