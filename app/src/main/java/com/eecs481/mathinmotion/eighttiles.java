@@ -600,7 +600,8 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         if (spacerow != 2){
             String direction = "up";
             last_move.push(direction);
-            goUp();}
+            goUp();
+        }
         renderBoard();
     }
     public void swipeDown()
@@ -608,7 +609,8 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         if (spacerow != 0){
             String direction = "down";
             last_move.push(direction);
-            goDown();}
+            goDown();
+        }
         renderBoard();
     }
     public void swipeLeft()
@@ -616,7 +618,8 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         if (spacecolumn != 2){
             String direction = "left";
             last_move.push(direction);
-            goLeft();}
+            goLeft();
+        }
         renderBoard();
     }
     public void swipeRight()
@@ -624,14 +627,14 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         if (spacecolumn != 0){
             String direction = "right";
             last_move.push(direction);
-            goRight();}
+            goRight();
+        }
         renderBoard();
     }
     public void goUp()
     {
-
         board[spacerow][spacecolumn] = board[spacerow +1][spacecolumn];
-        board[spacerow +1][spacecolumn] ="";
+        board[spacerow +1][spacecolumn] = "";
         spacerow++;
         //renderBoard();
     }
@@ -668,11 +671,9 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     public void undo(View view){
-        Log.d("stack size",Integer.toString(last_move.size()));
         if(last_move.empty()) return;
         String last = last_move.peek();
         last_move.pop();
