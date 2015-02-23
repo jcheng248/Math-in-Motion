@@ -9,8 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-public class Accelerometer implements SensorEventListener
-{
+public class Accelerometer implements SensorEventListener {
     private static Accelerometer instance = null;
     private SensorManager mSensorManager;
     private ArrayList<AccelerometerListener> listeners;
@@ -20,32 +19,28 @@ public class Accelerometer implements SensorEventListener
     private static final int SHAKE_THRESHOLD = 100;
     boolean moved = false;
     boolean waiting = false;
+    private long sleeptime = 0;
 
-    private Accelerometer()
-    {
+    private Accelerometer() {
         listeners = new ArrayList<AccelerometerListener>();
     }
 
-    public static Accelerometer getInstance()
-    {
+    public static Accelerometer getInstance() {
         if (instance == null)
             instance = new Accelerometer();
         return instance;
     }
 
-    public void addListener(Context context, AccelerometerListener listener)
-    {
-        if (listeners.size() == 0)
-        {
-            mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+    public void addListener(Context context, AccelerometerListener listener) {
+        if (listeners.size() == 0) {
+            mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
             Sensor mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
             mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         }
         listeners.add(listener);
     }
 
-    public void removeListener(AccelerometerListener listener)
-    {
+    public void removeListener(AccelerometerListener listener) {
         listeners.remove(listener);
         if (listeners.size() == 0)
             mSensorManager.unregisterListener(this);
@@ -54,6 +49,7 @@ public class Accelerometer implements SensorEventListener
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
     public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly
         long curTime = System.currentTimeMillis();
         float x = event.values[0];
@@ -166,76 +162,87 @@ public class Accelerometer implements SensorEventListener
 //        }
 
         //Original
-        if(curTime - lastUpdate > 200) //wait 200 ms to get get opposite direction accel data
+        if (curTime - lastUpdate > 200) //wait 200 ms to get get opposite direction accel data
         {
             waiting = true;
         }
-        if(curTime - lastUpdate > 2000) //wait two seconds to refresh
+        if (curTime - lastUpdate > 1500) //wait two seconds to refresh
         {
             last_x = 0;
             last_y = 0;
             last_z = 0;
         }
-        if(waiting && (Math.abs(x) >= 2.5 || Math.abs(y) >= 2.5 || Math.abs(z) >= 2.5)){
+        if (curTime - sleeptime < 600) {
+            return;
+        } else {
+            sleeptime = 0;
+        }
+
+        if (waiting && (Math.abs(x) >= 1.2 || Math.abs(y) >= 1 || Math.abs(z) >= 6)
+                && (Math.abs(last_x) >= 3 || Math.abs(last_y) >= 3 || Math.abs(last_z) >= 3)) {
+            Log.d("lastx",Float.toString(last_x));
+            Log.d("lasty",Float.toString(last_y));
+            Log.d("lastz",Float.toString(last_z));
+            Log.d("x",Float.toString(x));
+            Log.d("y",Float.toString(y));
+            Log.d("z",Float.toString(z));
             waiting = false;
-            if(last_x != 0 && Math.abs(last_x) > Math.abs(last_y) && Math.abs(last_x) > Math.abs(last_z))
-            {
-                if((last_x * x) < 0 && last_x > 0)
-                {
+            if (last_x != 0 && Math.abs(last_x) > Math.abs(last_y) && Math.abs(last_x) > Math.abs(last_z) -1) {
+                if ((last_x * x) < 0 && last_x > 1) {
                     right();
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
-                    long time = System.currentTimeMillis();
-                    while(System.currentTimeMillis() - time <= 300){}
+                    sleeptime = System.currentTimeMillis();
+                    long time = sleeptime;
 
-                }
-                else if((last_x * x) < 0 && last_x < 0)
-                {
+                } else if ((last_x * x) < 0 && last_x < -1) {
                     left();
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
-                    long time = System.currentTimeMillis();
-                    while(System.currentTimeMillis() - time <= 300){}
+                    sleeptime = System.currentTimeMillis();
+                    long time = sleeptime;
+
                 }
-            }
-            else if(last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y)>Math.abs(last_z)){
-                if((last_y * y) < 0 && last_y > 0){
+            } else if (last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y) > Math.abs(last_z)-4) {
+                if ((last_y * y) < 0 && last_y > 0.5) {
                     up();
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
-                    long time = System.currentTimeMillis();
-                    while(System.currentTimeMillis() - time <= 300){
+                    sleeptime = System.currentTimeMillis();
+                    long time = sleeptime;
 
-                    }
                 }
-                else if((last_y * y) < 0 && last_y < 0){
-                    down();
-                    last_y = 0;
-                    last_x = 0;
-                    last_z = 0;
-                    long time = System.currentTimeMillis();
-                    while(System.currentTimeMillis() - time <= 300){}
-                }
-            }
-            else if(last_z != 0 && Math.abs(last_z) > Math.abs(last_y) && Math.abs(last_z)>Math.abs(last_x)){
-                if((last_z * z) < 0){
-                    shake();
-                    last_y = 0;
-                    last_x = 0;
-                    last_z = 0;
-                    long time = System.currentTimeMillis();
-                    while(System.currentTimeMillis() - time <= 300){}
+            } else if ((last_y * y) < 0 && last_y < -0.5) {
+                down();
+                last_y = 0;
+                last_x = 0;
+                last_z = 0;
+                sleeptime = System.currentTimeMillis();
+                long time = sleeptime;
+                while (System.currentTimeMillis() - time < 1000)
+                {
+
                 }
             }
-            lastUpdate = curTime;
-            last_x = x;
-            last_y = y;
-            last_z = z;
+        } else if (last_z != 0 && Math.abs(last_z) > Math.abs(last_y)+5 && Math.abs(last_z) > Math.abs(last_x)+5) {
+            if ((last_z * z) < 0 ) {
+                shake();
+                last_y = 0;
+                last_x = 0;
+                last_z = 0;
+                sleeptime = System.currentTimeMillis();
+            }
         }
+        lastUpdate = curTime;
+        last_x = x;
+        last_y = y;
+        last_z = z;
     }
+
+
     public void left()
     {
         for (AccelerometerListener listener : listeners)
