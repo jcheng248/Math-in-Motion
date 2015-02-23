@@ -5,6 +5,7 @@ import android.hardware.SensorManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.provider.Settings;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -166,13 +167,13 @@ public class Accelerometer implements SensorEventListener {
         {
             waiting = true;
         }
-        if (curTime - lastUpdate > 1500) //wait two seconds to refresh
+        if (curTime - lastUpdate > 1000) //wait two seconds to refresh
         {
             last_x = 0;
             last_y = 0;
             last_z = 0;
         }
-        if (curTime - sleeptime < 600) {
+        if (curTime - sleeptime < 780) {
             return;
         } else {
             sleeptime = 0;
@@ -187,44 +188,61 @@ public class Accelerometer implements SensorEventListener {
             Log.d("y",Float.toString(y));
             Log.d("z",Float.toString(z));
             waiting = false;
-            if (last_x != 0 && Math.abs(last_x) > Math.abs(last_y) && Math.abs(last_x) > Math.abs(last_z) -1) {
-                if ((last_x * x) < 0 && last_x > 1) {
+            if (last_x != 0 && Math.abs(last_x) > Math.abs(last_y) && (Math.abs(last_x) > Math.abs(last_z)-4)) {
+                if ((last_x >x) && last_x > 1) {
+                    Log.d("going right","yes");
                     right();
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
                     long time = sleeptime;
+//                    while(System.currentTimeMillis() - time <800)
+//                    {
+//
+//                    }
 
-                } else if ((last_x * x) < 0 && last_x < -1) {
+                } else if ((last_x <x) && last_x < -1) {
+                    Log.d("going left","yes");
                     left();
                     last_x = 0;
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
                     long time = sleeptime;
+//                    while(System.currentTimeMillis() - time <800)
+//                    {
+//
+//                    }
 
                 }
-            } else if (last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y) > Math.abs(last_z)-4) {
-                if ((last_y * y) < 0 && last_y > 0.5) {
+            } else if (last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y) > Math.abs(last_z)-3) {
+
+                if ((last_y   >y)) {
+                    Log.d("going up","yes");
                     up();
                     last_y = 0;
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
                     long time = sleeptime;
-
+//                    while(System.currentTimeMillis() - time <800)
+//                    {
+//
+//                    }
                 }
-            } else if ((last_y * y) < 0 && last_y < -0.5) {
-                down();
-                last_y = 0;
-                last_x = 0;
-                last_z = 0;
-                sleeptime = System.currentTimeMillis();
-                long time = sleeptime;
-                while (System.currentTimeMillis() - time < 1000)
-                {
-
+                 else if (last_y < y) {
+                    Log.d("going down","yes");
+                    down();
+                    last_y = 0;
+                    last_x = 0;
+                    last_z = 0;
+                    sleeptime = System.currentTimeMillis();
+                    long time = sleeptime;
+//                    while(System.currentTimeMillis() - time <800)
+//                    {
+//
+//                    }
                 }
             }
         } else if (last_z != 0 && Math.abs(last_z) > Math.abs(last_y)+5 && Math.abs(last_z) > Math.abs(last_x)+5) {
@@ -234,6 +252,12 @@ public class Accelerometer implements SensorEventListener {
                 last_x = 0;
                 last_z = 0;
                 sleeptime = System.currentTimeMillis();
+                long time = sleeptime;
+
+//                while(System.currentTimeMillis() - time <800)
+//                {
+//
+//                }
             }
         }
         lastUpdate = curTime;
