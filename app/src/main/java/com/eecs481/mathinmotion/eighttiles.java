@@ -1,5 +1,6 @@
 package com.eecs481.mathinmotion;
 
+import android.graphics.Color;
 import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -532,12 +533,11 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
                     TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
                     current.setText(board[i][j]);
                     if(!(board[i][j].equals( Integer.toString(i*3+j+1)) || (board[i][j].equals(""))))
-//                current.setText(Integer.toString(i));
                         finish = false;
                     if (board[i][j].equals(""))
-                        current.setBackgroundColor( -16776961);
+                        current.setBackgroundResource(Color.TRANSPARENT);
                     else
-                        current.setBackgroundColor( -65536 );
+                        current.setBackgroundResource(R.drawable.tile);
                 }
 
             }
@@ -577,19 +577,15 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
     public void renderBoard()
     {
 
-        TextView current = (TextView) findViewById(R.id.win);
+        TextView current = (TextView) findViewById(R.id.eight_puzzle_win);
         if (checkComplete())
         {
             done = true;
             current.setText("You win!!!");
-            for (int i = 1; i <10; i++) {
+            /*for (int i = 1; i <10; i++) {
                 current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(i));
                 current.setBackgroundColor(-256);
-            }
-        }
-        else
-        {
-            current.setText("Play 8-squares");
+            }*/
         }
 
     }
@@ -669,14 +665,12 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         board[spacerow][spacecolumn] = board[spacerow +1][spacecolumn];
         board[spacerow +1][spacecolumn] = "";
         spacerow++;
-        //renderBoard();
     }
     public void goDown()
     {
         board[spacerow][spacecolumn] = board[spacerow-1][spacecolumn];
         board[spacerow -1][spacecolumn] = "";
         spacerow--;
-        //renderBoard();
     }
     public void goLeft()
     {
@@ -684,14 +678,12 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
         board[spacerow][spacecolumn] = board[spacerow][spacecolumn+1];
         board[spacerow][spacecolumn+1] = "";
         spacecolumn++;
-        //renderBoard();
     }
     public void goRight()
     {
         board[spacerow][spacecolumn] = board[spacerow][spacecolumn - 1];
         board[spacerow][spacecolumn-1] = "";
         spacecolumn--;
-        //renderBoard();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
