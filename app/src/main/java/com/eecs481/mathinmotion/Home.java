@@ -6,11 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
-import android.hardware.SensorManager;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.util.Log;
 
 public class Home extends ActionBarActivity{
 
@@ -44,7 +39,7 @@ public class Home extends ActionBarActivity{
 
     public void eight_puzzle_launch(View view)
     {
-        Intent intent = new Intent(this, eighttiles.class);
+        Intent intent = new Intent(this, EightPuzzle.class);
         startActivity(intent);
     }
 

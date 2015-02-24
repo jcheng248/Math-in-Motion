@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:keepScreenOn="true"
-    tools:context="com.eecs481.mathinmotion.eighttiles">
+    tools:context="com.eecs481.mathinmotion.EightPuzzle">
 
     <TextView
         android:layout_width="300dp"
