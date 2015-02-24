@@ -15,6 +15,7 @@ import java.util.Stack;
 
 
 public class eighttiles extends ActionBarActivity implements AccelerometerListener {
+    boolean magicSquare;
     static String[][] board = new String [3][3];
     boolean done = false;
     int spacerow = 2;
@@ -522,22 +523,54 @@ public class eighttiles extends ActionBarActivity implements AccelerometerListen
     public boolean checkComplete()
     {
         boolean finish = true;
-        for (int i = 0; i <3; i++)
+        if(!magicSquare)
         {
-            for (int j = 0; j < 3; j++)
+            for (int i = 0; i <3; i++)
             {
-                TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
-                current.setText(board[i][j]);
-                if(!(board[i][j].equals( Integer.toString(i*3+j+1)) || (board[i][j].equals(""))))
+                for (int j = 0; j < 3; j++)
+                {
+                    TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
+                    current.setText(board[i][j]);
+                    if(!(board[i][j].equals( Integer.toString(i*3+j+1)) || (board[i][j].equals(""))))
 //                current.setText(Integer.toString(i));
-                    finish = false;
-                if (board[i][j].equals(""))
-                    current.setBackgroundColor( -16776961);
-                else
-                    current.setBackgroundColor( -65536 );
+                        finish = false;
+                    if (board[i][j].equals(""))
+                        current.setBackgroundColor( -16776961);
+                    else
+                        current.setBackgroundColor( -65536 );
+                }
+
             }
+        }
+        else
+        {
+            int sum = Integer.parseInt(board[0][0]) + Integer.parseInt(board[0][1])+Integer.parseInt(board[0][2]);
+            if(sum != Integer.parseInt(board[1][0]) + Integer.parseInt(board[1][1])+Integer.parseInt(board[1][2])){
+                return false;
+            }
+            if(sum != Integer.parseInt(board[2][0]) + Integer.parseInt(board[2][1])+Integer.parseInt(board[2][2])) {
+                return false;
+            }
+            if(sum != Integer.parseInt(board[0][0]) + Integer.parseInt(board[1][0])+Integer.parseInt(board[2][0])){
+                return false;
+            }
+            if(sum != Integer.parseInt(board[0][1]) + Integer.parseInt(board[1][1])+Integer.parseInt(board[2][1])){
+                return false;
+            }
+            if(sum != Integer.parseInt(board[0][2]) + Integer.parseInt(board[1][2])+Integer.parseInt(board[2][2])){
+                return false;
+            }
+            if(sum != Integer.parseInt(board[0][0]) + Integer.parseInt(board[1][1])+Integer.parseInt(board[2][2])){
+                return false;
+            }
+            if(sum != Integer.parseInt(board[2][0]) + Integer.parseInt(board[1][1])+Integer.parseInt(board[0][2])){
+                return false;
+            }
+            finish = true;
+
 
         }
+
         return finish;
     }
 
