@@ -39,8 +39,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
         setContentView(R.layout.activity_eightpuzzle);
         setupToolbars();
-        reset(null
-        );
+        reset(null);
     }
 
     protected void onResume()
