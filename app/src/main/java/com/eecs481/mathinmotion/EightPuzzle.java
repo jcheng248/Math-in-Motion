@@ -21,6 +21,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     int spacecolumn = 2;
     Stack<String> last_move = new Stack<String>();
     long startTime;
+    boolean winnerWinnerChickenDinner = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
         setContentView(R.layout.activity_eightpuzzle);
         setupToolbars();
-        reset(null);
+        reset(null
+        );
     }
 
     protected void onResume()
@@ -597,7 +599,9 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         if (checkComplete())
         {
             done = true;
-            current.setText("You win!!!");
+            current.setText("Finished in " + findViewById(R.id.eight_puzzle_time_value) + " and "
+                + last_move.size() + " moves!!!");
+
             /*for (int i = 1; i <10; i++) {
                 current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(i));
                 current.setBackgroundColor(-256);
@@ -722,6 +726,10 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
     public void updateTime()
     {
+        if(done)
+        {
+            return;
+        }
         long timeElapsed = (System.currentTimeMillis() - startTime) / 1000;
         //String time = Long.toString(timeElapsed / 60) + ":" + Long.toString(timeElapsed % 60);
         TextView timeIndicator = (TextView) findViewById(R.id.eight_puzzle_time_value);

@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/eight_puzzle_win"
         android:textStyle="bold"
-        android:textSize="18sp" />
+        android:textColor="@color/red"
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
     <TableLayout android:id="@+id/board"
         android:layout_width="300dp"
