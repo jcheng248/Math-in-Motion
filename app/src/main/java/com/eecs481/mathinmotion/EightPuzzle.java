@@ -599,7 +599,14 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         if (checkComplete())
         {
             done = true;
-            current.setText("Finished in " + findViewById(R.id.eight_puzzle_time_value) + " and "
+            long timeElapsed = (System.currentTimeMillis() - startTime) / 1000;
+            //String time = Long.toString(timeElapsed / 60) + ":" + Long.toString(timeElapsed % 60);
+            String seconds = Long.toString(timeElapsed % 60);
+            if(timeElapsed % 60 < 10)
+            {
+                seconds = "0" + seconds;
+            }
+            current.setText("Finished in " + Long.toString(timeElapsed / 60) + ":" + seconds + " and "
                 + last_move.size() + " moves!!!");
 
             /*for (int i = 1; i <10; i++) {
@@ -642,6 +649,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             last_move.pop();
         }
         renderBoard();
+        done = true;
         startTime = System.currentTimeMillis();
         updateTime();
     }
