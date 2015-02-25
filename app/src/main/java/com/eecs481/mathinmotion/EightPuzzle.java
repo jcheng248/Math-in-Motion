@@ -755,6 +755,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
 
     public void undo(View view){
+        if(done) return;
         if(last_move.empty()) return;
         String last = last_move.peek();
         last_move.pop();
