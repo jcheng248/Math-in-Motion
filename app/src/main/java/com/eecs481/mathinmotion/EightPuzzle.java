@@ -648,6 +648,9 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         {
             last_move.pop();
         }
+        done = false;
+        TextView current = (TextView) findViewById(R.id.eight_puzzle_win);
+        current.setText("");
         renderBoard();
         startTime = System.currentTimeMillis();
         updateTime();
