@@ -637,6 +637,10 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                     goRight();
             }
         }
+        while(!last_move.empty())
+        {
+            last_move.pop();
+        }
         renderBoard();
         startTime = System.currentTimeMillis();
         updateTime();
