@@ -1,12 +1,16 @@
 package com.eecs481.mathinmotion;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,8 +24,21 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     int spacerow = 2;
     int spacecolumn = 2;
     Stack<String> last_move = new Stack<String>();
-    long startTime;
+    long lastTime = 0;
+    long timeElapsed = 0;
     boolean winnerWinnerChickenDinner = false;
+    GestureDetectorCompat detector;
+
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable()
+    {
+        public void run()
+        {
+            updateTime();
+            timerHandler.postDelayed(this, 100);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +57,31 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         setContentView(R.layout.activity_eightpuzzle);
         setupToolbars();
         reset(null);
+
+        PreferenceManager.setDefaultValues(this, R.xml.eight_puzzle_settings, false);
     }
 
     protected void onResume()
     {
         super.onResume();
-        Accelerometer.getInstance().addListener(this, this);
+        lastTime = System.currentTimeMillis();
+        timerHandler.postDelayed(timerRunnable, 500);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type", "Motion")
+                .equals("Motion"))
+            Accelerometer.getInstance().addListener(this, this);
+        else
+            detector = new GestureDetectorCompat(this, new Gesture(this));
     }
 
     protected void onPause()
     {
         super.onPause();
-        Accelerometer.getInstance().removeListener(this);
+        timerHandler.removeCallbacks(timerRunnable);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type", "Motion")
+                .equals("Motion"))
+            Accelerometer.getInstance().removeListener(this);
+        else
+            detector = null;
     }
 
     private void setupToolbars()
@@ -69,15 +99,15 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         actionbar.setCustomView(custom);
     }
 
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if (detector != null)
+            detector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
     public void nextStep()
     {
-//        TextView current = (TextView) findViewById(R.id.win);
-//        current.setText("you!!");
-//        Log.e("werwer","werwerwer");
-//
-//        int moveThree = 0;
-//        int move47p1 = 0;
-//        int move47p2 =0;
         int b1 = spacerow;
         int b2 = spacecolumn;
         if(checkComplete())
@@ -598,20 +628,12 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         if (checkComplete())
         {
             done = true;
-            long timeElapsed = (System.currentTimeMillis() - startTime) / 1000;
-            //String time = Long.toString(timeElapsed / 60) + ":" + Long.toString(timeElapsed % 60);
-            String seconds = Long.toString(timeElapsed % 60);
-            if(timeElapsed % 60 < 10)
-            {
-                seconds = "0" + seconds;
-            }
-            current.setText("Finished in " + Long.toString(timeElapsed / 60) + ":" + seconds + " and "
+            timeElapsed += System.currentTimeMillis() - lastTime;
+            long seconds = timeElapsed / 1000;
+            long minutes = seconds / 60;
+            seconds %= 60;
+            current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
                 + last_move.size() + " moves!!!");
-
-            /*for (int i = 1; i <10; i++) {
-                current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(i));
-                current.setBackgroundColor(-256);
-            }*/
         }
 
 
@@ -651,7 +673,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         TextView current = (TextView) findViewById(R.id.eight_puzzle_win);
         current.setText("");
         renderBoard();
-        startTime = System.currentTimeMillis();
+        lastTime = System.currentTimeMillis();
+        timeElapsed = 0;
         updateTime();
     }
     public void swipeUp()
@@ -727,6 +750,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
     public void settings_launch(View view)
     {
+        Intent intent = new Intent(this, EightPuzzleSettingsActivity.class);
+        startActivity(intent);
     }
 
     public void undo(View view){
@@ -744,17 +769,14 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     public void updateTime()
     {
         if(done)
-        {
             return;
-        }
-        long timeElapsed = (System.currentTimeMillis() - startTime) / 1000;
-        //String time = Long.toString(timeElapsed / 60) + ":" + Long.toString(timeElapsed % 60);
+        long currentTime = System.currentTimeMillis();
+        timeElapsed += currentTime - lastTime;
+        lastTime = currentTime;
+        long seconds = timeElapsed / 1000;
+        long minutes = seconds / 60;
+        seconds %= 60;
         TextView timeIndicator = (TextView) findViewById(R.id.eight_puzzle_time_value);
-        String seconds = Long.toString(timeElapsed % 60);
-        if(timeElapsed % 60 < 10)
-        {
-            seconds = "0" + seconds;
-        }
-        timeIndicator.setText(Long.toString(timeElapsed / 60) + ":" + seconds);
+        timeIndicator.setText(String.format("%d:%02d", minutes, seconds));
     }
 }

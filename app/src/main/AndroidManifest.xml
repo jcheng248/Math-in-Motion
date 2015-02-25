@@ -10,8 +10,8 @@
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:screenOrientation="portrait"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,10 @@
         <activity
             android:name=".EightPuzzle"
             android:label="@string/title_activity_eightpuzzle"
+            android:launchMode="singleTop"
+            android:parentActivityName=".Home"
             android:screenOrientation="portrait"
-            android:uiOptions="splitActionBarWhenNarrow"
-            android:parentActivityName=".Home" >
+            android:uiOptions="splitActionBarWhenNarrow" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.eecs481.mathinmotion.Home" />
@@ -44,6 +45,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.eecs481.mathinmotion.Home" />
+        </activity>
+        <activity
+            android:name=".EightPuzzleSettingsActivity"
+            android:label="@string/title_activity_eight_puzzle_settings"
+            android:parentActivityName=".EightPuzzle">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eecs481.mathinmotion.EightPuzzle" />
         </activity>
     </application>
 

@@ -19,6 +19,4 @@ public interface AccelerometerListener
 
     //shake
     public void nextStep();
-
-    public void updateTime();
 }
