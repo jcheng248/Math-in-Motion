@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="@string/eight_puzzle_settings_gameplay_options" >
+
+        <ListPreference
+            android:key="input_type"
+            android:title="@string/eight_puzzle_settings_input_type"
+            android:entries="@array/input_choices"
+            android:entryValues="@array/input_choices"
+            android:defaultValue="Motion" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
