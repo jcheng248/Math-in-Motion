@@ -42,6 +42,7 @@ public class Accelerometer implements SensorEventListener {
     }
 
     public void removeListener(AccelerometerListener listener) {
+
         listeners.remove(listener);
         if (listeners.size() == 0)
             mSensorManager.unregisterListener(this);
@@ -52,10 +53,12 @@ public class Accelerometer implements SensorEventListener {
     }
 
     public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly
+        updateTime();
         long curTime = System.currentTimeMillis();
         float x = event.values[0];
         float y = event.values[1];
         float z = event.values[2];
+
 //        if(curTime - lastUpdate > 2000)
 //        {
 //            last_x = 0;
@@ -291,5 +294,10 @@ public class Accelerometer implements SensorEventListener {
     {
         for (AccelerometerListener listener : listeners)
             listener.nextStep();
+    }
+    public void updateTime()
+    {
+        for (AccelerometerListener listener : listeners)
+            listener.updateTime();
     }
 }

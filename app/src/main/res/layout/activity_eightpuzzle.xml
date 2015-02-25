@@ -141,7 +141,7 @@
 
     <RelativeLayout
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="105dp"
         android:layout_below="@id/board"
         android:paddingTop="10dp"
         android:id="@+id/stats" >
@@ -177,7 +177,9 @@
                 android:layout_toRightOf="@id/eight_puzzle_time_label"
                 android:layout_toEndOf="@id/eight_puzzle_time_label"
                 android:layout_centerVertical="true"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/red" />
 
         </RelativeLayout>
 
@@ -213,10 +215,39 @@
                 android:layout_toRightOf="@id/eight_puzzle_moves_label"
                 android:layout_toEndOf="@id/eight_puzzle_moves_label"
                 android:layout_centerVertical="true"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:textSize="18sp"/>
 
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:onClick="undo">
 
+
+            <ImageView android:id="@+id/eight_puzzle_undo_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:contentDescription="@string/eight_tiles_moves"
+                android:src="@drawable/home_button" />
+
+            <TextView android:id="@+id/eight_puzzle_undo_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:textSize="18sp"
+                android:text="@string/eight_tiles_undo" />
+        </RelativeLayout>
     </RelativeLayout>
+
+
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -13,12 +14,13 @@ import java.util.Random;
 import java.util.Stack;
 
 public class EightPuzzle extends ActionBarActivity implements AccelerometerListener {
-    boolean magicSquare;
+    boolean magicSquare = false;
     static String[][] board = new String [3][3];
     boolean done = false;
     int spacerow = 2;
     int spacecolumn = 2;
     Stack<String> last_move = new Stack<String>();
+    long startTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -535,6 +537,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public boolean checkComplete()
     {
+        TextView moveCounter = (TextView) findViewById(R.id.eight_puzzle_moves_value);
+        moveCounter.setText(Integer.toString(last_move.size()));
         boolean finish = true;
         if(!magicSquare)
         {
@@ -630,6 +634,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             }
         }
         renderBoard();
+        startTime = System.currentTimeMillis();
+        updateTime();
     }
     public void swipeUp()
     {
@@ -711,5 +717,19 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         else if(last == "up") swipeDown();
         else swipeUp();
         last_move.pop();
+        renderBoard();
+    }
+
+    public void updateTime()
+    {
+        long timeElapsed = (System.currentTimeMillis() - startTime) / 1000;
+        //String time = Long.toString(timeElapsed / 60) + ":" + Long.toString(timeElapsed % 60);
+        TextView timeIndicator = (TextView) findViewById(R.id.eight_puzzle_time_value);
+        String seconds = Long.toString(timeElapsed % 60);
+        if(timeElapsed % 60 < 10)
+        {
+            seconds = "0" + seconds;
+        }
+        timeIndicator.setText(Long.toString(timeElapsed / 60) + ":" + seconds);
     }
 }
