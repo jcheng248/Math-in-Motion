@@ -1,12 +1,103 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.eecs481.mathinmotion.Instructions">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/eight_tiles"
+                android:textStyle="bold"
+                android:id="@+id/block1"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_one"
+
+                android:id="@+id/block2"
+                android:layout_marginTop="10dp"/>
+
+            <ImageView android:id="@+id/solution"
+                android:adjustViewBounds="true"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/solution"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_two"
+                android:id="@+id/block3"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_three"
+                android:id="@+id/block4"
+                android:layout_marginTop="5dp" />
+
+            <ImageView android:id="@+id/instr_ex"
+                android:adjustViewBounds="true"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/instr"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_four"
+                android:id="@+id/block5"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_five"
+                android:id="@+id/block6"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_six"
+                android:id="@+id/block7"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/algebra"
+                android:textStyle="bold"
+                android:id="@+id/block8"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="(Beta)"
+                android:id="@+id/block9"
+                android:layout_marginTop="5dp" />
+
+
+        </LinearLayout>
+
+</ScrollView>
+
