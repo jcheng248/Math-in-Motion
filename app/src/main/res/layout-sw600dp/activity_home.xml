@@ -1,25 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/orange"
+    android:gravity="center"
+    android:keepScreenOn="true"
     tools:context="com.eecs481.mathinmotion.Home">
 
-    <ImageView
+    <ImageView android:id="@+id/home_title"
         android:adjustViewBounds="true"
         android:layout_width="475dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
         android:contentDescription="@string/app_name"
         android:src="@drawable/home_title" />
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/home_eight_puzzle"
         android:layout_width="450dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/home_title" >
 
         <ImageView android:id="@+id/eight_puzzle_launch"
             android:adjustViewBounds="true"
@@ -35,18 +35,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="24sp"
             android:text="@string/eight_tiles"/>
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/home_algebra"
         android:layout_width="450dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/home_eight_puzzle" >
 
         <ImageView android:id="@+id/algebra_launch"
             android:adjustViewBounds="true"
@@ -62,18 +62,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="24sp"
             android:text="@string/algebra"/>
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <RelativeLayout android:id="@+id/home_instructions"
         android:layout_width="450dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/home_algebra" >
 
         <ImageView android:id="@+id/instructions_launch"
             android:adjustViewBounds="true"
@@ -96,4 +96,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
