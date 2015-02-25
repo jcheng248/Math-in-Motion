@@ -731,9 +731,9 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         if(last_move.empty()) return;
         String last = last_move.peek();
         last_move.pop();
-        if(last == "left") swipeRight();
-        else if(last == "right") swipeLeft();
-        else if(last == "up") swipeDown();
+        if(last.equals("left")) swipeRight();
+        else if(last.equals("right")) swipeLeft();
+        else if(last.equals("up")) swipeDown();
         else swipeUp();
         last_move.pop();
         renderBoard();
