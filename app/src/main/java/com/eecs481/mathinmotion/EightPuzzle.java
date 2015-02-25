@@ -649,12 +649,12 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             last_move.pop();
         }
         renderBoard();
-        done = true;
         startTime = System.currentTimeMillis();
         updateTime();
     }
     public void swipeUp()
     {
+        if (done) return;
         if (spacerow != 2){
             String direction = "up";
             last_move.push(direction);
@@ -664,6 +664,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void swipeDown()
     {
+        if (done) return;
         if (spacerow != 0){
             String direction = "down";
             last_move.push(direction);
@@ -673,6 +674,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void swipeLeft()
     {
+        if (done) return;
         if (spacecolumn != 2){
             String direction = "left";
             last_move.push(direction);
@@ -682,6 +684,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void swipeRight()
     {
+        if (done) return;
         if (spacecolumn != 0){
             String direction = "right";
             last_move.push(direction);
