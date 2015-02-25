@@ -15,4 +15,5 @@
     <string name="eight_tiles_time">Time:</string>
     <string name="eight_tiles_moves">Moves:</string>
     <string name="eight_tiles_undo">Undo</string>
+    <string name="eight_tiles_reset">Reset</string>
 </resources>

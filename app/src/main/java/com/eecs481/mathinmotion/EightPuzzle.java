@@ -38,7 +38,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
         setContentView(R.layout.activity_eightpuzzle);
         setupToolbars();
-        reset();
+        reset(null);
     }
 
     protected void onResume()
@@ -607,7 +607,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
     }
 
-    public void reset()
+    public void reset(View view)
     {
         Random randomGenerator = new Random();
         for(int i = 0; i < 400; i++)
