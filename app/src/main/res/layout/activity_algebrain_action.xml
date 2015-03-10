@@ -155,7 +155,8 @@
                 android:layout_height="wrap_content"
                 android:text="Backspace"
                 android:id="@+id/backspace_button"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:onClick="bksp"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -171,7 +172,8 @@
                 android:layout_height="wrap_content"
                 android:text="Enter"
                 android:id="@+id/submit_button"
-                android:layout_column="5" />
+                android:layout_column="5"
+                android:onClick="submit"/>
         </TableRow>
     </TableLayout>
 </RelativeLayout>

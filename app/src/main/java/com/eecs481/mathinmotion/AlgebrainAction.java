@@ -1,5 +1,7 @@
 package com.eecs481.mathinmotion;
 
+import android.preference.PreferenceManager;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -43,7 +45,32 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         TextView current = (TextView) findViewById(R.id.answer_display);
         current.setText(answer);
     }
+    public void submit(View view)
+    {
 
+    }
+    public void bksp (View view)
+    {
+        if(answer.length() >= 1)
+        {
+            answer = answer.substring(0, answer.length()-1);
+        }
+        TextView current = (TextView) findViewById(R.id.answer_display);
+
+        current.setText(answer);
+    }
+    protected void onResume()
+    {
+        super.onResume();
+        Motion.getInstance().addListener(this, this);
+
+    }
+
+    protected void onPause()
+    {
+        super.onPause();
+        Motion.getInstance().addListener(this, this);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
