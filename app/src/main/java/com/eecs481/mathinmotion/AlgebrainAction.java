@@ -4,14 +4,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
-
-
-public class AlgebrainAction extends ActionBarActivity {
+public class AlgebrainAction  extends ActionBarActivity implements MotionListener {
     LinearLayout mLinearLayout;
+    String answer = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,15 +20,29 @@ public class AlgebrainAction extends ActionBarActivity {
 
         mLinearLayout = new LinearLayout(this);
         ImageView i = new ImageView(this);
-        i.setImageResource(R.drawable.test);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 1000);
         i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
         i.setLayoutParams(layoutParams);
         // Add the ImageView to the layout and set the layout as the content view
         mLinearLayout.addView(i);
-        setContentView(mLinearLayout);
+        setContentView(R.layout.activity_algebrain_action);
+        TextView current = (TextView) findViewById(R.id.answer_display);
+        current.setText("");
     }
-
+    public void clicker(View view)
+    {
+        String name = (String)view.getTag();
+        if (name.length() == 1)
+        {
+            append(name);
+        }
+    }
+    public void append(String digit)
+    {
+        answer = answer + digit;
+        TextView current = (TextView) findViewById(R.id.answer_display);
+        current.setText(answer);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
