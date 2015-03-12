@@ -49,10 +49,18 @@
         <activity
             android:name=".EightPuzzleSettingsActivity"
             android:label="@string/title_activity_eight_puzzle_settings"
-            android:parentActivityName=".EightPuzzle">
+            android:parentActivityName=".EightPuzzle" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.eecs481.mathinmotion.EightPuzzle" />
+        </activity>
+        <activity
+            android:name=".AIA_Settings"
+            android:label="@string/title_activity_aia__settings"
+            android:parentActivityName=".AlgebrainAction" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eecs481.mathinmotion.AlgebrainAction" />
         </activity>
     </application>
 

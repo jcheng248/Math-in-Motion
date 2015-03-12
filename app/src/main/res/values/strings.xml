@@ -26,5 +26,10 @@
     <string name="title_activity_eight_puzzle_settings">8-Puzzle Settings</string>
     <string name="eight_puzzle_settings_gameplay_options">Gameplay Options</string>
     <string name="eight_puzzle_settings_input_type">Input Type</string>
+    <string name="title_activity_aia__settings">AIA_Settings</string>
+    <string name="difficulty">Select Difficulty</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
 
 </resources>
