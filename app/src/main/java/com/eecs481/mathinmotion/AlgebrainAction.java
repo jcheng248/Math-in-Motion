@@ -52,7 +52,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         {
             int a = randomGenerator.nextInt(100);
             int b = randomGenerator.nextInt(100);
-            question = Integer.toString(a) + " + " + Integer.toString(b) + "=";
+            question = Integer.toString(a) + " + " + Integer.toString(b) + " =";
             answerLine = Integer.toString(a+b);
         }
         else if(questionFormat.equals("multiplication"))
@@ -60,7 +60,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
             int a = randomGenerator.nextInt(30);
             int b = randomGenerator.nextInt(30);
-            question = Integer.toString(a) + " x " + Integer.toString(b) + "=";
+            question = Integer.toString(a) + " x " + Integer.toString(b) + " =";
             answerLine = Integer.toString(a*b);
         }
         else if(questionFormat.equals("equations"))
@@ -69,13 +69,13 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             int b = randomGenerator.nextInt(20);
             int c = randomGenerator.nextInt(100);
             int d  = randomGenerator.nextInt(10);
-            if (d%2 ==1 )
+            if (d % 2 == 1 )
             {
-                question = "Find x: "+ Integer.toString(b) + "x + "+Integer.toString(c) + " = " + Integer.toString(a*b +c);
+                question = "Find x: "+ Integer.toString(b) + "x + " + Integer.toString(c) + " = " + Integer.toString(a*b +c);
             }
             else
             {
-                question = "Find x: "+ Integer.toString(b) + "x - "+Integer.toString(c) + " = " + Integer.toString(a*b -c);
+                question = "Find x: "+ Integer.toString(b) + "x - " + Integer.toString(c) + " = " + Integer.toString(a*b -c);
 
             }
             answerLine = Integer.toString(a);
@@ -117,10 +117,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     {
         if(answer.length() >= 1)
         {
-            answer = answer.substring(0, answer.length()-1);
+            answer = answer.substring(0, answer.length() - 1);
         }
         TextView current = (TextView) findViewById(R.id.answer_display);
-
         current.setText(answer);
     }
     protected void onResume()
@@ -130,7 +129,6 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             return;
         }
         Motion.getInstance().addListener(this, this);
-
     }
 
     protected void onPause()
@@ -159,7 +157,6 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
