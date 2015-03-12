@@ -86,6 +86,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         current.setText("");
         current.setBackgroundColor(0);
         answer = "";
+        TextView wrong = (TextView) findViewById(R.id.wrong);
+        wrong.setText("");
     }
 
     public void append(String digit)
@@ -105,6 +107,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         }
         else
         {
+            TextView wrong = (TextView) findViewById(R.id.wrong);
+            wrong.setText("Wrong!!!");
             current.setBackgroundColor(-65536);
         }
     }
