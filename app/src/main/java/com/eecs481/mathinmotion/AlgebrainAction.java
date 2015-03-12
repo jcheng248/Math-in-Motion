@@ -68,7 +68,16 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             int a = randomGenerator.nextInt(100);
             int b = randomGenerator.nextInt(20);
             int c = randomGenerator.nextInt(100);
-            question = "Find x: "+ Integer.toString(b) + "x + "+Integer.toString(c) + " = " + Integer.toString(a*b +c);
+            int d  = randomGenerator.nextInt(10);
+            if (d%2 ==1 )
+            {
+                question = "Find x: "+ Integer.toString(b) + "x + "+Integer.toString(c) + " = " + Integer.toString(a*b +c);
+            }
+            else
+            {
+                question = "Find x: "+ Integer.toString(b) + "x - "+Integer.toString(c) + " = " + Integer.toString(a*b -c);
+
+            }
             answerLine = Integer.toString(a);
         }
         TextView current = (TextView) findViewById(R.id.problem_display);
@@ -78,6 +87,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         current.setBackgroundColor(0);
         answer = "";
     }
+
     public void append(String digit)
     {
         answer = answer + digit;
@@ -98,6 +108,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             current.setBackgroundColor(-65536);
         }
     }
+
     public void bksp (View view)
     {
         if(answer.length() >= 1)
