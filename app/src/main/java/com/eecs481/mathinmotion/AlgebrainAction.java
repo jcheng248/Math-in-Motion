@@ -21,17 +21,17 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     String questionFormat = "equations"; // can be "addition", "multiplication", etc
     String answerLine;
     String question;
-    String message;
+   // String message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_algebrain_action);
+        //setContentView(R.layout.activity_algebrainaction);
         Intent intent = getIntent();
-        if(intent.getExtras() == null) {
+        /*if(intent.getExtras() == null) {
             message = "easy";
         } else {
-            message = intent.getStringExtra(AIA_Settings.DIFFICULTY);
-        }
+            //message = intent.getStringExtra(AIA_Settings.DIFFICULTY);
+        }*/
         mLinearLayout = new LinearLayout(this);
         ImageView i = new ImageView(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 1000);
@@ -40,8 +40,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         // Add the ImageView to the layout and set the layout as the content view
         mLinearLayout.addView(i);
         setContentView(R.layout.activity_algebrain_action);
-        TextView current = (TextView) findViewById(R.id.difficulty);
-        current.setText(message);
+       /* TextView current = (TextView) findViewById(R.id.difficulty);
+        current.setText(message);*/
         generateProblem();
 
     }

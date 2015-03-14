@@ -12,27 +12,19 @@ import android.widget.EditText;
 
 
 public class AIA_Settings extends ActionBarActivity {
-    public final static String DIFFICULTY = "com.eecs481.mathinmotion.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aia__settings);
     }
 
-    public void sendMessageE(View view) {
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        intent.putExtra(DIFFICULTY, "easy");
-        startActivity(intent);
-    }
-    public void sendMessageM(View view) {
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        intent.putExtra(DIFFICULTY, "medium");
-        startActivity(intent);
-    }
-    public void sendMessageH(View view) {
-        Intent intent = new Intent(this, AlgebrainAction.class);
-        intent.putExtra(DIFFICULTY, "hard");
-        startActivity(intent);
+    public static class SettingsFragment extends PreferenceFragment
+    {
+        public void onCreate(Bundle instance)
+        {
+            super.onCreate(instance);
+            addPreferencesFromResource(R.xml.aia_settings);
+        }
     }
 }
 
