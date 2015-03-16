@@ -2,9 +2,12 @@ package com.eecs481.mathinmotion;
 
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +25,20 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     String answerLine;
     String question;
    // String message;
+   private void setupToolbars()
+   {
+       ActionBar actionbar = getSupportActionBar();
+       actionbar.setDisplayShowTitleEnabled(false);
+       actionbar.setDisplayShowHomeEnabled(false);
+       actionbar.setDisplayUseLogoEnabled(false);
+       actionbar.setDisplayHomeAsUpEnabled(false);
+       actionbar.setDisplayShowCustomEnabled(true);
+
+       View custom = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
+       TextView title = (TextView)custom.findViewById(R.id.actionbar_title);
+       title.setText("Algebra In Action");
+       actionbar.setCustomView(custom);
+   }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +60,16 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
        /* TextView current = (TextView) findViewById(R.id.difficulty);
         current.setText(message);*/
         generateProblem();
-
+        setupToolbars();
+    }
+    public void home_launch(View view)
+    {
+        NavUtils.navigateUpFromSameTask(this);
+    }
+    public void settings_launch(View view)
+    {
+        Intent intent = new Intent(this, AIA_Settings.class);
+        startActivity(intent);
     }
     public void clicker(View view)
     {
@@ -135,7 +161,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         }
         Motion.getInstance().addListener(this, this);
     }
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_algebrain_action, menu);
@@ -156,5 +182,5 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
