@@ -32,4 +32,10 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
 
+    <string name="instructions_eight">The objective of the game is to solve the provided algebra problems within the allotted time by using either motion or the touch screen interface.</string>
+    <string name="instructions_nine">To answer the question, input numbers based on the motions depicted below:</string>
+    <string name="instructions_ten">After you have inputted the desired number, press the submit button. If your answer is correct you will move on to the next level, otherwise you will need to re-enter a new solution until correct.</string>
+    <string name="instructions_eleven">In addition, you may also press the numbers on the provided keypad to answer.</string>
+
+
 </resources>
