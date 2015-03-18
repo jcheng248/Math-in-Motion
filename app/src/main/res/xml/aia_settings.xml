@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="Gameplay Options" >
+
+        <ListPreference
+            android:key="diff_type"
+            android:title="Difficulty"
+            android:entries="@array/difficulty_choices"
+            android:entryValues="@array/difficulty_choices"
+            android:defaultValue="Difficulty" />
+
+        <ListPreference
+            android:key="input_type"
+            android:title="Input"
+            android:entries="@array/input_aia_choices"
+            android:entryValues="@array/input_aia_choices"
+            android:defaultValue="Input" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,9 +1,13 @@
 package com.eecs481.mathinmotion;
 
+import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +24,31 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     String questionFormat = "equations"; // can be "addition", "multiplication", etc
     String answerLine;
     String question;
+   // String message;
+   private void setupToolbars()
+   {
+       ActionBar actionbar = getSupportActionBar();
+       actionbar.setDisplayShowTitleEnabled(false);
+       actionbar.setDisplayShowHomeEnabled(false);
+       actionbar.setDisplayUseLogoEnabled(false);
+       actionbar.setDisplayHomeAsUpEnabled(false);
+       actionbar.setDisplayShowCustomEnabled(true);
+
+       View custom = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
+       TextView title = (TextView)custom.findViewById(R.id.actionbar_title);
+       title.setText("Algebra In Action");
+       actionbar.setCustomView(custom);
+   }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_algebrain_action);
-
+        //setContentView(R.layout.activity_algebrainaction);
+        Intent intent = getIntent();
+        /*if(intent.getExtras() == null) {
+            message = "easy";
+        } else {
+            //message = intent.getStringExtra(AIA_Settings.DIFFICULTY);
+        }*/
         mLinearLayout = new LinearLayout(this);
         ImageView i = new ImageView(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 1000);
@@ -33,8 +57,19 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         // Add the ImageView to the layout and set the layout as the content view
         mLinearLayout.addView(i);
         setContentView(R.layout.activity_algebrain_action);
-
+       /* TextView current = (TextView) findViewById(R.id.difficulty);
+        current.setText(message);*/
         generateProblem();
+        setupToolbars();
+    }
+    public void home_launch(View view)
+    {
+        NavUtils.navigateUpFromSameTask(this);
+    }
+    public void settings_launch(View view)
+    {
+        Intent intent = new Intent(this, AIA_Settings.class);
+        startActivity(intent);
     }
     public void clicker(View view)
     {
@@ -120,6 +155,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             answer = answer.substring(0, answer.length() - 1);
         }
         TextView current = (TextView) findViewById(R.id.answer_display);
+        current.setBackgroundColor(0);
         current.setText(answer);
     }
     protected void onResume()
@@ -139,7 +175,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         }
         Motion.getInstance().addListener(this, this);
     }
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_algebrain_action, menu);
@@ -155,8 +191,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent intent = new Intent(this, AIA_Settings.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

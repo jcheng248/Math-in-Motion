@@ -4,4 +4,21 @@
         <item>Motion</item>
         <item>Swipe</item>
     </string-array>
+
+    <string-array name="input_aia_choices">
+        <item>Motion</item>
+        <item>Touch</item>
+    </string-array>
+
+    <string-array name="difficulty_choices">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string-array name="game_choices">
+        <item>Original</item>
+        <item>Magic Squares</item>
+    </string-array>
+
 </resources>

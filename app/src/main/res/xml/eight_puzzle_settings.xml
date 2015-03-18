@@ -11,6 +11,12 @@
             android:entryValues="@array/input_choices"
             android:defaultValue="Motion" />
 
+        <ListPreference
+            android:key="game_type"
+            android:title="Game Type"
+            android:entries="@array/game_choices"
+            android:entryValues="@array/game_choices"
+            android:defaultValue="TYPE" />
     </PreferenceCategory>
 
 </PreferenceScreen>

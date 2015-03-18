@@ -94,13 +94,38 @@
                 android:text="@string/algebra"
                 android:textStyle="bold"
                 android:id="@+id/block8"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:paddingTop="@dimen/activity_vertical_margin"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="(Beta)"
+                android:text="@string/instructions_eight"
                 android:id="@+id/block9"
+                android:layout_marginTop="10dp" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_nine"
+                android:id="@+id/block11"
+                android:layout_marginTop="5dp" />
+            <ImageView android:id="@+id/instr_aia_one"
+                android:adjustViewBounds="true"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_launcher"
+                android:layout_gravity="center_horizontal" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_ten"
+                android:id="@+id/block12"
+                android:layout_marginTop="5dp" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions_eleven"
+                android:id="@+id/block13"
                 android:layout_marginTop="5dp" />
 
 
