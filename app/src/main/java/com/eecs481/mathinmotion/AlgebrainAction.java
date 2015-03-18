@@ -140,7 +140,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             answer = answer.substring(0, answer.length()-1);
         }
         TextView current = (TextView) findViewById(R.id.answer_display);
-
+        current.setBackgroundColor(0);
         current.setText(answer);
     }
     protected void onResume()
