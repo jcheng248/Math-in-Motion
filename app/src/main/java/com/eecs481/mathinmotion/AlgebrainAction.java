@@ -43,8 +43,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_algebrainaction);
-        Intent intent = getIntent();
-        /*if(intent.getExtras() == null) {
+        /*Intent intent = getIntent();
+        if(intent.getExtras() == null) {
             message = "easy";
         } else {
             //message = intent.getStringExtra(AIA_Settings.DIFFICULTY);
@@ -161,19 +161,20 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     protected void onResume()
     {
         super.onResume();
-        if (Motion.getInstance() != null) {
+        /*if (Motion.getInstance() != null) {
             return;
-        }
+        }*/
         Motion.getInstance().addListener(this, this);
     }
 
     protected void onPause()
     {
         super.onPause();
-        if (Motion.getInstance() != null) {
+        /*if (Motion.getInstance() != null) {
             return;
-        }
-        Motion.getInstance().addListener(this, this);
+        }*/
+       // Motion.getInstance().addListener(this, this);
+        Motion.getInstance().removeListener(this);
     }
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

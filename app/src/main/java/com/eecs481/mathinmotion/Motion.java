@@ -53,7 +53,7 @@ public class Motion implements SensorEventListener {
 
     }
 
-    public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly
+    public void onSensorChanged(SensorEvent event) { //detects change and acts accordingly=
         long curTime = System.currentTimeMillis();
         float x = event.values[0];
         float y = event.values[1];
