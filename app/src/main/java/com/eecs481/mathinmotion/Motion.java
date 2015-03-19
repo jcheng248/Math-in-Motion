@@ -42,7 +42,7 @@ public class Motion implements SensorEventListener {
         listeners.add(listener);
     }
 
-    public void removeListener(AccelerometerListener listener) {
+    public void removeListener(MotionListener listener) {
 
         listeners.remove(listener);
         if (listeners.size() == 0)
