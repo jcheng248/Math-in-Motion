@@ -26,5 +26,7 @@
     <string name="title_activity_eight_puzzle_settings">8-Puzzle Settings</string>
     <string name="eight_puzzle_settings_gameplay_options">Gameplay Options</string>
     <string name="eight_puzzle_settings_input_type">Input Type</string>
+    <string name="edit_message">Enter Your Answer</string>
+    <string name="submit_answer">Tap Here to Submit</string>
 
 </resources>
