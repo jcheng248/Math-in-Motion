@@ -35,6 +35,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         setContentView(R.layout.activity_algebrain_action);
         generateProblem();
         setupToolbars();
+
+        PreferenceManager.setDefaultValues(this, R.xml.aia_settings, false);
     }
     public void home_launch(View view)
     {

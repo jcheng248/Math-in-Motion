@@ -16,7 +16,7 @@
             android:title="Game Type"
             android:entries="@array/game_choices"
             android:entryValues="@array/game_choices"
-            android:defaultValue="TYPE" />
+            android:defaultValue="Original" />
     </PreferenceCategory>
 
 </PreferenceScreen>

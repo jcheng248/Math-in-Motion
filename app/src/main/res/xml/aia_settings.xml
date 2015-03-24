@@ -9,14 +9,14 @@
             android:title="Difficulty"
             android:entries="@array/difficulty_choices"
             android:entryValues="@array/difficulty_choices"
-            android:defaultValue="Difficulty" />
+            android:defaultValue="Medium" />
 
         <ListPreference
             android:key="input_type"
             android:title="Input"
             android:entries="@array/input_aia_choices"
             android:entryValues="@array/input_aia_choices"
-            android:defaultValue="Input" />
+            android:defaultValue="Motion" />
 
     </PreferenceCategory>
 
