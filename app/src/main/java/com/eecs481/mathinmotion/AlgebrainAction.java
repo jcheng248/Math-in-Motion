@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -24,41 +25,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     String questionFormat = "equations"; // can be "addition", "multiplication", etc
     String answerLine;
     String question;
-   // String message;
-   private void setupToolbars()
-   {
-       ActionBar actionbar = getSupportActionBar();
-       actionbar.setDisplayShowTitleEnabled(false);
-       actionbar.setDisplayShowHomeEnabled(false);
-       actionbar.setDisplayUseLogoEnabled(false);
-       actionbar.setDisplayHomeAsUpEnabled(false);
-       actionbar.setDisplayShowCustomEnabled(true);
+    private boolean answered = false;
+    private boolean correct = false;
 
-       View custom = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
-       TextView title = (TextView)custom.findViewById(R.id.actionbar_title);
-       title.setText("Algebra In Action");
-       actionbar.setCustomView(custom);
-   }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_algebrainaction);
-        /*Intent intent = getIntent();
-        if(intent.getExtras() == null) {
-            message = "easy";
-        } else {
-            //message = intent.getStringExtra(AIA_Settings.DIFFICULTY);
-        }*/
-        mLinearLayout = new LinearLayout(this);
-        ImageView i = new ImageView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 1000);
-        i.setAdjustViewBounds(true); // set the ImageView bounds to match the Drawable's dimensions
-        i.setLayoutParams(layoutParams);
-        // Add the ImageView to the layout and set the layout as the content view
-        mLinearLayout.addView(i);
         setContentView(R.layout.activity_algebrain_action);
-       /* TextView current = (TextView) findViewById(R.id.difficulty);
-        current.setText(message);*/
         generateProblem();
         setupToolbars();
     }
@@ -71,6 +45,22 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         Intent intent = new Intent(this, AIA_Settings.class);
         startActivity(intent);
     }
+
+    private void setupToolbars()
+    {
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayShowTitleEnabled(false);
+        actionbar.setDisplayShowHomeEnabled(false);
+        actionbar.setDisplayUseLogoEnabled(false);
+        actionbar.setDisplayHomeAsUpEnabled(false);
+        actionbar.setDisplayShowCustomEnabled(true);
+
+        View custom = LayoutInflater.from(this).inflate(R.layout.actionbar, null);
+        TextView title = (TextView)custom.findViewById(R.id.actionbar_title);
+        title.setText(R.string.title_activity_algebrain_action);
+        actionbar.setCustomView(custom);
+    }
+
     public void clicker(View view)
     {
         String name = (String)view.getTag();
@@ -115,36 +105,63 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             answerLine = Integer.toString(a);
         }
-        TextView current = (TextView) findViewById(R.id.problem_display);
+        TextView current = (TextView) findViewById(R.id.generated_question);
         current.setText(question);
-        current = (TextView) findViewById(R.id.answer_display);
+        current = (TextView) findViewById(R.id.aia_answer);
         current.setText("");
-        current.setBackgroundColor(0);
         answer = "";
-        TextView wrong = (TextView) findViewById(R.id.wrong);
-        wrong.setText("");
     }
 
     public void append(String digit)
     {
         answer = answer + digit;
-        TextView current = (TextView) findViewById(R.id.answer_display);
+        TextView current = (TextView) findViewById(R.id.aia_answer);
         current.setText(answer);
     }
 
     public void submit(View view)
     {
-        TextView current = (TextView) findViewById(R.id.answer_display);
-        String userAnswer = current.getText().toString();
-        if(userAnswer.equals(answerLine))
+        if (!answered)
         {
-            generateProblem();
+            TextView current = (TextView) findViewById(R.id.aia_answer);
+            String userAnswer = current.getText().toString();
+
+            TextView submit_view = (TextView) findViewById(R.id.aia_submit);
+            RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
+            if (userAnswer.equals(answerLine))
+            {
+                submit_view.setText(R.string.correct_submission);
+                submit_area.setBackgroundResource(R.color.green);
+                correct = true;
+            }
+            else
+            {
+                submit_view.setText(R.string.incorrect_submission);
+                submit_area.setBackgroundResource(R.color.red);
+                correct = false;
+            }
+            answered = true;
         }
         else
         {
-            TextView wrong = (TextView) findViewById(R.id.wrong);
-            wrong.setText("Wrong!!!");
-            current.setBackgroundColor(-65536);
+            TextView submit_view = (TextView) findViewById(R.id.aia_submit);
+            submit_view.setText(R.string.submit_answer);
+            RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
+            submit_area.setBackgroundResource(R.color.orange);
+
+            if (correct)
+            {
+                generateProblem();
+            }
+            else
+            {
+                TextView answer_view = (TextView) findViewById(R.id.aia_answer);
+                answer_view.setText("");
+                answer = "";
+            }
+
+            correct = false;
+            answered = false;
         }
     }
 
@@ -154,47 +171,18 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         {
             answer = answer.substring(0, answer.length() - 1);
         }
-        TextView current = (TextView) findViewById(R.id.answer_display);
-        current.setBackgroundColor(0);
+        TextView current = (TextView) findViewById(R.id.aia_answer);
         current.setText(answer);
     }
     protected void onResume()
     {
         super.onResume();
-        /*if (Motion.getInstance() != null) {
-            return;
-        }*/
         Motion.getInstance().addListener(this, this);
     }
 
     protected void onPause()
     {
         super.onPause();
-        /*if (Motion.getInstance() != null) {
-            return;
-        }*/
-       // Motion.getInstance().addListener(this, this);
         Motion.getInstance().removeListener(this);
     }
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_algebrain_action, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, AIA_Settings.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }
