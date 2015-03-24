@@ -28,5 +28,20 @@
     <string name="eight_puzzle_settings_input_type">Input Type</string>
     <string name="edit_message">Enter Your Answer</string>
     <string name="submit_answer">Tap Here to Submit</string>
+    <string name="correct_submission">Correct! Tap for Next Level</string>
+    <string name="incorrect_submission">Incorrect :( Try Again</string>
+    <string name="answer_below">Your Answer Below</string>
+
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="backspace">Backspace</string>
 
 </resources>

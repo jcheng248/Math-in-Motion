@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -22,6 +23,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     String questionFormat = "equations"; // can be "addition", "multiplication", etc
     String answerLine;
     String question;
+    private boolean answered = false;
+    private boolean correct = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,45 +97,72 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         }
         TextView current = (TextView) findViewById(R.id.generated_question);
         current.setText(question);
-        /*current = (TextView) findViewById(R.id.answer_display);
+        current = (TextView) findViewById(R.id.aia_answer);
         current.setText("");
-        current.setBackgroundColor(0);
         answer = "";
-        TextView wrong = (TextView) findViewById(R.id.wrong);
-        wrong.setText("");*/
     }
 
     public void append(String digit)
     {
-        /*answer = answer + digit;
-        TextView current = (TextView) findViewById(R.id.answer_display);
-        current.setText(answer);*/
+        answer = answer + digit;
+        TextView current = (TextView) findViewById(R.id.aia_answer);
+        current.setText(answer);
     }
 
     public void submit(View view)
-    {/*
-        TextView current = (TextView) findViewById(R.id.answer_display);
-        String userAnswer = current.getText().toString();
-        if(userAnswer.equals(answerLine))
+    {
+        if (!answered)
         {
-            generateProblem();
+            TextView current = (TextView) findViewById(R.id.aia_answer);
+            String userAnswer = current.getText().toString();
+
+            TextView submit_view = (TextView) findViewById(R.id.aia_submit);
+            RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
+            if (userAnswer.equals(answerLine))
+            {
+                submit_view.setText(R.string.correct_submission);
+                submit_area.setBackgroundResource(R.color.green);
+                correct = true;
+            }
+            else
+            {
+                submit_view.setText(R.string.incorrect_submission);
+                submit_area.setBackgroundResource(R.color.red);
+                correct = false;
+            }
+            answered = true;
         }
         else
         {
-            TextView wrong = (TextView) findViewById(R.id.wrong);
-            wrong.setText("Wrong!!!");
-            current.setBackgroundColor(-65536);
-        }*/
+            TextView submit_view = (TextView) findViewById(R.id.aia_submit);
+            submit_view.setText(R.string.submit_answer);
+            RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
+            submit_area.setBackgroundResource(R.color.orange);
+
+            if (correct)
+            {
+                generateProblem();
+            }
+            else
+            {
+                TextView answer_view = (TextView) findViewById(R.id.aia_answer);
+                answer_view.setText("");
+                answer = "";
+            }
+
+            correct = false;
+            answered = false;
+        }
     }
 
     public void bksp (View view)
-    {/*
+    {
         if(answer.length() >= 1)
         {
             answer = answer.substring(0, answer.length() - 1);
         }
-        TextView current = (TextView) findViewById(R.id.answer_display);
-        current.setText(answer);*/
+        TextView current = (TextView) findViewById(R.id.aia_answer);
+        current.setText(answer);
     }
     protected void onResume()
     {

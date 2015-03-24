@@ -5,4 +5,5 @@
     <item name="white" type="color">#FFFFFF</item>
     <item name="gray" type="color">#828282</item>
     <item name="red" type="color">#FF0000</item>
+    <item name="green" type="color">#00FF00</item>
 </resources>
