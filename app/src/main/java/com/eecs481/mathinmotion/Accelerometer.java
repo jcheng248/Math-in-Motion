@@ -16,9 +16,6 @@ public class Accelerometer implements SensorEventListener {
     private ArrayList<AccelerometerListener> listeners;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private float last_last_x, last_last_y, last_last_z;
-    private static final int SHAKE_THRESHOLD = 100;
-    boolean moved = false;
     boolean waiting = false;
     private long sleeptime = 0;
 
@@ -58,113 +55,6 @@ public class Accelerometer implements SensorEventListener {
         float y = event.values[1];
         float z = event.values[2];
 
-//        if(curTime - lastUpdate > 2000)
-//        {
-//            last_x = 0;
-//            last_y = 0;
-//            last_z = 0;
-//            last_last_x = 0;
-//            last_last_y = 0;
-//            last_last_z = 0;
-//        }
-//        if(curTime - lastUpdate > 500)
-//        {
-//            if(Math.abs(x) >= 0.5 || Math.abs(y) >= 0.5 || Math.abs(z) >= 0.5)
-//            {
-//                if (Math.abs(last_last_x) >= 1.5 || Math.abs(last_last_y) >= 1.5 || Math.abs(last_last_z) >= 1.5)
-//                {
-//                    if(last_last_x != 0 && Math.abs(last_last_x) > Math.abs(last_last_y)
-//                            && Math.abs(last_last_x) > Math.abs(last_last_z))
-//                    {
-//                        if(last_x * last_last_x <0 && last_x *x < 0 && last_last_x >0)
-//                        {
-//                            right();
-//                            last_x = 0;
-//                            last_y = 0;
-//                            last_z = 0;
-//                            last_last_x = 0;
-//                            last_last_y = 0;
-//                            last_last_z = 0;
-//                        }
-//                        else if(last_x * last_last_x <0 && last_x *x < 0 && last_last_x <0)
-//                        {
-//                            left();
-//                            last_x = 0;
-//                            last_y = 0;
-//                            last_z = 0;
-//                            last_last_x = 0;
-//                            last_last_y = 0;
-//                            last_last_z = 0;
-//                        }
-//                        long time = System.currentTimeMillis();
-//                        while(System.currentTimeMillis() - time >100)
-//                        {
-//
-//                        }
-//                    }
-//                    else if(last_last_y != 0 && Math.abs(last_last_y) > Math.abs(last_last_x)
-//                            && Math.abs(last_last_y) > Math.abs(last_last_z))
-//                    {
-//                        if(last_y * last_last_y <0 && last_y *y < 0 && last_last_y >0)
-//                        {
-//                            up();
-//                            last_x = 0;
-//                            last_y = 0;
-//                            last_z = 0;
-//                            last_last_x = 0;
-//                            last_last_y = 0;
-//                            last_last_z = 0;
-//                        }
-//                        else if(last_y * last_last_y <0 && last_y *y < 0 && last_last_y <0)
-//                        {
-//                            down();
-//                            last_x = 0;
-//                            last_y = 0;
-//                            last_z = 0;
-//                            last_last_x = 0;
-//                            last_last_y = 0;
-//                            last_last_z = 0;
-//                        }
-//                        long time = System.currentTimeMillis();
-//                        while(System.currentTimeMillis() - time >100)
-//                        {
-//
-//                        }
-//                    }
-//                    else if(last_last_z != 0 && Math.abs(last_last_z) > Math.abs(last_last_x)
-//                            && Math.abs(last_last_z) > Math.abs(last_last_y))
-//                    {
-//                        if(last_z * last_last_z <0 && last_z *z < 0 )
-//                        {
-//                            shake();
-//                            last_x = 0;
-//                            last_y = 0;
-//                            last_z = 0;
-//                            last_last_x = 0;
-//                            last_last_y = 0;
-//                            last_last_z = 0;
-//                        }
-//                        long time = System.currentTimeMillis();
-//                        while(System.currentTimeMillis() - time >100)
-//                        {
-//
-//                        }
-//                    }
-//
-//                }
-//                last_last_x = last_x;
-//                last_last_y = last_y;
-//                last_last_z = last_z;
-//                last_x = x;
-//                last_y = y;
-//                last_z = z;
-//                lastUpdate = curTime;
-//            }
-//
-//
-//        }
-
-        //Original
         if (curTime - lastUpdate > 200) //wait 200 ms to get get opposite direction accel data
         {
             waiting = true;
@@ -198,12 +88,6 @@ public class Accelerometer implements SensorEventListener {
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
-
                 } else if ((last_x <x) && last_x < -1) {
                     Log.d("going left","yes");
                     left();
@@ -211,11 +95,6 @@ public class Accelerometer implements SensorEventListener {
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
 
                 }
             } else if (last_y != 0 && Math.abs(last_y) > Math.abs(last_x) && Math.abs(last_y) > Math.abs(last_z)-3) {
@@ -227,11 +106,6 @@ public class Accelerometer implements SensorEventListener {
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
                 }
                  else if (last_y < y) {
                     Log.d("going down","yes");
@@ -240,11 +114,6 @@ public class Accelerometer implements SensorEventListener {
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
                 }
             }
         } else if (last_z != 0 && Math.abs(last_z) > Math.abs(last_y)+5 && Math.abs(last_z) > Math.abs(last_x)+5) {
@@ -254,12 +123,6 @@ public class Accelerometer implements SensorEventListener {
                 last_x = 0;
                 last_z = 0;
                 sleeptime = System.currentTimeMillis();
-                long time = sleeptime;
-
-//                while(System.currentTimeMillis() - time <800)
-//                {
-//
-//                }
             }
         }
         lastUpdate = curTime;

@@ -93,12 +93,6 @@ public class Motion implements SensorEventListener {
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
-
                 } else  if ((last_x <x) &&(last_y > y) && last_x < -1 && last_y > 1) {
                     Log.d("direction","1");
                     append(1);
@@ -106,12 +100,6 @@ public class Motion implements SensorEventListener {
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
-
                 } else  if ((last_x <x) &&(last_y < y) && last_x < -1 && last_y < -1) {
                     Log.d("direction","7");
                     append(7);
@@ -119,12 +107,6 @@ public class Motion implements SensorEventListener {
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
-
                 } else  if ((last_x >x) &&(last_y < y) && last_x > 1 && last_y < -1) {
                     Log.d("direction","9");
                     append(9);
@@ -132,12 +114,6 @@ public class Motion implements SensorEventListener {
                     last_y = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
-
                 }
             } else if (last_x != 0 && Math.abs(last_x) > Math.abs(last_z)-2 && (Math.abs(last_y) >
                     Math.abs(last_z)-2) &&( Math.abs(last_x/last_y) < 0.5 || Math.abs(last_x/last_y) >2)) {
@@ -150,11 +126,6 @@ public class Motion implements SensorEventListener {
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
                 }
                 else if ((last_y < y) && last_y < -1 && Math.abs(last_y) > Math.abs(last_x)) {
                     Log.d("direction","8");
@@ -163,11 +134,6 @@ public class Motion implements SensorEventListener {
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
                 }
                 else if ((last_x < x) && last_x < -1 && Math.abs(last_x) > Math.abs(last_y)) {
                     Log.d("direction","4");
@@ -176,11 +142,6 @@ public class Motion implements SensorEventListener {
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
                 }
                 else if ((last_x > x) && last_x > 1 && Math.abs(last_x) > Math.abs(last_y)) {
                     Log.d("direction","6");
@@ -189,40 +150,23 @@ public class Motion implements SensorEventListener {
                     last_x = 0;
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
-                    long time = sleeptime;
-//                    while(System.currentTimeMillis() - time <800)
-//                    {
-//
-//                    }
                 }
             }
         } else if (waiting && Math.abs(last_z) > Math.abs(last_y)+1 && Math.abs(last_z) > Math.abs(last_x)+1 && (Math.abs(x) >= 1 || Math.abs(y) >= 0.8 || Math.abs(z) >= 2)
                 && (Math.abs(last_x) >= 2.5 || Math.abs(last_y) >= 2.5 || Math.abs(last_z) >= 3)) {
-            if (last_z < z && last_z <-2 ) {
+            if (last_z < z && last_z <-1 ) {
                 append(5);
                 last_y = 0;
                 last_x = 0;
                 last_z = 0;
                 sleeptime = System.currentTimeMillis();
-                long time = sleeptime;
-
-//                while(System.currentTimeMillis() - time <800)
-//                {
-//
-//                }
             }
-            else if (last_z > z && last_z >2 ) {
+            else if (last_z > z && last_z >1 ) {
                 append(0);
                 last_y = 0;
                 last_x = 0;
                 last_z = 0;
                 sleeptime = System.currentTimeMillis();
-                long time = sleeptime;
-
-//                while(System.currentTimeMillis() - time <800)
-//                {
-//
-//                }
             }
 
         }
