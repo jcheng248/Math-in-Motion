@@ -62,13 +62,13 @@
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp">
+                    android:paddingTop="2dp"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp">
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/one"
                         android:tag="1"
                         android:background="@drawable/tile"
@@ -76,8 +76,8 @@
                         android:id="@+id/button" />
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/two"
                         android:tag="2"
                         android:onClick="clicker"
@@ -85,8 +85,8 @@
                         android:background="@drawable/tile"/>
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/three"
                         android:tag="3"
                         android:onClick="clicker"
@@ -98,12 +98,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="horizontal"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp">
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp">
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:tag="4"
                         android:onClick="clicker"
                         android:text="@string/four"
@@ -120,8 +120,8 @@
                         android:background="@drawable/tile"/>
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/six"
                         android:tag="6"
                         android:onClick="clicker"
@@ -133,12 +133,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp">
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp">
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/seven"
                         android:tag="7"
                         android:onClick="clicker"
@@ -146,8 +146,8 @@
                         android:background="@drawable/tile"/>
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/eight"
                         android:tag="8"
                         android:onClick="clicker"
@@ -155,8 +155,8 @@
                         android:background="@drawable/tile"/>
 
                     <Button
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
                         android:text="@string/nine"
                         android:tag="9"
                         android:onClick="clicker"
@@ -168,13 +168,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingLeft="3dp"
-                    android:paddingRight="3dp"
-                    android:paddingBottom="3dp">
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:paddingBottom="2dp">
 
                     <Button
                         android:layout_width="99dp"
-                        android:layout_height="66dp"
+                        android:layout_height="67dp"
                         android:text="@string/backspace"
                         android:id="@+id/backspace_button"
                         android:onClick="bksp"
@@ -183,7 +183,7 @@
 
                     <Button
                         android:layout_width="99dp"
-                        android:layout_height="66dp"
+                        android:layout_height="67dp"
                         android:text="@string/zero"
                         android:tag="0"
                         android:onClick="clicker"
