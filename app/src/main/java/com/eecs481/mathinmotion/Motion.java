@@ -115,7 +115,8 @@ public class Motion implements SensorEventListener {
                     last_z = 0;
                     sleeptime = System.currentTimeMillis();
                 }
-            } else if (last_x != 0 && Math.abs(last_x) > Math.abs(last_z)-2 && (Math.abs(last_y) >
+            }
+            else if (last_x != 0 && Math.abs(last_x) > Math.abs(last_z)-2 && (Math.abs(last_y) >
                     Math.abs(last_z)-2) &&( Math.abs(last_x/last_y) < 0.5 || Math.abs(last_x/last_y) >2)) {
 
                 Log.d("got here","b");
@@ -152,8 +153,10 @@ public class Motion implements SensorEventListener {
                     sleeptime = System.currentTimeMillis();
                 }
             }
-        } else if (waiting && Math.abs(last_z) > Math.abs(last_y)+1 && Math.abs(last_z) > Math.abs(last_x)+1 && (Math.abs(x) >= 1 || Math.abs(y) >= 0.8 || Math.abs(z) >= 2)
+        } else if (Math.abs(last_z) > Math.abs(last_y)+1 && Math.abs(last_z) > Math.abs(last_x)+1 && (Math.abs(x) >= 1 || Math.abs(y) >= 0.8 || Math.abs(z) >= 2)
                 && (Math.abs(last_x) >= 2.5 || Math.abs(last_y) >= 2.5 || Math.abs(last_z) >= 3)) {
+
+            Log.d("z","z");
             if (last_z < z && last_z <-1 ) {
                 append(5);
                 last_y = 0;
@@ -175,7 +178,7 @@ public class Motion implements SensorEventListener {
         last_y = y;
         last_z = z;
     }
-    public void append( int digit)
+    public void append(int digit)
     {
         for (MotionListener listener : listeners)
             listener.append(Integer.toString(digit));
