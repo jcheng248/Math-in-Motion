@@ -26,7 +26,6 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     Stack<String> last_move = new Stack<String>();
     long lastTime = 0;
     long timeElapsed = 0;
-    boolean winnerWinnerChickenDinner = false;
     GestureDetectorCompat detector;
 
     Handler timerHandler = new Handler();
@@ -42,6 +41,10 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        magicSquare = !PreferenceManager.getDefaultSharedPreferences(this).
+            getString("game_type", "Original").equals("Original");
+
         int counter = 1;
         for(int i = 0; i < 3; i++)
         {
@@ -51,8 +54,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             }
         }
 
-
-        board[2][2]= "";
+        if (!magicSquare)
+            board[2][2] = "";
 
         setContentView(R.layout.activity_eightpuzzle);
         setupToolbars();
@@ -71,6 +74,28 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             Accelerometer.getInstance().addListener(this, this);
         else
             detector = new GestureDetectorCompat(this, new Gesture(this));
+
+        boolean ms = !PreferenceManager.getDefaultSharedPreferences(this).
+            getString("game_type", "Original").equals("Original");
+        if (ms != magicSquare)
+        {
+            magicSquare = ms;
+            int counter = 1;
+            for(int i = 0; i < 3; i++)
+            {
+                for(int j = 0; j < 3; j++)
+                {
+                    board[i][j] = Integer.toString(counter++);
+                }
+            }
+
+            if (!magicSquare)
+                board[2][2] = "";
+            spacerow = 2;
+            spacecolumn = 2;
+
+            reset(null);
+        }
     }
 
     protected void onPause()
@@ -591,6 +616,20 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         }
         else
         {
+            for (int i = 0; i <3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
+                    current.setText(board[i][j]);
+                    if (board[i][j].equals("9"))
+                        current.setBackgroundResource(Color.TRANSPARENT);
+                    else
+                        current.setBackgroundResource(R.drawable.tile);
+                }
+
+            }
+
             int sum = Integer.parseInt(board[0][0]) + Integer.parseInt(board[0][1])+Integer.parseInt(board[0][2]);
             if(sum != Integer.parseInt(board[1][0]) + Integer.parseInt(board[1][1])+Integer.parseInt(board[1][2])){
                 return false;
@@ -719,27 +758,30 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void goUp()
     {
+        String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow +1][spacecolumn];
-        board[spacerow +1][spacecolumn] = "";
+        board[spacerow +1][spacecolumn] = tmp;
         spacerow++;
     }
     public void goDown()
     {
+        String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow-1][spacecolumn];
-        board[spacerow -1][spacecolumn] = "";
+        board[spacerow -1][spacecolumn] = tmp;
         spacerow--;
     }
     public void goLeft()
     {
-
+        String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow][spacecolumn+1];
-        board[spacerow][spacecolumn+1] = "";
+        board[spacerow][spacecolumn+1] = tmp;
         spacecolumn++;
     }
     public void goRight()
     {
+        String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow][spacecolumn - 1];
-        board[spacerow][spacecolumn-1] = "";
+        board[spacerow][spacecolumn-1] = tmp;
         spacecolumn--;
     }
 
