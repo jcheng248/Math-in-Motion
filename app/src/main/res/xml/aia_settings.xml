@@ -9,7 +9,7 @@
             android:title="Difficulty"
             android:entries="@array/difficulty_choices"
             android:entryValues="@array/difficulty_choices"
-            android:defaultValue="Medium" />
+            android:defaultValue="Addition" />
 
         <ListPreference
             android:key="input_type"

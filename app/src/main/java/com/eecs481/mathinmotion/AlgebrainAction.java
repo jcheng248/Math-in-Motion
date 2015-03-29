@@ -180,11 +180,55 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     {
         super.onResume();
         Motion.getInstance().addListener(this, this);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
+                .equals("Addition"))
+        {
+            questionFormat = "addition";
+        }
+        else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
+                .equals("Multiplication"))
+        {
+            questionFormat = "multiplication";
+        }
+        else
+        {
+            questionFormat = "equations";
+        }
     }
 
     protected void onPause()
     {
         super.onPause();
         Motion.getInstance().removeListener(this);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
+                .equals("Addition"))
+        {
+            boolean change = questionFormat.equals("addition");
+            questionFormat = "addition";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
+                .equals("Multiplication"))
+        {
+            boolean change = questionFormat.equals("multiplication");
+            questionFormat = "multiplication";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        else
+        {
+            boolean change = questionFormat.equals("equations");
+
+            questionFormat = "equations";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
     }
 }

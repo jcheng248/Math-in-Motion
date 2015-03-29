@@ -11,9 +11,9 @@
     </string-array>
 
     <string-array name="difficulty_choices">
-        <item>Easy</item>
-        <item>Medium</item>
-        <item>Hard</item>
+        <item>Addition</item>
+        <item>Multiplication</item>
+        <item>Equations</item>
     </string-array>
 
     <string-array name="game_choices">
