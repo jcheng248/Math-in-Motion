@@ -22,11 +22,12 @@ import java.util.Random;
 public class AlgebrainAction  extends ActionBarActivity implements MotionListener {
     LinearLayout mLinearLayout;
     String answer = "";
-    String questionFormat = "equations"; // can be "addition", "multiplication", etc
+    String questionFormat = "addition"; // can be "addition", "multiplication", etc
     String answerLine;
     String question;
     private boolean answered = false;
     private boolean correct = false;
+    String difficulty ="easy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,25 +78,74 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         randomGenerator.setSeed(randomGenerator.nextLong());
         if(questionFormat.equals("addition"))
         {
-            int a = randomGenerator.nextInt(100);
-            int b = randomGenerator.nextInt(100);
+            int a = 0;
+            int b = 0;
+            if(difficulty.equals("easy"))
+            {
+                a = randomGenerator.nextInt(20)+1;
+                b =randomGenerator.nextInt(20)+1;
+            }
+            else if(difficulty.equals("medium"))
+            {
+                a = randomGenerator.nextInt(500)+1;
+                b =randomGenerator.nextInt(500)+1;
+            }
+            else if(difficulty.equals("hard"))
+            {
+                a = randomGenerator.nextInt(5000)+1;
+                b =randomGenerator.nextInt(5000)+1;
+            }
             question = Integer.toString(a) + " + " + Integer.toString(b) + " =";
             answerLine = Integer.toString(a+b);
         }
         else if(questionFormat.equals("multiplication"))
         {
 
-            int a = randomGenerator.nextInt(30);
-            int b = randomGenerator.nextInt(30);
+            int a = 0;
+            int b = 0;
+            if(difficulty.equals("easy"))
+            {
+                a = randomGenerator.nextInt(10)+1;
+                b =randomGenerator.nextInt(10)+1;
+            }
+            else if(difficulty.equals("medium"))
+            {
+                a = randomGenerator.nextInt(20)+1;
+                b =randomGenerator.nextInt(20)+1;
+            }
+            else if(difficulty.equals("hard"))
+            {
+                a = randomGenerator.nextInt(100)+1;
+                b =randomGenerator.nextInt(100)+1;
+            }
             question = Integer.toString(a) + " x " + Integer.toString(b) + " =";
             answerLine = Integer.toString(a*b);
         }
         else if(questionFormat.equals("equations"))
         {
-            int a = randomGenerator.nextInt(100);
-            int b = randomGenerator.nextInt(20);
-            int c = randomGenerator.nextInt(100);
-            int d  = randomGenerator.nextInt(10);
+            int a = 0;
+            int b = 0;
+            int c = 0;
+            int d = randomGenerator.nextInt(100);
+            if(difficulty.equals("easy"))
+            {
+                 a = randomGenerator.nextInt(10)+1;
+                 b = randomGenerator.nextInt(5)+1;
+                 c = randomGenerator.nextInt(10)+1;
+            }
+            else if(difficulty.equals("medium"))
+            {
+                a = randomGenerator.nextInt(20)+1;
+                b = randomGenerator.nextInt(20)+1;
+                c = randomGenerator.nextInt(40)+1;
+            }
+            else if(difficulty.equals("hard"))
+            {
+                a = randomGenerator.nextInt(50)+1;
+                b = randomGenerator.nextInt(50)+1;
+                c = randomGenerator.nextInt(100)+1;
+            }
+
             if (d % 2 == 1 )
             {
                 question = "Find x: "+ Integer.toString(b) + "x + " + Integer.toString(c) + " = " + Integer.toString(a*b +c);
@@ -166,7 +216,10 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             answered = false;
         }
     }
-
+    public void newProblem(View view)
+    {
+        generateProblem();
+    }
     public void bksp (View view)
     {
         if(answer.length() >= 1)
@@ -183,16 +236,62 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
                 .equals("Addition"))
         {
+            boolean change = questionFormat.equals("addition");
             questionFormat = "addition";
+            if(!change)
+            {
+                generateProblem();
+            }
         }
         else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
                 .equals("Multiplication"))
         {
+            boolean change = questionFormat.equals("multiplication");
             questionFormat = "multiplication";
+            if(!change)
+            {
+                generateProblem();
+            }
         }
         else
         {
+            boolean change = questionFormat.equals("equations");
+
             questionFormat = "equations";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_level", "Easy")
+                .equals("Easy"))
+        {
+            boolean change = difficulty.equals("easy");
+            difficulty = "easy";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_level", "Easy")
+                .equals("Medium"))
+        {
+            boolean change = difficulty.equals("medium");
+            difficulty = "medium";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        else
+        {
+            boolean change = difficulty.equals("hard");
+
+            difficulty = "hard";
+            if(!change)
+            {
+                generateProblem();
+            }
         }
     }
 
@@ -225,6 +324,37 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             boolean change = questionFormat.equals("equations");
 
             questionFormat = "equations";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_level", "Easy")
+                .equals("Easy"))
+        {
+            boolean change = difficulty.equals("easy");
+            difficulty = "easy";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_level", "Easy")
+                .equals("Medium"))
+        {
+            boolean change = difficulty.equals("medium");
+            difficulty = "medium";
+            if(!change)
+            {
+                generateProblem();
+            }
+        }
+        else
+        {
+            boolean change = difficulty.equals("hard");
+
+            difficulty = "hard";
             if(!change)
             {
                 generateProblem();

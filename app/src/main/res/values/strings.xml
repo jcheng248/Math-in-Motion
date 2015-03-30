@@ -43,6 +43,7 @@
     <string name="instructions_eleven">In addition, you may also press the numbers on the provided keypad to answer.</string>
 
     <string name="one">1</string>
+    <string name="aia_reset">Reset</string>
     <string name="two">2</string>
     <string name="three">3</string>
     <string name="four">4</string>
@@ -52,7 +53,7 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="zero">0</string>
-    <string name="backspace">Backspace</string>
+    <string name="backspace">Del</string>
 >>>>>>> UI-AIA
 
 </resources>

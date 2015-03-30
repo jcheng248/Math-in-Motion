@@ -169,11 +169,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingBottom="2dp">
+                    android:paddingRight="2dp">
 
                     <Button
-                        android:layout_width="99dp"
+                        android:layout_width="67dp"
                         android:layout_height="67dp"
                         android:text="@string/backspace"
                         android:id="@+id/backspace_button"
@@ -182,14 +181,21 @@
                         />
 
                     <Button
-                        android:layout_width="99dp"
+                        android:layout_width="67dp"
                         android:layout_height="67dp"
                         android:text="@string/zero"
                         android:tag="0"
                         android:onClick="clicker"
                         android:id="@+id/button0"
                         android:background="@drawable/button"/>
-
+                    <Button
+                        android:layout_width="67dp"
+                        android:layout_height="67dp"
+                        android:text="@string/aia_reset"
+                        android:id="@+id/reset_button"
+                        android:onClick="newProblem"
+                        android:background="@drawable/button"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

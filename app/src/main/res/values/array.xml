@@ -16,6 +16,12 @@
         <item>Equations</item>
     </string-array>
 
+    <string-array name="difficulty_levels">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
     <string-array name="game_choices">
         <item>Original</item>
         <item>Magic Squares</item>

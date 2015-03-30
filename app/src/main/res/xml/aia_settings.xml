@@ -6,10 +6,17 @@
 
         <ListPreference
             android:key="diff_type"
-            android:title="Difficulty"
+            android:title="Problem Type"
             android:entries="@array/difficulty_choices"
             android:entryValues="@array/difficulty_choices"
             android:defaultValue="Addition" />
+
+        <ListPreference
+            android:key="diff_level"
+            android:title="Difficulty Level"
+            android:entries="@array/difficulty_levels"
+            android:entryValues="@array/difficulty_levels"
+            android:defaultValue="Easy" />
 
         <ListPreference
             android:key="input_type"
