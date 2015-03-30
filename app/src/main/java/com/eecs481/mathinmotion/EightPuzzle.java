@@ -623,7 +623,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                     TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
                     current.setText(board[i][j]);
                     if (board[i][j].equals("9"))
-                        current.setBackgroundResource(Color.TRANSPARENT);
+                        current.setBackgroundResource(R.drawable.transsquare);
                     else
                         current.setBackgroundResource(R.drawable.tile);
                 }

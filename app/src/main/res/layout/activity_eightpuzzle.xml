@@ -137,10 +137,10 @@
                     android:gravity="center" />
 
                 <TextView
-                    android:layout_width="98dp"
-                    android:layout_height="98dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:background="@drawable/tile"
+                    android:background="@drawable/transsquare"
                     android:id="@+id/block9"
                     android:tag="9"
                     android:layout_column="3"
