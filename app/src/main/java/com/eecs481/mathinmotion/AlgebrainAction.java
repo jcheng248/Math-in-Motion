@@ -166,6 +166,10 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
     public void append(String digit)
     {
+        if(answered)
+        {
+            return;
+        }
         answer = answer + digit;
         TextView current = (TextView) findViewById(R.id.aia_answer);
         current.setText(answer);
@@ -180,7 +184,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
             TextView submit_view = (TextView) findViewById(R.id.aia_submit);
             RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
-            if (userAnswer.equals(answerLine))
+            if (Integer.parseInt(userAnswer) == Integer.parseInt(answerLine))
             {
                 submit_view.setText(R.string.correct_submission);
                 submit_area.setBackgroundResource(R.color.green);
@@ -232,7 +236,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     protected void onResume()
     {
         super.onResume();
-        Motion.getInstance().addListener(this, this);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type_aia", "Motion")
+                .equals("Motion"))
+            Motion.getInstance().addListener(this, this);
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
                 .equals("Addition"))
         {
@@ -298,7 +304,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     protected void onPause()
     {
         super.onPause();
-        Motion.getInstance().removeListener(this);
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type_aia", "Motion")
+                .equals("Motion"))
+            Motion.getInstance().removeListener(this);
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
                 .equals("Addition"))
         {
