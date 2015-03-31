@@ -38,9 +38,26 @@
     <string name="answer_below">Your Answer Below</string>
 
     <string name="instructions_eight">The objective of the game is to solve the provided algebra problems within the allotted time by using either motion or the touch screen interface.</string>
-    <string name="instructions_nine">To answer the question, input numbers based on the motions depicted below:</string>
-    <string name="instructions_ten">After you have inputted the desired number, press the submit button. If your answer is correct you will move on to the next level, otherwise you will need to re-enter a new solution until correct.</string>
-    <string name="instructions_eleven">In addition, you may also press the numbers on the provided keypad to answer.</string>
+    <string name="instructions_nine">To answer the question, input numbers based on the descriptions below:</string>
+    <string name="instructions_ten">After you have inputted the desired number, press the submit button.
+        If your answer is correct you will move on to the next level, otherwise press the footer
+        until it is no longer red (only one tap should be needed) and then
+        re-enter a new solution.</string>
+    <string name="instructions_eleven">In addition, you may also press the numbers on the provided keypad to answer. To delete a number, press the delete button.
+        To get another problem, press reset. </string>
+
+
+    <string name="instructions_12">To input a:</string>
+    <string name="instructions_13">1, move the phone in the North West direction. </string>
+    <string name="instructions_14">2, move the phone Northward.</string>
+    <string name="instructions_15">3, move the phone in the North East direction.</string>
+    <string name="instructions_16">4, move the phone West.</string>
+    <string name="instructions_17">5, move the phone away from you.</string>
+    <string name="instructions_18">6, move the phone East.</string>
+    <string name="instructions_19">7, move the phone in the South West direction.</string>
+    <string name="instructions_20">8, move the phone South.</string>
+    <string name="instructions_21">9, move the phone in the South East direction.</string>
+    <string name="instructions_22">0, move the phone towards you.</string>
 
     <string name="one">1</string>
     <string name="aia_reset">Reset</string>
@@ -54,6 +71,11 @@
     <string name="nine">9</string>
     <string name="zero">0</string>
     <string name="backspace">Del</string>
->>>>>>> UI-AIA
+
+    <string name="magic">Magic Squares</string>
+    <string name="sub_1">For a more challenging game!!!!!</string>
+    <string name="sub_2">Select the Magic Squares type under settings. </string>
+    <string name="sub_3">The rules of this game are to arrange the numbers from 1 to n^2 such that the sum of the entries of any row, any column or any main diagonal is the same.  </string>
+    <string name="sub_4">Hint**: The sum should be n(n^2 +1)/2. </string>
 
 </resources>
