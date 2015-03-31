@@ -133,6 +133,10 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
     public void nextStep()
     {
+        if(magicSquare)
+        {
+            return;
+        }
         int b1 = spacerow;
         int b2 = spacecolumn;
         if(checkComplete())
