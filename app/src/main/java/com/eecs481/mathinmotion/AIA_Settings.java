@@ -20,6 +20,7 @@ public class AIA_Settings extends ActionBarActivity {
 
     public static class SettingsFragment extends PreferenceFragment
     {
+        //calls the fragments needed for the AIA_Settings page
         public void onCreate(Bundle instance)
         {
             super.onCreate(instance);
