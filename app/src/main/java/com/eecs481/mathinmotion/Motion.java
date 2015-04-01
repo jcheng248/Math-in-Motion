@@ -62,7 +62,7 @@ public class Motion implements SensorEventListener {
         {
             waiting = true;
         }
-        if (curTime - lastUpdate > 1500) //wait two seconds to refresh
+        if (curTime - lastUpdate > 1500) //wait 1.5 seconds to refresh
         {
             last_x = 0;
             last_y = 0;

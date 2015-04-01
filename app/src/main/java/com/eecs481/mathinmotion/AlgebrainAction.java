@@ -34,7 +34,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algebrain_action);
+        //loads problem
         generateProblem();
+        //loads toolbars
         setupToolbars();
 
         PreferenceManager.setDefaultValues(this, R.xml.aia_settings, false);
@@ -66,9 +68,12 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
     public void clicker(View view)
     {
+        //handles when people click buttons to enter numbers
         String name = (String)view.getTag();
-        if (name.length() == 1)
+
+        if (name.length() == 1)//add only if it's a digit
         {
+            //adds digit to answer
             append(name);
         }
     }
@@ -76,11 +81,11 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     {
         Random randomGenerator = new Random();
         randomGenerator.setSeed(randomGenerator.nextLong());
-        if(questionFormat.equals("addition"))
+        if(questionFormat.equals("addition"))//question type
         {
             int a = 0;
             int b = 0;
-            if(difficulty.equals("easy"))
+            if(difficulty.equals("easy"))//size of the numbers used in calculation and answer
             {
                 a = randomGenerator.nextInt(20)+1;
                 b =randomGenerator.nextInt(20)+1;
@@ -95,7 +100,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 a = randomGenerator.nextInt(5000)+1;
                 b =randomGenerator.nextInt(5000)+1;
             }
+            //saves string to be displayed
             question = Integer.toString(a) + " + " + Integer.toString(b) + " =";
+            //saves answer to check against
             answerLine = Integer.toString(a+b);
         }
         else if(questionFormat.equals("multiplication"))
@@ -146,7 +153,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 c = randomGenerator.nextInt(100)+1;
             }
 
-            if (d % 2 == 1 )
+            if (d % 2 == 1 )//2 different form of equations: one with addition, one with subtraction
             {
                 question = "Find x: "+ Integer.toString(b) + "x + " + Integer.toString(c) + " = " + Integer.toString(a*b +c);
             }
@@ -158,33 +165,37 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             answerLine = Integer.toString(a);
         }
         TextView current = (TextView) findViewById(R.id.generated_question);
+        //displays question
         current.setText(question);
         current = (TextView) findViewById(R.id.aia_answer);
+        //clears answer box
         current.setText("");
+        //clears internal answer
         answer = "";
     }
 
+    //adds stuff to answer
     public void append(String digit)
     {
-        if(answered)
+        if(answered)//lock keypad in case of submission
         {
             return;
         }
-        answer = answer + digit;
+        answer = answer + digit;//adds new digit to answer already
         TextView current = (TextView) findViewById(R.id.aia_answer);
         current.setText(answer);
     }
 
+    //submits the answer
     public void submit(View view)
     {
-        if (!answered)
+        if (!answered)//if not submitted
         {
             TextView current = (TextView) findViewById(R.id.aia_answer);
             String userAnswer = current.getText().toString();
-
             TextView submit_view = (TextView) findViewById(R.id.aia_submit);
             RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
-            if (Integer.parseInt(userAnswer) == Integer.parseInt(answerLine))
+            if (Integer.parseInt(userAnswer) == Integer.parseInt(answerLine))//checks if correct
             {
                 submit_view.setText(R.string.correct_submission);
                 submit_area.setBackgroundResource(R.color.green);
@@ -204,47 +215,65 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             submit_view.setText(R.string.submit_answer);
             RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
             submit_area.setBackgroundResource(R.color.orange);
-
-            if (correct)
+            //if already submitted
+            if (correct)//new problem if correct
             {
                 generateProblem();
             }
             else
             {
+                //resets answer line for another try
                 TextView answer_view = (TextView) findViewById(R.id.aia_answer);
                 answer_view.setText("");
                 answer = "";
             }
-
             correct = false;
             answered = false;
         }
     }
+
+    //handles "reset" button; generates a new problem
     public void newProblem(View view)
     {
+        if(answered)//locks if answer is submitted already
+        {
+            return;
+        }
         generateProblem();
     }
+
+    //backspace
     public void bksp (View view)
     {
-        if(answer.length() >= 1)
+        if(answered)//locks if answer is submitted already
         {
+            return;
+        }
+        if(answer.length() >= 1)//make sure there's something to delete
+        {
+            //replaces answer with everything except for last char
             answer = answer.substring(0, answer.length() - 1);
         }
+        //redisplays
         TextView current = (TextView) findViewById(R.id.aia_answer);
         current.setText(answer);
     }
+
+
     protected void onResume()
     {
         super.onResume();
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type_aia", "Motion")
                 .equals("Motion"))
             Motion.getInstance().addListener(this, this);
+
+        //handles settings loading for question type
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
                 .equals("Addition"))
         {
             boolean change = questionFormat.equals("addition");
             questionFormat = "addition";
-            if(!change)
+            if(!change)//if there's a change, then reload the questions
             {
                 generateProblem();
             }
@@ -269,12 +298,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 generateProblem();
             }
         }
+
+        //handles Difficulty preference
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_level", "Easy")
                 .equals("Easy"))
         {
             boolean change = difficulty.equals("easy");
             difficulty = "easy";
-            if(!change)
+            if(!change)//if there's a change, then reload the questions
             {
                 generateProblem();
             }
@@ -303,6 +334,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
     protected void onPause()
     {
+        //same as onResume
         super.onPause();
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type_aia", "Motion")
                 .equals("Motion"))

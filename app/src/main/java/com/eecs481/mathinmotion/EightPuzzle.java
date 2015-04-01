@@ -41,10 +41,10 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //checks whether the game is original or magic square
         magicSquare = !PreferenceManager.getDefaultSharedPreferences(this).
             getString("game_type", "Original").equals("Original");
-
+        //loads the board
         int counter = 1;
         for(int i = 0; i < 3; i++)
         {
@@ -53,7 +53,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                 board[i][j] = Integer.toString(counter++);
             }
         }
-
+        //if original, then the last square is empty
         if (!magicSquare)
             board[2][2] = "";
 
@@ -69,12 +69,13 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         super.onResume();
         lastTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 500);
+        //decides whether or not to detect motion based on preferences
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type", "Motion")
                 .equals("Motion"))
             Accelerometer.getInstance().addListener(this, this);
         else
-            detector = new GestureDetectorCompat(this, new Gesture(this));
-
+            detector = new GestureDetectorCompat(this, new Gesture(this));//swipe settings
+        //checks if the game preferences has changed and reload the board if it did
         boolean ms = !PreferenceManager.getDefaultSharedPreferences(this).
             getString("game_type", "Original").equals("Original");
         if (ms != magicSquare)
@@ -102,6 +103,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
+        //removes listener when activity is paused
         if (PreferenceManager.getDefaultSharedPreferences(this).getString("input_type", "Motion")
                 .equals("Motion"))
             Accelerometer.getInstance().removeListener(this);
@@ -130,7 +132,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             detector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
-
+    //Uses a look-up table style format for original game to determine next step
+    //Uses a published algorithm to solve, so steps are the same every time, so user can learn to solve
     public void nextStep()
     {
         if(magicSquare)
@@ -600,16 +603,19 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         TextView moveCounter = (TextView) findViewById(R.id.eight_puzzle_moves_value);
         moveCounter.setText(Integer.toString(last_move.size()));
         boolean finish = true;
-        if(!magicSquare)
+        if(!magicSquare)//original game
         {
             for (int i = 0; i <3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
+                    //loads the board by taking the
                     TextView current = (TextView) findViewById(R.id.board).findViewWithTag(Integer.toString(j+3*i +1 ));
                     current.setText(board[i][j]);
+                    //checks if there's any spaces that's not complete
                     if(!(board[i][j].equals( Integer.toString(i*3+j+1)) || (board[i][j].equals(""))))
                         finish = false;
+                    //different colors for different type of tiles
                     if (board[i][j].equals(""))
                         current.setBackgroundResource(Color.TRANSPARENT);
                     else
@@ -620,6 +626,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         }
         else
         {
+            //magic square
             for (int i = 0; i <3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -633,8 +640,9 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                 }
 
             }
-
+            //sum of first row
             int sum = Integer.parseInt(board[0][0]) + Integer.parseInt(board[0][1])+Integer.parseInt(board[0][2]);
+            //if any row, column, diagonal doesn't sum up to the same thing, then not complete
             if(sum != Integer.parseInt(board[1][0]) + Integer.parseInt(board[1][1])+Integer.parseInt(board[1][2])){
                 return false;
             }
@@ -664,12 +672,15 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         return finish;
     }
 
+    //handles checking if the game is complete and handles stuff if complete. Bit of a misnomer
     public void renderBoard()
     {
 
         TextView current = (TextView) findViewById(R.id.eight_puzzle_win);
+        //checks if complete
         if (checkComplete())
         {
+            //displays success message
             done = true;
             timeElapsed += System.currentTimeMillis() - lastTime;
             long seconds = timeElapsed / 1000;
@@ -687,6 +698,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         Random randomGenerator = new Random();
         for(int i = 0; i < 400; i++)
         {
+            //randomly make 400 moves based on RNG.
+
             if(randomGenerator.nextInt(4) == 3)
             {
                 if (spacerow != 2)
@@ -708,30 +721,38 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                     goRight();
             }
         }
+        //empty the last_move stack
         while(!last_move.empty())
         {
             last_move.pop();
         }
         done = false;
+        //undo the winner message
         TextView current = (TextView) findViewById(R.id.eight_puzzle_win);
         current.setText("");
+        //set the board
         renderBoard();
+        //reset timer
         lastTime = System.currentTimeMillis();
         timeElapsed = 0;
         updateTime();
     }
+    //called when person swipes up or motions device upwards
     public void swipeUp()
     {
-        if (done) return;
+        if (done) return;//if solved, then nothing happens
         if (spacerow != 2){
             String direction = "up";
+            //saves the move
             last_move.push(direction);
+            //makes the switch on the board
             goUp();
         }
         renderBoard();
     }
     public void swipeDown()
     {
+        //same as swipeUp()
         if (done) return;
         if (spacerow != 0){
             String direction = "down";
@@ -742,6 +763,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void swipeLeft()
     {
+        //same as swipeUp()
         if (done) return;
         if (spacecolumn != 2){
             String direction = "left";
@@ -752,6 +774,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void swipeRight()
     {
+        //same as swipeUp()
         if (done) return;
         if (spacecolumn != 0){
             String direction = "right";
@@ -762,6 +785,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void goUp()
     {
+        //takes the the blank space/"9" and switches it with the one below to make everything go up
         String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow +1][spacecolumn];
         board[spacerow +1][spacecolumn] = tmp;
@@ -769,6 +793,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void goDown()
     {
+        //takes the the blank space/"9" and switches it with the one above to make everything go down
         String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow-1][spacecolumn];
         board[spacerow -1][spacecolumn] = tmp;
@@ -776,6 +801,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void goLeft()
     {
+        //takes the the blank space/"9" and switches it with the one to the right to make everything go left
         String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow][spacecolumn+1];
         board[spacerow][spacecolumn+1] = tmp;
@@ -783,6 +809,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     }
     public void goRight()
     {
+        //takes the the blank space/"9" and switches it with the one to the left to make everything go right
         String tmp = board[spacerow][spacecolumn];
         board[spacerow][spacecolumn] = board[spacerow][spacecolumn - 1];
         board[spacerow][spacecolumn-1] = tmp;
@@ -796,11 +823,13 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
     public void settings_launch(View view)
     {
+        //goes to settings
         Intent intent = new Intent(this, EightPuzzleSettingsActivity.class);
         startActivity(intent);
     }
 
     public void undo(View view){
+        //reverses the last step in last_moves
         if(done) return;
         if(last_move.empty()) return;
         String last = last_move.peek();
@@ -815,6 +844,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
 
     public void updateTime()
     {
+        //updates the timer; does nothing if puzzle is complete
         if(done)
             return;
         long currentTime = System.currentTimeMillis();
