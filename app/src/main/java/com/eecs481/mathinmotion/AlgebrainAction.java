@@ -20,7 +20,6 @@ import java.util.Random;
 
 
 public class AlgebrainAction  extends ActionBarActivity implements MotionListener {
-    LinearLayout mLinearLayout;
     String answer = "";
     String questionFormat = "addition"; // can be "addition", "multiplication", etc
     String answerLine;

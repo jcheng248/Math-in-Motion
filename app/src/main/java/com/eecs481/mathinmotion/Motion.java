@@ -18,9 +18,6 @@ public class Motion implements SensorEventListener {
     private ArrayList<MotionListener> listeners;
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
-    private float last_last_x, last_last_y, last_last_z;
-    private static final int SHAKE_THRESHOLD = 100;
-    boolean moved = false;
     boolean waiting = false;
     private long sleeptime = 0;
     private Motion() {
