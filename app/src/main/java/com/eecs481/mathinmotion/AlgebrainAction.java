@@ -194,7 +194,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             String userAnswer = current.getText().toString();
             TextView submit_view = (TextView) findViewById(R.id.aia_submit);
             RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
-            if (Integer.parseInt(userAnswer) == Integer.parseInt(answerLine))//checks if correct
+            if (userAnswer.equals("")||(Integer.parseInt(userAnswer) == Integer.parseInt(answerLine)))//checks if correct
             {
                 submit_view.setText(R.string.correct_submission);
                 submit_area.setBackgroundResource(R.color.green);
