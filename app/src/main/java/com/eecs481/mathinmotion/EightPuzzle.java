@@ -9,6 +9,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +28,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     long lastTime = 0;
     long timeElapsed = 0;
     GestureDetectorCompat detector;
+    int undo_nums = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable()
@@ -601,7 +603,9 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     public boolean checkComplete()
     {
         TextView moveCounter = (TextView) findViewById(R.id.eight_puzzle_moves_value);
-        moveCounter.setText(Integer.toString(last_move.size()));
+        Log.d("undo", Integer.toString(last_move.size() + undo_nums));
+        int number_of_moves = last_move.size() + 2*undo_nums;
+        moveCounter.setText(Integer.toString(number_of_moves));
         boolean finish = true;
         if(!magicSquare)//original game
         {
@@ -686,8 +690,9 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             long seconds = timeElapsed / 1000;
             long minutes = seconds / 60;
             seconds %= 60;
+             int number_of_moves = last_move.size() + 2*undo_nums;
             current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
-                + last_move.size() + " moves!!!");
+                + number_of_moves + " moves!!!");
         }
 
 
@@ -834,6 +839,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         if(last_move.empty()) return;
         String last = last_move.peek();
         last_move.pop();
+        undo_nums++;
         if(last.equals("left")) swipeRight();
         else if(last.equals("right")) swipeLeft();
         else if(last.equals("up")) swipeDown();
