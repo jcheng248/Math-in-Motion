@@ -91,13 +91,13 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             else if(difficulty.equals("medium"))
             {
-                a = randomGenerator.nextInt(500)+1;
-                b =randomGenerator.nextInt(500)+1;
+                a = randomGenerator.nextInt(400)+100;
+                b =randomGenerator.nextInt(400)+100;
             }
             else if(difficulty.equals("hard"))
             {
-                a = randomGenerator.nextInt(5000)+1;
-                b =randomGenerator.nextInt(5000)+1;
+                a = randomGenerator.nextInt(4500)+500;
+                b =randomGenerator.nextInt(4500)+500;
             }
             //saves string to be displayed
             question = Integer.toString(a) + " + " + Integer.toString(b) + " =";
@@ -116,13 +116,13 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             else if(difficulty.equals("medium"))
             {
-                a = randomGenerator.nextInt(20)+1;
-                b =randomGenerator.nextInt(20)+1;
+                a = randomGenerator.nextInt(15)+11;
+                b =randomGenerator.nextInt(15)+11;
             }
             else if(difficulty.equals("hard"))
             {
-                a = randomGenerator.nextInt(100)+1;
-                b =randomGenerator.nextInt(100)+1;
+                a = randomGenerator.nextInt(80)+21;
+                b =randomGenerator.nextInt(80)+21;
             }
             question = Integer.toString(a) + " x " + Integer.toString(b) + " =";
             answerLine = Integer.toString(a*b);
@@ -141,14 +141,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             else if(difficulty.equals("medium"))
             {
-                a = randomGenerator.nextInt(20)+1;
-                b = randomGenerator.nextInt(20)+1;
-                c = randomGenerator.nextInt(40)+1;
+                a = randomGenerator.nextInt(10)+11;
+                b = randomGenerator.nextInt(10)+11;
+                c = randomGenerator.nextInt(30)+11;
             }
             else if(difficulty.equals("hard"))
             {
-                a = randomGenerator.nextInt(50)+1;
-                b = randomGenerator.nextInt(50)+1;
+                a = randomGenerator.nextInt(40)+20;
+                b = randomGenerator.nextInt(40)+20;
                 c = randomGenerator.nextInt(100)+1;
             }
 
@@ -177,6 +177,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     public void append(String digit)
     {
         if(answered)//lock keypad in case of submission
+        {
+            return;
+        }
+        if(answer.length() > 7)
+        {
+            return;
+        }
+        if(answer.length() == 0 && digit.equals("0"))
         {
             return;
         }

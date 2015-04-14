@@ -220,7 +220,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:orientation="vertical">
+                android:orientation="vertical"
+               >
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -240,7 +241,18 @@
             </LinearLayout>
 
         </RelativeLayout>
+        <TextView
+            android:layout_width="260dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/consecutive"
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:layout_below ="@+id/input_panel"
+            android:gravity="center"
+            android:textSize="18sp"/>
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="fill_parent"
