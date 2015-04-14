@@ -43,7 +43,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
 
         PreferenceManager.setDefaultValues(this, R.xml.aia_settings, false);
         high_score_preference = getSharedPreferences("high_score", Context.MODE_PRIVATE);
-        if(high_score_preference.getInt(questionFormat + difficulty + "current", ))
+        if(high_score_preference.contains("aia"+questionFormat + difficulty + "current"))
+        {
+            consecutiveCorrect = high_score_preference.getInt("aia"+questionFormat + difficulty + "current",0);
+        }
+        else
+        {
+            consecutiveCorrect = 0;
+        }
 
     }
     public void home_launch(View view)
@@ -178,6 +185,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         //clears internal answer
         answer = "";
         TextView highScore = (TextView) findViewById(R.id.consecutive);
+        highScore.setText("Consecutive Right Answers: "+consecutiveCorrect);
 
     }
 
@@ -215,13 +223,39 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 submit_view.setText(R.string.correct_submission);
                 submit_area.setBackgroundResource(R.color.green);
                 correct = true;
+                consecutiveCorrect++;
             }
             else
             {
                 submit_view.setText(R.string.incorrect_submission);
                 submit_area.setBackgroundResource(R.color.red);
                 correct = false;
+                TextView highScore = (TextView) findViewById(R.id.consecutive);
+                if(!high_score_preference.contains("aia"+questionFormat + difficulty + "record"))
+                {
+                    SharedPreferences.Editor edit_high = high_score_preference.edit();
+                    edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
+                    highScore.setText(consecutiveCorrect + " right in a row! New record!");
+                    edit_high.commit();
+                }
+                else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) < consecutiveCorrect)
+                {
+                    SharedPreferences.Editor edit_high = high_score_preference.edit();
+                    edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
+                    highScore.setText(consecutiveCorrect + " right in a row! New record!");
+                    edit_high.commit();
+                }
+                else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) == consecutiveCorrect)
+                {
+                    highScore.setText(consecutiveCorrect + " right in a row! Matched record!");
+                }
+                else
+                {
+                    highScore.setText(consecutiveCorrect + " right in a row! Record: "
+                            + Integer.toString(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0)));
+                }
             }
+            consecutiveCorrect = 0;
             answered = true;
         }
         else
@@ -241,6 +275,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 TextView answer_view = (TextView) findViewById(R.id.aia_answer);
                 answer_view.setText("");
                 answer = "";
+                TextView highScore = (TextView) findViewById(R.id.consecutive);
+                highScore.setText("Consecutive Right Answers: "+consecutiveCorrect);
             }
             correct = false;
             answered = false;
@@ -345,6 +381,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 generateProblem();
             }
         }
+        if(high_score_preference.contains("aia" + questionFormat + difficulty + "current"))
+        {
+            consecutiveCorrect = high_score_preference.getInt("aia"+questionFormat + difficulty + "current",0);
+        }
+        else
+        {
+            consecutiveCorrect = 0;
+        }
     }
 
     protected void onPause()
@@ -415,5 +459,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 generateProblem();
             }
         }
+
+        SharedPreferences.Editor editor = high_score_preference.edit();
+        editor.putInt("aia"+questionFormat + difficulty + "current", consecutiveCorrect);
+        editor.commit();
     }
 }
