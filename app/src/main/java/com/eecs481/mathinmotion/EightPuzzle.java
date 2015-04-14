@@ -606,8 +606,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     public boolean checkComplete()
     {
         TextView moveCounter = (TextView) findViewById(R.id.eight_puzzle_moves_value);
-        Log.d("undo", Integer.toString(last_move.size() + undo_nums));
-        int number_of_moves = last_move.size() + 2*undo_nums;
+        int number_of_moves = last_move.size();
         moveCounter.setText(Integer.toString(number_of_moves));
         boolean finish = true;
         if(!magicSquare)//original game
@@ -693,7 +692,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             long seconds = timeElapsed / 1000;
             long minutes = seconds / 60;
             seconds %= 60;
-             int number_of_moves = last_move.size() + 2*undo_nums;
+             int number_of_moves = last_move.size();
 
             String time = String.format("%d:%02d", minutes, seconds);
 
