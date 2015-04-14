@@ -1,6 +1,8 @@
 package com.eecs481.mathinmotion;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -29,7 +31,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     long timeElapsed = 0;
     GestureDetectorCompat detector;
     int undo_nums = 0;
-
+    SharedPreferences high_score_preference;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable()
     {
@@ -64,6 +66,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
         reset(null);
 
         PreferenceManager.setDefaultValues(this, R.xml.eight_puzzle_settings, false);
+        high_score_preference = getSharedPreferences("high_score", Context.MODE_PRIVATE);
     }
 
     protected void onResume()
@@ -691,9 +694,63 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             long minutes = seconds / 60;
             seconds %= 60;
              int number_of_moves = last_move.size() + 2*undo_nums;
-            current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
-                + number_of_moves + " moves!!!");
+
+            String time = String.format("%d:%02d", minutes, seconds);
+
+            SharedPreferences.Editor editor = high_score_preference.edit();
+            Log.d("time",Long.toString(high_score_preference.getLong("time",0)));
+            if(!high_score_preference.contains("time"))
+            {
+                editor.putLong("time",timeElapsed);
+                editor.putInt("moves",number_of_moves);
+                current.setText("New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                        + number_of_moves + " moves!!!");
+            }
+            else
+            {
+                int bestMoves = high_score_preference.getInt("moves",0);
+                if (bestMoves > number_of_moves)
+                {
+                    editor.putLong("time",timeElapsed);
+                    editor.putInt("moves",number_of_moves);
+                    current.setText("New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                            + number_of_moves + " moves!!!");
+                }
+                else if (bestMoves == number_of_moves)
+                {
+                    long record_time = high_score_preference.getLong("time",0);
+                    if(timeElapsed < record_time)
+                    {
+                        editor.putLong("time",timeElapsed);
+                        editor.putInt("moves",number_of_moves);
+                        current.setText("New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                                + number_of_moves + " moves!!!");
+                    }
+                    else
+                    {
+                        long record_seconds = record_time / 1000;
+                        long record_minutes = record_seconds / 60;
+                        record_seconds %= 60;
+                        current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                                + number_of_moves + " moves!!!\n" + "Record: " + bestMoves + " moves in " +
+                                String.format("%d:%02d", record_minutes, record_seconds));
+                    }
+                }
+                else
+                {
+                    long record_time = high_score_preference.getLong("time",0);
+                    long record_seconds = record_time / 1000;
+                    long record_minutes = record_seconds / 60;
+                    record_seconds %= 60;
+                    current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                            + number_of_moves + " moves!!!\n" + "Record: " + bestMoves + " moves in " +
+                            String.format("%d:%02d", record_minutes, record_seconds));
+                }
+
+            }
+            editor.commit();
         }
+
 
 
     }
