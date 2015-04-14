@@ -1,6 +1,8 @@
 package com.eecs481.mathinmotion;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.GestureDetectorCompat;
@@ -27,7 +29,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     private boolean answered = false;
     private boolean correct = false;
     String difficulty ="easy";
-
+    SharedPreferences high_score_preference;
+    int consecutiveCorrect=0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,6 +42,9 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         setupToolbars();
 
         PreferenceManager.setDefaultValues(this, R.xml.aia_settings, false);
+        high_score_preference = getSharedPreferences("high_score", Context.MODE_PRIVATE);
+        if(high_score_preference.getInt(questionFormat + difficulty + "current", ))
+
     }
     public void home_launch(View view)
     {
@@ -171,6 +177,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         current.setText("");
         //clears internal answer
         answer = "";
+        TextView highScore = (TextView) findViewById(R.id.consecutive);
+
     }
 
     //adds stuff to answer
