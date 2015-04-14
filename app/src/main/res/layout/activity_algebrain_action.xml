@@ -245,7 +245,7 @@
             android:layout_width="260dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/consecutive"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_gravity="center"
             android:layout_below ="@+id/input_panel"

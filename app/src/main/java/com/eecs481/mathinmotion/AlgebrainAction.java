@@ -9,6 +9,7 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,13 +38,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_algebrain_action);
         //loads problem
-        generateProblem();
-        //loads toolbars
-        setupToolbars();
-
-        PreferenceManager.setDefaultValues(this, R.xml.aia_settings, false);
         high_score_preference = getSharedPreferences("high_score", Context.MODE_PRIVATE);
-        if(high_score_preference.contains("aia"+questionFormat + difficulty + "current"))
+        if(high_score_preference.contains("aia" + questionFormat + difficulty + "current"))
         {
             consecutiveCorrect = high_score_preference.getInt("aia"+questionFormat + difficulty + "current",0);
         }
@@ -51,6 +47,12 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         {
             consecutiveCorrect = 0;
         }
+        generateProblem();
+        //loads toolbars
+        setupToolbars();
+
+        PreferenceManager.setDefaultValues(this, R.xml.aia_settings, false);
+
 
     }
     public void home_launch(View view)
@@ -93,6 +95,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     {
         Random randomGenerator = new Random();
         randomGenerator.setSeed(randomGenerator.nextLong());
+
         if(questionFormat.equals("addition"))//question type
         {
             int a = 0;
@@ -208,10 +211,21 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         TextView current = (TextView) findViewById(R.id.aia_answer);
         current.setText(answer);
     }
-
+    public void editCurrentConsec()
+    {
+        if(high_score_preference.contains("aia" + questionFormat + difficulty + "current"))
+        {
+            consecutiveCorrect = high_score_preference.getInt("aia"+questionFormat + difficulty + "current",0);
+        }
+        else
+        {
+            consecutiveCorrect = 0;
+        }
+    }
     //submits the answer
     public void submit(View view)
     {
+        Log.d("con: ", Integer.toString(consecutiveCorrect));
         if (!answered)//if not submitted
         {
             TextView current = (TextView) findViewById(R.id.aia_answer);
@@ -235,27 +249,28 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 {
                     SharedPreferences.Editor edit_high = high_score_preference.edit();
                     edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
-                    highScore.setText(consecutiveCorrect + " right in a row! New record!");
+                    highScore.setText(consecutiveCorrect +
+                            " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
                     edit_high.commit();
                 }
                 else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) < consecutiveCorrect)
                 {
                     SharedPreferences.Editor edit_high = high_score_preference.edit();
                     edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
-                    highScore.setText(consecutiveCorrect + " right in a row! New record!");
+                    highScore.setText(consecutiveCorrect +
+                            " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
                     edit_high.commit();
                 }
                 else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) == consecutiveCorrect)
                 {
-                    highScore.setText(consecutiveCorrect + " right in a row! Matched record!");
-                }
+                    highScore.setText(consecutiveCorrect +
+                            " right in a row! \nMatched record for "+difficulty+" " +questionFormat+"!");                }
                 else
                 {
                     highScore.setText(consecutiveCorrect + " right in a row! Record: "
                             + Integer.toString(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0)));
                 }
             }
-            consecutiveCorrect = 0;
             answered = true;
         }
         else
@@ -267,11 +282,13 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             //if already submitted
             if (correct)//new problem if correct
             {
+
                 generateProblem();
             }
             else
             {
                 //resets answer line for another try
+                consecutiveCorrect = 0;
                 TextView answer_view = (TextView) findViewById(R.id.aia_answer);
                 answer_view.setText("");
                 answer = "";
@@ -326,6 +343,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             questionFormat = "addition";
             if(!change)//if there's a change, then reload the questions
             {
+                editCurrentConsec();
                 generateProblem();
             }
         }
@@ -336,6 +354,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             questionFormat = "multiplication";
             if(!change)
             {
+                editCurrentConsec();
+
                 generateProblem();
             }
         }
@@ -346,6 +366,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             questionFormat = "equations";
             if(!change)
             {
+                editCurrentConsec();
+
                 generateProblem();
             }
         }
@@ -358,6 +380,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             difficulty = "easy";
             if(!change)//if there's a change, then reload the questions
             {
+                editCurrentConsec();
+
                 generateProblem();
             }
         }
@@ -368,6 +392,8 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             difficulty = "medium";
             if(!change)
             {
+                editCurrentConsec();
+
                 generateProblem();
             }
         }
@@ -378,17 +404,12 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             difficulty = "hard";
             if(!change)
             {
+                editCurrentConsec();
+
                 generateProblem();
             }
         }
-        if(high_score_preference.contains("aia" + questionFormat + difficulty + "current"))
-        {
-            consecutiveCorrect = high_score_preference.getInt("aia"+questionFormat + difficulty + "current",0);
-        }
-        else
-        {
-            consecutiveCorrect = 0;
-        }
+
     }
 
     protected void onPause()
