@@ -44,7 +44,7 @@
         until it is no longer red (only one tap should be needed) and then
         re-enter a new solution.</string>
     <string name="instructions_eleven">In addition, you may also press the numbers on the provided keypad to answer. To delete a number, press the delete button.
-        To get another problem, press reset. </string>
+        To get another problem, press reset. Resetting a question will be considered wrong and will reset your score back to 0. </string>
 
 
     <string name="instructions_12">To input a:</string>
@@ -76,6 +76,7 @@
     <string name="sub_1">For a more challenging game!!!!!</string>
     <string name="sub_2">Select the Magic Squares type under settings. </string>
     <string name="sub_3">The rules of this game are to arrange the numbers from 1 to n^2 such that the sum of the entries of any row, any column or any main diagonal is the same.  </string>
-    <string name="sub_4">Hint**: The sum should be n(n^2 +1)/2. </string>
+    <string name="sub_4">Hint:
+        The sum should be n(n^2+1)/2. </string>
 
 </resources>
