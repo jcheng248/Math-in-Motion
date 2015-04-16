@@ -189,8 +189,10 @@
                     android:layout_toEndOf="@id/eight_puzzle_time_label"
                     android:layout_centerVertical="true"
                     android:paddingRight="5dp"
+                    android:textColor="@color/red"
                     android:textSize="18sp"
-                    android:textColor="@color/red" />
+                    android:gravity="end"
+                    android:textAlignment="viewEnd"/>
 
             </RelativeLayout>
 
@@ -227,7 +229,9 @@
                     android:layout_toEndOf="@id/eight_puzzle_moves_label"
                     android:layout_centerVertical="true"
                     android:paddingRight="5dp"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:gravity="end"
+                    android:textAlignment="viewEnd" />
 
             </RelativeLayout>
 
