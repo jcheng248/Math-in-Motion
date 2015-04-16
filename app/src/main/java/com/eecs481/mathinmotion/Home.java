@@ -2,8 +2,6 @@ package com.eecs481.mathinmotion;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 
@@ -19,17 +17,20 @@ public class Home extends ActionBarActivity{
     {
         Intent intent = new Intent(this, EightPuzzle.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_left, R.anim.home_slide_left);
     }
 
     public void algebra_launch(View view)
     {
         Intent intent = new Intent(this, AlgebrainAction.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_left, R.anim.home_slide_left);
     }
 
     public void instructions_launch(View view)
     {
         Intent intent = new Intent(this, Instructions.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_left, R.anim.home_slide_left);
     }
 }

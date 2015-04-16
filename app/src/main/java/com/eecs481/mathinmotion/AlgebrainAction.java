@@ -40,8 +40,11 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     }
     public void home_launch(View view)
     {
+
         NavUtils.navigateUpFromSameTask(this);
+        overridePendingTransition(R.anim.slide_right, R.anim.exit_slide_right);
     }
+    
     public void settings_launch(View view)
     {
         Intent intent = new Intent(this, AIA_Settings.class);
