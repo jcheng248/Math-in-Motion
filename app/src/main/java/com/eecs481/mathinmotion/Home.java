@@ -32,4 +32,9 @@ public class Home extends ActionBarActivity{
         Intent intent = new Intent(this, Instructions.class);
         startActivity(intent);
     }
+    public void highscores_launch(View view)
+    {
+        Intent intent = new Intent(this, HighScore.class);
+        startActivity(intent);
+    }
 }

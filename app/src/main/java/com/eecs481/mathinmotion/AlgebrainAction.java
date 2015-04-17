@@ -179,6 +179,94 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             answerLine = Integer.toString(a);
         }
+        else if (questionFormat.equals("combination"))
+        {
+            int selector = randomGenerator.nextInt(20);
+            if(selector %3 == 1)//question type
+            {
+                int a = 0;
+                int b = 0;
+                if(difficulty.equals("easy"))//size of the numbers used in calculation and answer
+                {
+                    a = randomGenerator.nextInt(20)+1;
+                    b =randomGenerator.nextInt(20)+1;
+                }
+                else if(difficulty.equals("medium"))
+                {
+                    a = randomGenerator.nextInt(400)+100;
+                    b =randomGenerator.nextInt(400)+100;
+                }
+                else if(difficulty.equals("hard"))
+                {
+                    a = randomGenerator.nextInt(4500)+500;
+                    b =randomGenerator.nextInt(4500)+500;
+                }
+                //saves string to be displayed
+                question = Integer.toString(a) + " + " + Integer.toString(b) + " =";
+                //saves answer to check against
+                answerLine = Integer.toString(a+b);
+            }
+            else if(selector %3 == 2)
+            {
+
+                int a = 0;
+                int b = 0;
+                if(difficulty.equals("easy"))
+                {
+                    a = randomGenerator.nextInt(10)+1;
+                    b =randomGenerator.nextInt(10)+1;
+                }
+                else if(difficulty.equals("medium"))
+                {
+                    a = randomGenerator.nextInt(15)+11;
+                    b =randomGenerator.nextInt(15)+11;
+                }
+                else if(difficulty.equals("hard"))
+                {
+                    a = randomGenerator.nextInt(80)+21;
+                    b =randomGenerator.nextInt(80)+21;
+                }
+                question = Integer.toString(a) + " x " + Integer.toString(b) + " =";
+                answerLine = Integer.toString(a*b);
+            }
+            else if(selector %3 == 0    )
+            {
+                int a = 0;
+                int b = 0;
+                int c = 0;
+                int d = randomGenerator.nextInt(100);
+                if(difficulty.equals("easy"))
+                {
+                    a = randomGenerator.nextInt(10)+1;
+                    b = randomGenerator.nextInt(5)+1;
+                    c = randomGenerator.nextInt(10)+1;
+                }
+                else if(difficulty.equals("medium"))
+                {
+                    a = randomGenerator.nextInt(10)+11;
+                    b = randomGenerator.nextInt(10)+11;
+                    c = randomGenerator.nextInt(30)+11;
+                }
+                else if(difficulty.equals("hard"))
+                {
+                    a = randomGenerator.nextInt(40)+20;
+                    b = randomGenerator.nextInt(40)+20;
+                    c = randomGenerator.nextInt(100)+1;
+                }
+
+                if (d % 2 == 1 )//2 different form of equations: one with addition, one with subtraction
+                {
+                    question = "Find x: "+ Integer.toString(b) + "x + " + Integer.toString(c) + " = " + Integer.toString(a*b +c);
+                }
+                else
+                {
+                    question = "Find x: "+ Integer.toString(b) + "x - " + Integer.toString(c) + " = " + Integer.toString(a*b -c);
+
+                }
+                answerLine = Integer.toString(a);
+            }
+        }
+
         TextView current = (TextView) findViewById(R.id.generated_question);
         //displays question
         current.setText(question);
@@ -225,7 +313,6 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     //submits the answer
     public void submit(View view)
     {
-        Log.d("con: ", Integer.toString(consecutiveCorrect));
         if (!answered)//if not submitted
         {
             TextView current = (TextView) findViewById(R.id.aia_answer);
@@ -359,6 +446,18 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
                 generateProblem();
             }
         }
+        else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
+                .equals("Combination"))
+        {
+            boolean change = questionFormat.equals("combination");
+            questionFormat = "combination";
+            if(!change)
+            {
+                editCurrentConsec();
+
+                generateProblem();
+            }
+        }
         else
         {
             boolean change = questionFormat.equals("equations");
@@ -436,6 +535,18 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             questionFormat = "multiplication";
             if(!change)
             {
+                generateProblem();
+            }
+        }
+        else if (PreferenceManager.getDefaultSharedPreferences(this).getString("diff_type", "Addition")
+                .equals("Combination"))
+        {
+            boolean change = questionFormat.equals("combination");
+            questionFormat = "combination";
+            if(!change)
+            {
+                editCurrentConsec();
+
                 generateProblem();
             }
         }

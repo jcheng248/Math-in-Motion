@@ -48,6 +48,15 @@
                 android:value="com.eecs481.mathinmotion.Home" />
         </activity>
         <activity
+            android:name=".HighScore"
+            android:label="@string/title_activity_highscores"
+            android:parentActivityName=".Home"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.eecs481.mathinmotion.Home" />
+        </activity>
+        <activity
             android:name=".EightPuzzleSettingsActivity"
             android:label="@string/title_activity_eight_puzzle_settings"
             android:parentActivityName=".EightPuzzle"
