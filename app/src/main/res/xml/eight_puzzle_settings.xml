@@ -5,18 +5,21 @@
         android:title="@string/eight_puzzle_settings_gameplay_options" >
 
         <ListPreference
-            android:key="input_type"
-            android:title="@string/eight_puzzle_settings_input_type"
-            android:entries="@array/input_choices"
-            android:entryValues="@array/input_choices"
-            android:defaultValue="Motion" />
-
-        <ListPreference
             android:key="game_type"
             android:title="Game Type"
             android:entries="@array/game_choices"
             android:entryValues="@array/game_choices"
+            android:summary = "Press to change type of 8-Puzzle"
             android:defaultValue="Original" />
+        <ListPreference
+            android:key="input_type"
+            android:title="@string/eight_puzzle_settings_input_type"
+            android:entries="@array/input_choices"
+            android:entryValues="@array/input_choices"
+            android:summary = "Press to change physical input type"
+            android:defaultValue="Motion" />
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>

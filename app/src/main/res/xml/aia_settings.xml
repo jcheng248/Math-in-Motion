@@ -9,6 +9,7 @@
             android:title="Problem Type"
             android:entries="@array/difficulty_choices"
             android:entryValues="@array/difficulty_choices"
+            android:summary = "Press to change type of questions"
             android:defaultValue="Addition" />
 
         <ListPreference
@@ -16,6 +17,7 @@
             android:title="Difficulty Level"
             android:entries="@array/difficulty_levels"
             android:entryValues="@array/difficulty_levels"
+            android:summary = "Press to change difficulty of questions"
             android:defaultValue="Easy" />
 
         <ListPreference
@@ -23,6 +25,7 @@
             android:title="Input"
             android:entries="@array/input_aia_choices"
             android:entryValues="@array/input_aia_choices"
+            android:summary = "Press to change physical input type"
             android:defaultValue="Motion" />
 
     </PreferenceCategory>
