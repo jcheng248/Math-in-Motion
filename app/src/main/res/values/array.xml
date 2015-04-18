@@ -14,6 +14,7 @@
         <item>Addition</item>
         <item>Multiplication</item>
         <item>Equations</item>
+        <item>Combination</item>
     </string-array>
 
     <string-array name="difficulty_levels">

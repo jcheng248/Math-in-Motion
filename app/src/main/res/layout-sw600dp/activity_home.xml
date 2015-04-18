@@ -95,5 +95,31 @@
             android:text="@string/instructions"/>
 
     </RelativeLayout>
+    <RelativeLayout android:id="@+id/home_highscores"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/home_instructions" >
 
+        <ImageView android:id="@+id/highscores_lauch"
+            android:adjustViewBounds="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/highscores"
+            android:src="@drawable/home_button"
+            android:onClick="highscores_launch" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:text="@string/highscores"/>
+
+    </RelativeLayout>
 </RelativeLayout>

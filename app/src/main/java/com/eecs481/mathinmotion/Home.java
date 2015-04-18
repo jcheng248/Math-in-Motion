@@ -33,4 +33,9 @@ public class Home extends ActionBarActivity{
         startActivity(intent);
         overridePendingTransition(R.anim.slide_left, R.anim.home_slide_left);
     }
+    public void highscores_launch(View view)
+    {
+        Intent intent = new Intent(this, HighScore.class);
+        startActivity(intent);
+    }
 }
