@@ -3,6 +3,8 @@ package com.eecs481.mathinmotion;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.GestureDetectorCompat;
@@ -14,10 +16,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Random;
 
@@ -27,11 +32,25 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     String questionFormat = "addition"; // can be "addition", "multiplication", etc
     String answerLine;
     String question;
-    private boolean answered = false;
-    private boolean correct = false;
     String difficulty ="easy";
+    Boolean on_incorrect_reponse = false;
+
     SharedPreferences high_score_preference;
     int consecutiveCorrect=0;
+    Handler timerHandler = new Handler();
+    Runnable correct_timeout = new Runnable()
+    {
+        public void run()
+        {
+            View transparent_timeout = findViewById(R.id.answer_response);
+            transparent_timeout.setVisibility(View.GONE);
+            ImageView correct_gone = (ImageView)findViewById(R.id.correct_signal);
+            correct_gone.setVisibility(ImageView.GONE);
+            on_incorrect_reponse = false;
+            generateProblem();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -279,15 +298,14 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         //clears internal answer
         answer = "";
         TextView highScore = (TextView) findViewById(R.id.consecutive);
-        highScore.setText("Consecutive Right Answers: "+consecutiveCorrect);
+        highScore.setText("Current Consecutive Right Answers: "+consecutiveCorrect);
 
     }
 
     //adds stuff to answer
     public void append(String digit)
     {
-        if(answered)//lock keypad in case of submission
-        {
+        if (on_incorrect_reponse) {
             return;
         }
         if(answer.length() > 7)
@@ -316,56 +334,74 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
     //submits the answer
     public void submit(View view)
     {
-        if (!answered)//if not submitted
+        if (on_incorrect_reponse) {
+            return;
+        }
+        TextView current = (TextView) findViewById(R.id.aia_answer);
+        String userAnswer = current.getText().toString();
+        TextView submit_view = (TextView) findViewById(R.id.aia_submit);
+        on_incorrect_reponse = true;
+        RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
+        if (!userAnswer.equals("")&&(Integer.parseInt(userAnswer) == Integer.parseInt(answerLine)))//checks if correct
         {
-            TextView current = (TextView) findViewById(R.id.aia_answer);
-            String userAnswer = current.getText().toString();
-            TextView submit_view = (TextView) findViewById(R.id.aia_submit);
-            RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
-            if (!userAnswer.equals("")&&(Integer.parseInt(userAnswer) == Integer.parseInt(answerLine)))//checks if correct
-            {
-                submit_view.setText(R.string.correct_submission);
-                submit_area.setBackgroundResource(R.color.green);
-                correct = true;
-                consecutiveCorrect++;
-            }
-            else
-            {
-                submit_view.setText(R.string.incorrect_submission);
-                submit_area.setBackgroundResource(R.color.red);
-                correct = false;
-                TextView highScore = (TextView) findViewById(R.id.consecutive);
-                if(!high_score_preference.contains("aia"+questionFormat + difficulty + "record"))
-                {
-                    SharedPreferences.Editor edit_high = high_score_preference.edit();
-                    edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
-                    highScore.setText(consecutiveCorrect +
-                            " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
-                    edit_high.commit();
-                }
-                else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) < consecutiveCorrect)
-                {
-                    SharedPreferences.Editor edit_high = high_score_preference.edit();
-                    edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
-                    highScore.setText(consecutiveCorrect +
-                            " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
-                    edit_high.commit();
-                }
-                else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) == consecutiveCorrect)
-                {
-                    highScore.setText(consecutiveCorrect +
-                            " right in a row! \nMatched record for "+difficulty+" " +questionFormat+"!");                }
-                else
-                {
-                    highScore.setText(consecutiveCorrect + " right in a row! Record: "
-                            + Integer.toString(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0)));
-                }
-            }
-            answered = true;
+            View transparent = findViewById(R.id.answer_response);
+            transparent.setVisibility(View.VISIBLE);
+            ImageView correct_response = (ImageView)findViewById(R.id.correct_signal);
+            correct_response.setVisibility(View.VISIBLE);
+
+
+            timerHandler.postDelayed(correct_timeout,1000);
+
+            //submit_view.setText(R.string.correct_submission);
+            //submit_area.setBackgroundResource(R.color.green);
+            //correct = true;
+            consecutiveCorrect++;
         }
         else
         {
-            TextView submit_view = (TextView) findViewById(R.id.aia_submit);
+            //submit_view.setText(R.string.incorrect_submission);
+            //submit_area.setBackgroundResource(R.color.red);
+            View transparent = findViewById(R.id.answer_response);
+            transparent.setVisibility(View.VISIBLE);
+            LinearLayout incorrect_response = (LinearLayout)findViewById(R.id.incorrect_response);
+            incorrect_response.setVisibility(View.VISIBLE);
+            TextView highScore = (TextView) findViewById(R.id.consecutive);
+            TextView new_record = (TextView) findViewById(R.id.new_record);
+            TextView aia_stats = (TextView) findViewById(R.id.aia_stats);
+
+            if(!high_score_preference.contains("aia"+questionFormat + difficulty + "record"))
+            {
+                SharedPreferences.Editor edit_high = high_score_preference.edit();
+                edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
+                aia_stats.setText(consecutiveCorrect +
+                        " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
+                edit_high.commit();
+            }
+            else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) < consecutiveCorrect)
+            {
+                SharedPreferences.Editor edit_high = high_score_preference.edit();
+                edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
+                new_record.setVisibility(TextView.VISIBLE);
+                aia_stats.setText(consecutiveCorrect +
+                        " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
+                edit_high.commit();
+            }
+            else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) == consecutiveCorrect)
+            {
+                aia_stats.setText(consecutiveCorrect +
+                        " right in a row! \nMatched record for "+difficulty+" " +questionFormat+"!");
+            }
+            else
+            {
+                aia_stats.setText(consecutiveCorrect + " right in a row! Record: "
+                        + Integer.toString(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0)));
+            }
+
+            consecutiveCorrect = 0;
+        }
+
+
+            /*TextView submit_view = (TextView) findViewById(R.id.aia_submit);
             submit_view.setText(R.string.submit_answer);
             RelativeLayout submit_area = (RelativeLayout)findViewById(R.id.aia_submit_area);
             submit_area.setBackgroundResource(R.color.orange);
@@ -387,24 +423,41 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             correct = false;
             answered = false;
-        }
+        }*/
     }
 
     //handles "reset" button; generates a new problem
     public void newProblem(View view)
     {
-        if(answered)//locks if answer is submitted already
-        {
+        if (on_incorrect_reponse) {
             return;
         }
         generateProblem();
     }
 
+    public void click_play_again(View view)
+    {
+
+        on_incorrect_reponse = false;
+        View transparent_timeout = findViewById(R.id.answer_response);
+        transparent_timeout.setVisibility(View.GONE);
+        ImageView incorrect_gone = (ImageView)findViewById(R.id.incorrect_signal);
+        incorrect_gone.setVisibility(ImageView.GONE);
+        LinearLayout incorrect_text_gone = (LinearLayout) findViewById(R.id.incorrect_response);
+        incorrect_text_gone.setVisibility(LinearLayout.GONE);
+
+        generateProblem();
+    }
+
+    public void click_quit(View view)
+    {
+        NavUtils.navigateUpFromSameTask(this);
+    }
+
     //backspace
     public void bksp (View view)
     {
-        if(answered)//locks if answer is submitted already
-        {
+        if (on_incorrect_reponse) {
             return;
         }
         if(answer.length() >= 1)//make sure there's something to delete

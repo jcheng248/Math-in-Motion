@@ -83,4 +83,7 @@
     <string name="sub_4">Hint:
         The sum should be n(n^2+1)/2. </string>
 
+    <string name="new_record">New Record!</string>
+    <string name="play_again">Play Again</string>
+    <string name="quit">Quit</string>
 </resources>
