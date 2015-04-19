@@ -441,8 +441,6 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
         on_incorrect_reponse = false;
         View transparent_timeout = findViewById(R.id.answer_response);
         transparent_timeout.setVisibility(View.GONE);
-        ImageView incorrect_gone = (ImageView)findViewById(R.id.incorrect_signal);
-        incorrect_gone.setVisibility(ImageView.GONE);
         LinearLayout incorrect_text_gone = (LinearLayout) findViewById(R.id.incorrect_response);
         incorrect_text_gone.setVisibility(LinearLayout.GONE);
 
