@@ -1,6 +1,8 @@
 package com.eecs481.mathinmotion;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -682,19 +684,20 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     public void renderBoard()
     {
 
-        TextView current = (TextView) findViewById(R.id.eight_puzzle_win);
+        //TextView current = (TextView) findViewById(R.id.eight_puzzle_win); Remove this later
         //checks if complete
         if (checkComplete())
         {
-            //displays success message
+
             done = true;
             timeElapsed += System.currentTimeMillis() - lastTime;
             long seconds = timeElapsed / 1000;
             long minutes = seconds / 60;
             seconds %= 60;
-             int number_of_moves = last_move.size();
+            int number_of_moves = last_move.size();
 
             String time = String.format("%d:%02d", minutes, seconds);
+            String dialogText;
 
             SharedPreferences.Editor editor = high_score_preference.edit();
             Log.d("time",Long.toString(high_score_preference.getLong("time",0)));
@@ -702,8 +705,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
             {
                 editor.putLong("time",timeElapsed);
                 editor.putInt("moves",number_of_moves);
-                current.setText("New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
-                        + number_of_moves + " moves!!!");
+                dialogText = "New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                        + number_of_moves + " moves!";
             }
             else
             {
@@ -712,8 +715,8 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                 {
                     editor.putLong("time",timeElapsed);
                     editor.putInt("moves",number_of_moves);
-                    current.setText("New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
-                            + number_of_moves + " moves!!!");
+                    dialogText = "New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                            + number_of_moves + " moves!!!";
                 }
                 else if (bestMoves == number_of_moves)
                 {
@@ -722,17 +725,17 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                     {
                         editor.putLong("time",timeElapsed);
                         editor.putInt("moves",number_of_moves);
-                        current.setText("New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
-                                + number_of_moves + " moves!!!");
+                        dialogText = "New High Score!! Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                                + number_of_moves + " moves!!!";
                     }
                     else
                     {
                         long record_seconds = record_time / 1000;
                         long record_minutes = record_seconds / 60;
                         record_seconds %= 60;
-                        current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                        dialogText = "Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
                                 + number_of_moves + " moves!!!\n" + "Record: " + bestMoves + " moves in " +
-                                String.format("%d:%02d", record_minutes, record_seconds));
+                                String.format("%d:%02d", record_minutes, record_seconds);
                     }
                 }
                 else
@@ -741,12 +744,30 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
                     long record_seconds = record_time / 1000;
                     long record_minutes = record_seconds / 60;
                     record_seconds %= 60;
-                    current.setText("Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
+                    dialogText = "Finished in " + String.format("%d:%02d", minutes, seconds) + " and "
                             + number_of_moves + " moves!!!\n" + "Record: " + bestMoves + " moves in " +
-                            String.format("%d:%02d", record_minutes, record_seconds));
+                            String.format("%d:%02d", record_minutes, record_seconds);
                 }
 
             }
+
+            //displays success message
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(dialogText)
+                    .setTitle(R.string.win_dialog_title);
+            builder.setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    home_launch(null);
+                }
+            });
+            builder.setNegativeButton("Play Again", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    reset(null);
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
             editor.commit();
         }
 
