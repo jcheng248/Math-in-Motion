@@ -372,6 +372,7 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             if(!high_score_preference.contains("aia"+questionFormat + difficulty + "record"))
             {
                 SharedPreferences.Editor edit_high = high_score_preference.edit();
+                new_record.setVisibility(TextView.VISIBLE);
                 edit_high.putInt("aia"+questionFormat + difficulty + "record", consecutiveCorrect);
                 aia_stats.setText(consecutiveCorrect +
                         " right in a row! \nNew record for "+difficulty+" " +questionFormat+"!");
@@ -388,16 +389,21 @@ public class AlgebrainAction  extends ActionBarActivity implements MotionListene
             }
             else if(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0) == consecutiveCorrect)
             {
+                new_record.setVisibility(TextView.GONE);
                 aia_stats.setText(consecutiveCorrect +
                         " right in a row! \nMatched record for "+difficulty+" " +questionFormat+"!");
             }
             else
             {
+                new_record.setVisibility(TextView.GONE);
                 aia_stats.setText(consecutiveCorrect + " right in a row! Record: "
                         + Integer.toString(high_score_preference.getInt("aia"+questionFormat + difficulty + "record",0)));
             }
 
             consecutiveCorrect = 0;
+            SharedPreferences.Editor edit_current = high_score_preference.edit();
+            edit_current.putInt("aia"+questionFormat + difficulty + "current", 0);
+
         }
 
 
