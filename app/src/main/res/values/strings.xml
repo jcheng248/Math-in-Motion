@@ -87,4 +87,7 @@
     <string name="win_dialog_message">You won!</string>
     <string name="win_dialog_title">Winner!</string>
 
+    <string name="new_record">New Record!</string>
+    <string name="play_again">Play Again</string>
+    <string name="quit">Quit</string>
 </resources>

@@ -901,6 +901,7 @@ public class EightPuzzle extends ActionBarActivity implements AccelerometerListe
     public void home_launch(View view)
     {
         NavUtils.navigateUpFromSameTask(this);
+        overridePendingTransition(R.anim.slide_right, R.anim.exit_slide_right);
     }
 
     public void settings_launch(View view)

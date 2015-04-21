@@ -274,4 +274,111 @@
         />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/trans_white"
+        android:visibility="gone"
+        android:id="@+id/answer_response" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/correct"
+        android:visibility="gone"
+        android:id="@+id/correct_signal"/>
+
+    <LinearLayout android:id="@+id/incorrect_response"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/incorrect"
+            android:id="@+id/incorrect_signal"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="48sp"
+            android:text="@string/new_record"
+            android:visibility="gone"
+            android:gravity="center"
+            android:id="@+id/new_record"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:id="@+id/aia_stats"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+
+            <RelativeLayout android:id="@+id/play_again"
+                android:layout_width="140dp"
+                android:layout_height="100dp">
+
+            <ImageView
+                android:adjustViewBounds="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="Play Again"
+                android:src="@drawable/button"
+                android:onClick="click_play_again" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/play_again"
+                android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/quit"
+                android:layout_width="140dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp">
+
+                <ImageView
+                    android:adjustViewBounds="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contentDescription="Quit Game"
+                    android:src="@drawable/button"
+                    android:onClick="click_quit" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="@string/quit"
+                    android:layout_centerVertical="true" />
+
+            </RelativeLayout>
+
+            </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
 </RelativeLayout>
