@@ -27,7 +27,7 @@ import org.w3c.dom.Text;
 import java.util.Random;
 
 
-public class AlgebrainAction  extends ActionBarActivity implements MotionListener {
+public class AlgebraInAction extends ActionBarActivity implements MotionListener {
     String answer = "";
     String questionFormat = "addition"; // can be "addition", "multiplication", etc
     String answerLine;

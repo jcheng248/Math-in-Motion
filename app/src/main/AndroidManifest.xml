@@ -30,7 +30,7 @@
                 android:value="com.eecs481.mathinmotion.Home" />
         </activity>
         <activity
-            android:name=".AlgebrainAction"
+            android:name=".AlgebraInAction"
             android:label="@string/title_activity_algebrain_action"
             android:parentActivityName=".Home"
             android:screenOrientation="portrait" >
@@ -68,11 +68,11 @@
         <activity
             android:name=".AIA_Settings"
             android:label="@string/title_activity_aia__settings"
-            android:parentActivityName=".AlgebrainAction"
+            android:parentActivityName=".AlgebraInAction"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.eecs481.mathinmotion.AlgebrainAction" />
+                android:value=".AlgebraInAction" />
         </activity>
     </application>
 

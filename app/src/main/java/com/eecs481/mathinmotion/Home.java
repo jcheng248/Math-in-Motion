@@ -22,7 +22,7 @@ public class Home extends ActionBarActivity{
 
     public void algebra_launch(View view)
     {
-        Intent intent = new Intent(this, AlgebrainAction.class);
+        Intent intent = new Intent(this, AlgebraInAction.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_left, R.anim.home_slide_left);
     }
